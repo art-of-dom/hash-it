@@ -1,4 +1,6 @@
 '''
+HashIt.py
+The heavy hitter of hashing.
 '''
 
 

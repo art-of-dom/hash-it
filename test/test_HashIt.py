@@ -2,8 +2,8 @@
 '''
 
 from nose.tools import assert_equals, raises, assert_true
-from HashIt.HashIt import HashIt
-from HashIt.HashType import  HashType
+from HashIt import HashIt
+from HashType import  HashType
 
 
 def setup_module(module):
