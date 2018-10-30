@@ -26,7 +26,7 @@ class HashIt(object):
         if self.pos == self.size:
             return None
 
-        with open(self.filename) as fin:
+        with open(self.filename, 'rb') as fin:
             fin.seek(self.pos)
             data = fin.read(self.chunk_size)
         self.pos = self.pos + self.chunk_size
