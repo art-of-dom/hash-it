@@ -2,8 +2,8 @@
 '''
 
 from __future__ import absolute_import
-from hashit.HashIt import HashIt
-from hashit.HashType import HashType
+from hashit.hash_it import HashIt
+from hashit.hash_type import HashType
 
 def cli_main(args=None):
     if not args:

@@ -1,5 +1,5 @@
 '''
-HashIt.py
+hash_type.py
 The heavy hitter of hashing.
 '''
 from __future__ import absolute_import
@@ -7,9 +7,12 @@ import hashlib
 import os
 from PyCRC.CRC16 import CRC16
 from PyCRC.CRC32 import CRC32
-from hashit.HashType import HashType
+from hashit.hash_type import HashType
 
 class HashIt(object):
+    '''
+    The object to preform hashing
+    '''
     def __init__(self, data=None, hash_type=None, filename=None, chunk_size=0):
         self.filename = filename
         self.chunk_size = chunk_size
@@ -22,6 +25,9 @@ class HashIt(object):
             self.size = 0
 
     def next_chunk(self):
+        '''
+        Hash the next chunk of data
+        '''
         data = None
         if self.pos == self.size:
             return None
@@ -33,6 +39,9 @@ class HashIt(object):
         return self._hash(data)
 
     def hash_it(self, hash_type=None, filename=None):
+        '''
+        Hash all of the data
+        '''
         data = self.data
         if hash_type != None:
             self.hash_type = hash_type
@@ -67,4 +76,6 @@ class HashIt(object):
             hasher = hashlib.sha256()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()
+        else:
+            raise NotImplementedError
         return hash_str

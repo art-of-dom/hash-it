@@ -1,10 +1,11 @@
 '''
+Tests for the HashIt object
 '''
 
 from __future__ import absolute_import
 from nose.tools import assert_equals, raises, assert_true
-from hashit.HashIt import HashIt
-from hashit.HashType import HashType
+from hashit.hash_it import HashIt
+from hashit.hash_type import HashType
 
 
 def setup_module(module):
@@ -43,6 +44,13 @@ def test_hash_it_crc32_chunked():
     assert_equals("53B8A2EA", hashit.next_chunk())
     assert_equals("69D1BD05", hashit.next_chunk())
 
+@raises(NotImplementedError)
+def test_hash_it_md2_not_implemented():
+    HashIt().hash_it(HashType.MD2, "test/support/example.bin")
+
+@raises(NotImplementedError)
+def test_hash_it_md4_not_implemented():
+    HashIt().hash_it(HashType.MD4, "test/support/example.bin")
 
 def test_hash_it_md5():
     assert_equals("E2C865DB4162BED963BFAA9EF6AC18F0",
@@ -107,3 +115,11 @@ def test_hash_it_sha256_chunked():
     assert_equals("372AFEFA6BCD01BE7504CFE132D4CDB5151ED08DE35825772BDECAB4C4EB6FBC", hashit.next_chunk())
     assert_equals("2ED1BAD92452DF6752AC09877A37FC86EC876010FAA7D80765BD5131FB8E0226", hashit.next_chunk())
     assert_equals("FBD8C6B1CD3C16E5A21471CD88E33224C138BDCD856586F752C28BEDADC181FD", hashit.next_chunk())
+
+@raises(NotImplementedError)
+def test_hash_it_sha384_not_implemented():
+    HashIt().hash_it(HashType.SHA384, "test/support/example.bin")
+
+@raises(NotImplementedError)
+def test_hash_it_sha512_not_implemented():
+    HashIt().hash_it(HashType.SHA512, "test/support/example.bin")
