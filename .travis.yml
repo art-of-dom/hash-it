@@ -10,6 +10,12 @@ install:
 script:
   - nosetests -vv
   - python -m hashit test/support/example.bin
+  - python -m hashit test/support/example.bin --hash-type CRC16
+  - python -m hashit test/support/example.bin --hash-type CRC32
+  - python -m hashit test/support/example.bin --hash-type MD5
+  - python -m hashit test/support/example.bin --hash-type SH1
+  - python -m hashit test/support/example.bin --hash-type SH224
+  - python -m hashit test/support/example.bin --hash-type SH256
 notifications:
   email:
     - depostorivo@gmail.com
