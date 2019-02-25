@@ -3,19 +3,19 @@ HashIt.py
 The heavy hitter of hashing.
 '''
 
-
 import hashlib
 import os
 from PyCRC.CRC16 import CRC16
 from PyCRC.CRC32 import CRC32
-from HashType import  HashType
+import HashType
 
 class HashIt(object):
-    def __init__(self, hash_type=None, filename=None, size=0):
+    def __init__(self, data=None, hash_type=None, filename=None, chunk_size=0):
         self.filename = filename
-        self.chunk_size = size
+        self.chunk_size = chunk_size
         self.hash_type = hash_type
         self.pos = 0
+        self.data = data
         if filename != None:
             self.size = os.path.getsize(filename)
         else:
@@ -33,33 +33,38 @@ class HashIt(object):
         return self._hash(data)
 
     def hash_it(self, hash_type=None, filename=None):
+        data = self.data
         if hash_type != None:
             self.hash_type = hash_type
 
         if filename != None:
             self.filename = filename
 
-        return self._hash(open(self.filename, "rb").read())
+        if self.filename != None:
+            data = open(self.filename, "rb").read()
+        return self._hash(data)
 
 
     def _hash(self, data):
-        if self.hash_type == HashType.CRC16:
-            return "%04X"%(CRC16().calculate(data) & 0xFFFF)
-        elif self.hash_type == HashType.CRC32:
-            return "%08X"%(CRC32().calculate(data) & 0xFFFFFFFF)
-        elif self.hash_type == HashType.MD5:
+        hash_str = ""
+        if self.hash_type == HashType.HashType.CRC16:
+            hash_str = "%04X"%(CRC16().calculate(data) & 0xFFFF)
+        elif self.hash_type == HashType.HashType.CRC32:
+            hash_str = "%08X"%(CRC32().calculate(data) & 0xFFFFFFFF)
+        elif self.hash_type == HashType.HashType.MD5:
             hasher = hashlib.md5()
             hasher.update(data)
-            return hasher.hexdigest().upper()
-        elif self.hash_type == HashType.SHA1:
+            hash_str = hasher.hexdigest().upper()
+        elif self.hash_type == HashType.HashType.SHA1:
             hasher = hashlib.sha1()
             hasher.update(data)
-            return hasher.hexdigest().upper()
-        elif self.hash_type == HashType.SHA224:
+            hash_str = hasher.hexdigest().upper()
+        elif self.hash_type == HashType.HashType.SHA224:
             hasher = hashlib.sha224()
             hasher.update(data)
-            return hasher.hexdigest().upper()
-        elif self.hash_type == HashType.SHA256:
+            hash_str = hasher.hexdigest().upper()
+        elif self.hash_type == HashType.HashType.SHA256:
             hasher = hashlib.sha256()
             hasher.update(data)
-            return hasher.hexdigest().upper()
+            hash_str = hasher.hexdigest().upper()
+        return hash_str

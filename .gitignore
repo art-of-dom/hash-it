@@ -101,4 +101,8 @@ ENV/
 .mypy_cache/
 
 # vim temp
-*.sw[opnm]
+*.sw?
+
+# tags
+tags
+*.taghl

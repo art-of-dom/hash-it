@@ -2,8 +2,8 @@
 '''
 
 from nose.tools import assert_equals, raises, assert_true
-from HashIt import HashIt
-from HashType import  HashType
+from hashit.HashIt import HashIt
+from hashit.HashType import HashType
 
 
 def setup_module(module):
@@ -16,7 +16,8 @@ def test_hash_it_crc16():
     assert_equals("BAD3", HashIt().hash_it(HashType.CRC16, "test/support/example.bin"))
 
 def test_hash_it_crc16_chunked():
-    hashit = HashIt(hash_type=HashType.CRC16, filename="test/support/example.bin", size=16)
+    hashit = HashIt(hash_type=HashType.CRC16,
+            filename="test/support/example.bin", chunk_size=16)
     assert_equals("170A", hashit.next_chunk())
     assert_equals("6ABB", hashit.next_chunk())
     assert_equals("EC68", hashit.next_chunk())
@@ -30,7 +31,8 @@ def test_hash_it_crc32():
     assert_equals("29058C73", HashIt().hash_it(HashType.CRC32, "test/support/example.bin"))
 
 def test_hash_it_crc32_chunked():
-    hashit = HashIt(hash_type=HashType.CRC32, filename="test/support/example.bin", size=16)
+    hashit = HashIt(hash_type=HashType.CRC32,
+            filename="test/support/example.bin", chunk_size=16)
     assert_equals("CECEE288", hashit.next_chunk())
     assert_equals("F4A7FD67", hashit.next_chunk())
     assert_equals("BA1CDD56", hashit.next_chunk())
@@ -46,7 +48,7 @@ def test_hash_it_md5():
                   HashIt().hash_it(HashType.MD5, "test/support/example.bin"))
 
 def test_hash_it_md5_chunked():
-    hashit = HashIt(hash_type=HashType.MD5, filename="test/support/example.bin", size=16)
+    hashit = HashIt(hash_type=HashType.MD5, filename="test/support/example.bin", chunk_size=16)
     assert_equals("1AC1EF01E96CAF1BE0D329331A4FC2A8", hashit.next_chunk())
     assert_equals("1BF42E241816BA29FF5F307BB1BC1D16", hashit.next_chunk())
     assert_equals("35BA6D08F0E34C15B9D0B09998960EB6", hashit.next_chunk())
@@ -62,7 +64,7 @@ def test_hash_it_sha1():
                   HashIt().hash_it(HashType.SHA1, "test/support/example.bin"))
 
 def test_hash_it_sha1_chunked():
-    hashit = HashIt(hash_type=HashType.SHA1, filename="test/support/example.bin", size=16)
+    hashit = HashIt(hash_type=HashType.SHA1, filename="test/support/example.bin", chunk_size=16)
     assert_equals("56178B86A57FAC22899A9964185C2CC96E7DA589", hashit.next_chunk())
     assert_equals("CA148D05E875BCB8CCE4FD2C2C720BFD2E64753B", hashit.next_chunk())
     assert_equals("5C3F75DDA77EB61EF6D04B5045BDF661F4FA608C", hashit.next_chunk())
@@ -78,7 +80,7 @@ def test_hash_it_sha224():
                   HashIt().hash_it(HashType.SHA224, "test/support/example.bin"))
 
 def test_hash_it_sha224_chunked():
-    hashit = HashIt(hash_type=HashType.SHA224, filename="test/support/example.bin", size=16)
+    hashit = HashIt(hash_type=HashType.SHA224, filename="test/support/example.bin", chunk_size=16)
     assert_equals("529D656A8BC413FEF58DA82E1BF0308DCFE0429DCD80687E69C94633", hashit.next_chunk())
     assert_equals("0E97EA1BD23A0A7CB12CD3B7ECB9A60D6025C8CE105924279833CE85", hashit.next_chunk())
     assert_equals("39E8EB9A3607349FC39A33C5AC6E326CF863AF32E5424F9FAD1B8584", hashit.next_chunk())
@@ -95,7 +97,7 @@ def test_hash_it_sha256():
 
 
 def test_hash_it_sha256_chunked():
-    hashit = HashIt(hash_type=HashType.SHA256, filename="test/support/example.bin", size=16)
+    hashit = HashIt(hash_type=HashType.SHA256, filename="test/support/example.bin", chunk_size=16)
     assert_equals("BE45CB2605BF36BEBDE684841A28F0FD43C69850A3DCE5FEDBA69928EE3A8991", hashit.next_chunk())
     assert_equals("FC2E2C73072BFA2BDA03FF9307472DEBD3CC8105028A8A9E235E35BA8D2E37F4", hashit.next_chunk())
     assert_equals("36DB1ADC807AC50E4C85BD86A174B4AA260154E4F172A3659698945D7B16D084", hashit.next_chunk())
