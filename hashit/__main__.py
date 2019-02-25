@@ -7,12 +7,13 @@ Options:
     -f                 input is a file
     --hash-type=HASH   hash
 """
+from __future__ import absolute_import
 import sys
 from docopt import docopt
 
 def main():
     try:
-        from cli import cli_main
+        from hashit.cli import cli_main
         sys.exit(cli_main(docopt(__doc__)))
     except KeyboardInterrupt:
         sys.exit(130)

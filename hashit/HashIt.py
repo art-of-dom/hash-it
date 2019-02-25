@@ -2,12 +2,12 @@
 HashIt.py
 The heavy hitter of hashing.
 '''
-
+from __future__ import absolute_import
 import hashlib
 import os
 from PyCRC.CRC16 import CRC16
 from PyCRC.CRC32 import CRC32
-import HashType
+from hashit.HashType import HashType
 
 class HashIt(object):
     def __init__(self, data=None, hash_type=None, filename=None, chunk_size=0):
@@ -47,23 +47,23 @@ class HashIt(object):
 
     def _hash(self, data):
         hash_str = ""
-        if self.hash_type == HashType.HashType.CRC16:
+        if self.hash_type == HashType.CRC16:
             hash_str = "%04X"%(CRC16().calculate(data) & 0xFFFF)
-        elif self.hash_type == HashType.HashType.CRC32:
+        elif self.hash_type == HashType.CRC32:
             hash_str = "%08X"%(CRC32().calculate(data) & 0xFFFFFFFF)
-        elif self.hash_type == HashType.HashType.MD5:
+        elif self.hash_type == HashType.MD5:
             hasher = hashlib.md5()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()
-        elif self.hash_type == HashType.HashType.SHA1:
+        elif self.hash_type == HashType.SHA1:
             hasher = hashlib.sha1()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()
-        elif self.hash_type == HashType.HashType.SHA224:
+        elif self.hash_type == HashType.SHA224:
             hasher = hashlib.sha224()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()
-        elif self.hash_type == HashType.HashType.SHA256:
+        elif self.hash_type == HashType.SHA256:
             hasher = hashlib.sha256()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()

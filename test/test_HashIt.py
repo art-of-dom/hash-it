@@ -1,6 +1,7 @@
 '''
 '''
 
+from __future__ import absolute_import
 from nose.tools import assert_equals, raises, assert_true
 from hashit.HashIt import HashIt
 from hashit.HashType import HashType
