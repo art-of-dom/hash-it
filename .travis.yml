@@ -11,7 +11,9 @@ script:
   - nosetests -vv
   - python -m hashit -f test/support/example.bin
   - python -m hashit -f test/support/example.bin --hash-type CRC16
+  - python -m hashit -f test/support/example.bin --hash-type CRC16 --verify BAD3
   - python -m hashit -f test/support/example.bin --hash-type CRC32
+  - python -m hashit -f test/support/example.bin --hash-type CRC32 --verify 29058C73
   - python -m hashit -f test/support/example.bin --hash-type MD5
   - python -m hashit -f test/support/example.bin --hash-type SHA1
   - python -m hashit -f test/support/example.bin --hash-type SHA224

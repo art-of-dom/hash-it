@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 """
 Usage:
-    hash-it [-f] <input> [--hash-type=HASH]
+    hash-it [-f] <input> [--hash-type=HASH] [--verify=RESULT]
 
 Options:
     -f                 input is a file
     --hash-type=HASH   hash
+    --verify=RESULT    verify given result
 """
 from __future__ import absolute_import
 import sys

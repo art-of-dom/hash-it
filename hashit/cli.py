@@ -4,6 +4,7 @@
 from __future__ import absolute_import
 from hashit.hash_it import HashIt
 from hashit.hash_type import HashType
+from hashit.validate_hash import ValidateHash
 
 def cli_main(args=None):
     if not args:
@@ -20,9 +21,21 @@ def cli_main(args=None):
     else:
         pass # Assume CRC16
 
-    if args['-f']:
-        hash_str = HashIt(hash_type=hash_type,
-                filename=args['<input>']).hash_it()
-        print('file: %s hash: %s'%(args['<input>'], hash_str))
+    if not args['--verify']:
+        if args['-f']:
+            hash_str = HashIt(hash_type=hash_type,
+                    filename=args['<input>']).hash_it()
+            print('file: %s hash: %s'%(args['<input>'], hash_str))
+    else:
+        if args['-f']:
+            validate = ValidateHash(
+                result=args['--verify'],
+                hash_type=hash_type,
+                filename=args['<input>']
+            )
+            if validate.is_vaild():
+                return 0
+            else:
+                return 2
 
     return 0

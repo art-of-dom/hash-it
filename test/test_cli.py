@@ -17,6 +17,7 @@ class TestCLI(unittest.TestCase):
     def setUp(self):
         self.args = {
             '--hash-type': None,
+            '--verify': None,
             '-f': False,
             '<input>': None
         }
@@ -56,3 +57,15 @@ class TestCLI(unittest.TestCase):
         self.assertEqual("file: test/support/example.bin hash: BAD3",
             sys.stdout.getvalue().strip()
         )
+
+    def test_cil_verify_good_result_returns_zero(self):
+        self.args['-f'] = True
+        self.args['<input>'] = 'test/support/example.bin'
+        self.args['--verify'] = 'BAD3'
+        assert_equals(0, cli_main(self.args))
+
+    def test_cil_verify_bad_result_returns_error(self):
+        self.args['-f'] = True
+        self.args['<input>'] = 'test/support/example.bin'
+        self.args['--verify'] = 'F00D'
+        assert_equals(2, cli_main(self.args))
