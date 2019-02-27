@@ -9,6 +9,14 @@ from PyCRC.CRC16 import CRC16
 from PyCRC.CRC32 import CRC32
 from hashit.hash_type import HashType
 
+HASHLIB_MAPPING = {
+    HashType.MD5: hashlib.md5,
+    HashType.SHA1: hashlib.sha1,
+    HashType.SHA224: hashlib.sha224,
+    HashType.SHA256: hashlib.sha256
+}
+
+
 class HashIt(object):
     '''
     The object to preform hashing
@@ -60,20 +68,8 @@ class HashIt(object):
             hash_str = "%04X"%(CRC16().calculate(data) & 0xFFFF)
         elif self.hash_type == HashType.CRC32:
             hash_str = "%08X"%(CRC32().calculate(data) & 0xFFFFFFFF)
-        elif self.hash_type == HashType.MD5:
-            hasher = hashlib.md5()
-            hasher.update(data)
-            hash_str = hasher.hexdigest().upper()
-        elif self.hash_type == HashType.SHA1:
-            hasher = hashlib.sha1()
-            hasher.update(data)
-            hash_str = hasher.hexdigest().upper()
-        elif self.hash_type == HashType.SHA224:
-            hasher = hashlib.sha224()
-            hasher.update(data)
-            hash_str = hasher.hexdigest().upper()
-        elif self.hash_type == HashType.SHA256:
-            hasher = hashlib.sha256()
+        elif self.hash_type in HASHLIB_MAPPING:
+            hasher = HASHLIB_MAPPING[self.hash_type]()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()
         else:
