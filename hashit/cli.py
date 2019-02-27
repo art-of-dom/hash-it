@@ -35,7 +35,6 @@ def cli_main(args=None):
             )
             if validate.is_vaild():
                 return 0
-            else:
-                return 2
+            return 2
 
     return 0
