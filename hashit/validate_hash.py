@@ -10,10 +10,10 @@ class ValidateHash(object):
     '''
     The object to validate hashing
     '''
-    def __init__(self, result='', data=None, hash_type=HashType.CRC16, filename=None):
+    def __init__(self, result='', hash_type=HashType.CRC16, filename=None):
         self.filename = filename
         self.hash_type = hash_type
-        self.data = data
+        self.data = None
         self.expected_result = result
 
     def is_vaild(self):

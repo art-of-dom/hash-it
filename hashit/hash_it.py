@@ -21,12 +21,12 @@ class HashIt(object):
     '''
     The object to preform hashing
     '''
-    def __init__(self, data=None, hash_type=None, filename=None, chunk_size=0):
+    def __init__(self, hash_type=None, filename=None, chunk_size=0):
         self.filename = filename
         self.chunk_size = chunk_size
         self.hash_type = hash_type
         self.pos = 0
-        self.data = data
+        self.data = None
         if filename != None:
             self.size = os.path.getsize(filename)
         else:
