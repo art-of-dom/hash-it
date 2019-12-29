@@ -4,7 +4,7 @@ Tests for the HashData object
 
 from __future__ import absolute_import
 import unittest
-from nose.tools import (assert_equals, assert_is_none, assert_is_not_none, raises)
+from nose.tools import (assert_equals, assert_is_none, assert_is_not_none)
 from hashit.core.hash_data import HashData
 
 # pylint: disable=missing-docstring

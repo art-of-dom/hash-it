@@ -15,6 +15,7 @@ script:
   - python -m hashit -f test/support/example.bin --hash-type CRC32
   - python -m hashit -f test/support/example.bin --hash-type CRC32 --verify 29058C73
   - python -m hashit -f test/support/example.bin --hash-type MD5
+  - python -m hashit -f test/support/example.bin --hash-type MD5 --verify E2C865DB4162BED963BFAA9EF6AC18F0
   - python -m hashit -f test/support/example.bin --hash-type SHA1
   - python -m hashit -f test/support/example.bin --hash-type SHA224
   - python -m hashit -f test/support/example.bin --hash-type SHA256

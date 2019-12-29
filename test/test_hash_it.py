@@ -5,6 +5,7 @@ Tests for the HashIt object
 from __future__ import absolute_import
 import unittest
 from nose.tools import assert_equals, raises
+from hashit.core.hash_data import HashData
 from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
 
@@ -16,17 +17,17 @@ from hashit.core.hash_type import HashType
 
 class TestHashIt(unittest.TestCase):
     def setUp(self):
-        pass
+        self.example = HashData(filename="test/support/example.bin")
+        self.example_chunk = HashData(filename="test/support/example.bin", chunk_size=16)
 
     def tearDown(self):
         pass
 
     def test_hash_it_crc16(self):
-        assert_equals("BAD3", HashIt().hash_it(HashType.CRC16, "test/support/example.bin"))
+        assert_equals("BAD3", HashIt().hash_it(HashType.CRC16, self.example))
 
     def test_hash_it_crc16_chunked(self):
-        hashit = HashIt(hash_type=HashType.CRC16,
-                filename="test/support/example.bin", chunk_size=16)
+        hashit = HashIt(HashType.CRC16, self.example_chunk)
         assert_equals("170A", hashit.next_chunk())
         assert_equals("6ABB", hashit.next_chunk())
         assert_equals("EC68", hashit.next_chunk())
@@ -37,11 +38,10 @@ class TestHashIt(unittest.TestCase):
         assert_equals("271E", hashit.next_chunk())
 
     def test_hash_it_crc32(self):
-        assert_equals("29058C73", HashIt().hash_it(HashType.CRC32, "test/support/example.bin"))
+        assert_equals("29058C73", HashIt().hash_it(HashType.CRC32, self.example))
 
     def test_hash_it_crc32_chunked(self):
-        hashit = HashIt(hash_type=HashType.CRC32,
-                filename="test/support/example.bin", chunk_size=16)
+        hashit = HashIt(HashType.CRC32, self.example_chunk)
         assert_equals("CECEE288", hashit.next_chunk())
         assert_equals("F4A7FD67", hashit.next_chunk())
         assert_equals("BA1CDD56", hashit.next_chunk())
@@ -53,18 +53,18 @@ class TestHashIt(unittest.TestCase):
 
     @raises(NotImplementedError)
     def test_hash_it_md2_not_implemented(self):
-        HashIt().hash_it(HashType.MD2, "test/support/example.bin")
+        HashIt().hash_it(HashType.MD2, self.example)
 
     @raises(NotImplementedError)
     def test_hash_it_md4_not_implemented(self):
-        HashIt().hash_it(HashType.MD4, "test/support/example.bin")
+        HashIt().hash_it(HashType.MD4, self.example)
 
     def test_hash_it_md5(self):
         assert_equals("E2C865DB4162BED963BFAA9EF6AC18F0",
-                      HashIt().hash_it(HashType.MD5, "test/support/example.bin"))
+                HashIt().hash_it(HashType.MD5, self.example))
 
     def test_hash_it_md5_chunked(self):
-        hashit = HashIt(hash_type=HashType.MD5, filename="test/support/example.bin", chunk_size=16)
+        hashit = HashIt(HashType.MD5, self.example_chunk)
         assert_equals("1AC1EF01E96CAF1BE0D329331A4FC2A8", hashit.next_chunk())
         assert_equals("1BF42E241816BA29FF5F307BB1BC1D16", hashit.next_chunk())
         assert_equals("35BA6D08F0E34C15B9D0B09998960EB6", hashit.next_chunk())
@@ -77,10 +77,10 @@ class TestHashIt(unittest.TestCase):
 
     def test_hash_it_sha1(self):
         assert_equals("4916D6BDB7F78E6803698CAB32D1586EA457DFC8",
-                      HashIt().hash_it(HashType.SHA1, "test/support/example.bin"))
+                      HashIt().hash_it(HashType.SHA1, self.example))
 
     def test_hash_it_sha1_chunked(self):
-        hashit = HashIt(hash_type=HashType.SHA1, filename="test/support/example.bin", chunk_size=16)
+        hashit = HashIt(HashType.SHA1, self.example_chunk)
         assert_equals("56178B86A57FAC22899A9964185C2CC96E7DA589", hashit.next_chunk())
         assert_equals("CA148D05E875BCB8CCE4FD2C2C720BFD2E64753B", hashit.next_chunk())
         assert_equals("5C3F75DDA77EB61EF6D04B5045BDF661F4FA608C", hashit.next_chunk())
@@ -93,11 +93,10 @@ class TestHashIt(unittest.TestCase):
 
     def test_hash_it_sha224(self):
         assert_equals("88702E63237824C4EB0D0FCFE41469A462493E8BEB2A75BBE5981734",
-                      HashIt().hash_it(HashType.SHA224, "test/support/example.bin"))
+                HashIt().hash_it(HashType.SHA224, self.example))
 
     def test_hash_it_sha224_chunked(self):
-        hashit = HashIt(hash_type=HashType.SHA224, filename="test/support/example.bin",
-                chunk_size=16)
+        hashit = HashIt(HashType.SHA224, self.example_chunk)
         assert_equals("529D656A8BC413FEF58DA82E1BF0308DCFE0429DCD80687E69C94633",
                 hashit.next_chunk())
         assert_equals("0E97EA1BD23A0A7CB12CD3B7ECB9A60D6025C8CE105924279833CE85",
@@ -118,11 +117,10 @@ class TestHashIt(unittest.TestCase):
 
     def test_hash_it_sha256(self):
         assert_equals("40AFF2E9D2D8922E47AFD4648E6967497158785FBD1DA870E7110266BF944880",
-                      HashIt().hash_it(HashType.SHA256, "test/support/example.bin"))
+                      HashIt().hash_it(HashType.SHA256, self.example))
 
     def test_hash_it_sha256_chunked(self):
-        hashit = HashIt(hash_type=HashType.SHA256, filename="test/support/example.bin",
-                chunk_size=16)
+        hashit = HashIt(HashType.SHA256, self.example_chunk)
         assert_equals("BE45CB2605BF36BEBDE684841A28F0FD43C69850A3DCE5FEDBA69928EE3A8991",
                 hashit.next_chunk())
         assert_equals("FC2E2C73072BFA2BDA03FF9307472DEBD3CC8105028A8A9E235E35BA8D2E37F4",
@@ -142,8 +140,8 @@ class TestHashIt(unittest.TestCase):
 
     @raises(NotImplementedError)
     def test_hash_it_sha384_not_implemented(self):
-        HashIt().hash_it(HashType.SHA384, "test/support/example.bin")
+        HashIt().hash_it(HashType.SHA384, self.example)
 
     @raises(NotImplementedError)
     def test_hash_it_sha512_not_implemented(self):
-        HashIt().hash_it(HashType.SHA512, "test/support/example.bin")
+        HashIt().hash_it(HashType.SHA512, self.example)

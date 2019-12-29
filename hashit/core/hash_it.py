@@ -21,45 +21,27 @@ class HashIt(object):
     '''
     The object to preform hashing
     '''
-    def __init__(self, hash_type=None, filename=None, chunk_size=0):
-        self.filename = filename
-        self.chunk_size = chunk_size
+    def __init__(self, hash_type=None, hash_data=None):
         self.hash_type = hash_type
-        self.pos = 0
-        self.data = None
-        if filename != None:
-            self.size = os.path.getsize(filename)
-        else:
-            self.size = 0
+        self.data = hash_data
 
     def next_chunk(self):
         '''
         Hash the next chunk of data
         '''
-        data = None
-        if self.pos == self.size:
-            return None
+        return self._hash(self.data.next_chunk())
 
-        with open(self.filename, 'rb') as fin:
-            fin.seek(self.pos)
-            data = fin.read(self.chunk_size)
-        self.pos = self.pos + self.chunk_size
-        return self._hash(data)
-
-    def hash_it(self, hash_type=None, filename=None):
+    def hash_it(self, hash_type=None, hash_data=None):
         '''
         Hash all of the data
         '''
-        data = self.data
         if hash_type != None:
             self.hash_type = hash_type
 
-        if filename != None:
-            self.filename = filename
+        if hash_data != None:
+            self.data = hash_data
 
-        if self.filename != None:
-            data = open(self.filename, "rb").read()
-        return self._hash(data)
+        return self._hash(self.data.next_chunk())
 
 
     def _hash(self, data):

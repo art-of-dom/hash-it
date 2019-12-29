@@ -3,6 +3,7 @@ Runs the CLI for hash-it
 '''
 
 from __future__ import absolute_import, print_function
+from hashit.core.hash_data import HashData
 from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
 from hashit.service.validate_hash import ValidateHash
@@ -18,14 +19,26 @@ def verify_data(args, ht):
         validate = ValidateHash(
             result=args['--verify'],
             hash_type=ht,
-            filename=args['<input>']
+            data=HashData(args['<input>'])
         )
         if not validate.is_vaild():
             return 2
     return 0
 
+def run_hash(hash_type, args=None):
+    if args['--verify']:
+        return verify_data(args, hash_type)
+    else:
+        hash_str = ''
+        if args['-f']:
+            hash_str = HashIt(hash_type=hash_type,
+                hash_data=HashData(args['<input>'])
+            ).hash_it()
+            print('file: %s hash: %s'%(args['<input>'], hash_str))
+
+    return 0
+
 def cli_main(args=None):
-    hash_str = ''
     try:
         hash_type = extract_args(args)
     except KeyError:
@@ -34,12 +47,4 @@ def cli_main(args=None):
     except TypeError:
         return 1
 
-    if args['--verify']:
-        return verify_data(args, hash_type)
-    else:
-        if args['-f']:
-            hash_str = HashIt(hash_type=hash_type,
-                    filename=args['<input>']).hash_it()
-            print('file: %s hash: %s'%(args['<input>'], hash_str))
-
-    return 0
+    return run_hash(hash_type, args)
