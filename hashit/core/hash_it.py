@@ -4,7 +4,6 @@ The heavy hitter of hashing.
 '''
 from __future__ import absolute_import
 import hashlib
-import os
 from PyCRC.CRC16 import CRC16
 from PyCRC.CRC32 import CRC32
 from hashit.core.hash_type import HashType
@@ -51,6 +50,10 @@ class HashIt(object):
         elif self.hash_type == HashType.CRC32:
             hash_str = "%08X"%(CRC32().calculate(data) & 0xFFFFFFFF)
         elif self.hash_type in HASHLIB_MAPPING:
+            try:
+                data = data.encode('utf-8')
+            except:
+                pass
             hasher = HASHLIB_MAPPING[self.hash_type]()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()
