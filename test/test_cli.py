@@ -4,13 +4,14 @@ Tests for the cli interface
 
 from __future__ import absolute_import
 import unittest
-from nose.tools import assert_equals, assert_true
-from hashit.cli import cli_main
 import sys
+from nose.tools import assert_equals
+from hashit.cli import cli_main
 
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
 # pylint: disable=no-self-use
+# pylint: disable=bad-continuation
 
 
 class TestCLI(unittest.TestCase):

@@ -5,12 +5,13 @@ Tests for the HashIt object
 from __future__ import absolute_import
 import unittest
 from nose.tools import assert_equals, raises
-from hashit.hash_it import HashIt
-from hashit.hash_type import HashType
+from hashit.core.hash_it import HashIt
+from hashit.core.hash_type import HashType
 
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
 # pylint: disable=no-self-use
+# pylint: disable=bad-continuation
 
 
 class TestHashIt(unittest.TestCase):
@@ -95,15 +96,24 @@ class TestHashIt(unittest.TestCase):
                       HashIt().hash_it(HashType.SHA224, "test/support/example.bin"))
 
     def test_hash_it_sha224_chunked(self):
-        hashit = HashIt(hash_type=HashType.SHA224, filename="test/support/example.bin", chunk_size=16)
-        assert_equals("529D656A8BC413FEF58DA82E1BF0308DCFE0429DCD80687E69C94633", hashit.next_chunk())
-        assert_equals("0E97EA1BD23A0A7CB12CD3B7ECB9A60D6025C8CE105924279833CE85", hashit.next_chunk())
-        assert_equals("39E8EB9A3607349FC39A33C5AC6E326CF863AF32E5424F9FAD1B8584", hashit.next_chunk())
-        assert_equals("5371E71E799E41C70DE23DA40E283A4A997FBCD2A7B09F9CA91FA836", hashit.next_chunk())
-        assert_equals("A0C92632278202BE93F9815D4939A7ECA76E690B3A86C22B10AC154B", hashit.next_chunk())
-        assert_equals("FC74DD0B5078C8D1466F85C51B1EDF0DC65FF308035FD32113B83155", hashit.next_chunk())
-        assert_equals("E3A6ACADFEF1A97FF76E813F3C9F8ABD8498BDE28C8D295B5F315EBD", hashit.next_chunk())
-        assert_equals("F688C227166F7B837FA4C3AB010C08AF8C98FAFE61CB066D72B9B205", hashit.next_chunk())
+        hashit = HashIt(hash_type=HashType.SHA224, filename="test/support/example.bin",
+                chunk_size=16)
+        assert_equals("529D656A8BC413FEF58DA82E1BF0308DCFE0429DCD80687E69C94633",
+                hashit.next_chunk())
+        assert_equals("0E97EA1BD23A0A7CB12CD3B7ECB9A60D6025C8CE105924279833CE85",
+                hashit.next_chunk())
+        assert_equals("39E8EB9A3607349FC39A33C5AC6E326CF863AF32E5424F9FAD1B8584",
+                hashit.next_chunk())
+        assert_equals("5371E71E799E41C70DE23DA40E283A4A997FBCD2A7B09F9CA91FA836",
+                hashit.next_chunk())
+        assert_equals("A0C92632278202BE93F9815D4939A7ECA76E690B3A86C22B10AC154B",
+                hashit.next_chunk())
+        assert_equals("FC74DD0B5078C8D1466F85C51B1EDF0DC65FF308035FD32113B83155",
+                hashit.next_chunk())
+        assert_equals("E3A6ACADFEF1A97FF76E813F3C9F8ABD8498BDE28C8D295B5F315EBD",
+                hashit.next_chunk())
+        assert_equals("F688C227166F7B837FA4C3AB010C08AF8C98FAFE61CB066D72B9B205",
+                hashit.next_chunk())
 
 
     def test_hash_it_sha256(self):
@@ -111,15 +121,24 @@ class TestHashIt(unittest.TestCase):
                       HashIt().hash_it(HashType.SHA256, "test/support/example.bin"))
 
     def test_hash_it_sha256_chunked(self):
-        hashit = HashIt(hash_type=HashType.SHA256, filename="test/support/example.bin", chunk_size=16)
-        assert_equals("BE45CB2605BF36BEBDE684841A28F0FD43C69850A3DCE5FEDBA69928EE3A8991", hashit.next_chunk())
-        assert_equals("FC2E2C73072BFA2BDA03FF9307472DEBD3CC8105028A8A9E235E35BA8D2E37F4", hashit.next_chunk())
-        assert_equals("36DB1ADC807AC50E4C85BD86A174B4AA260154E4F172A3659698945D7B16D084", hashit.next_chunk())
-        assert_equals("816B9E7C25D559C5766755B3BBB36654AD451E080FFA93694A793D6EED41F40A", hashit.next_chunk())
-        assert_equals("BA22B7DC95F6CC8765757BE4BCCF37CD92ECE6D4987DC26A31E274C9BE236921", hashit.next_chunk())
-        assert_equals("372AFEFA6BCD01BE7504CFE132D4CDB5151ED08DE35825772BDECAB4C4EB6FBC", hashit.next_chunk())
-        assert_equals("2ED1BAD92452DF6752AC09877A37FC86EC876010FAA7D80765BD5131FB8E0226", hashit.next_chunk())
-        assert_equals("FBD8C6B1CD3C16E5A21471CD88E33224C138BDCD856586F752C28BEDADC181FD", hashit.next_chunk())
+        hashit = HashIt(hash_type=HashType.SHA256, filename="test/support/example.bin",
+                chunk_size=16)
+        assert_equals("BE45CB2605BF36BEBDE684841A28F0FD43C69850A3DCE5FEDBA69928EE3A8991",
+                hashit.next_chunk())
+        assert_equals("FC2E2C73072BFA2BDA03FF9307472DEBD3CC8105028A8A9E235E35BA8D2E37F4",
+                hashit.next_chunk())
+        assert_equals("36DB1ADC807AC50E4C85BD86A174B4AA260154E4F172A3659698945D7B16D084",
+                hashit.next_chunk())
+        assert_equals("816B9E7C25D559C5766755B3BBB36654AD451E080FFA93694A793D6EED41F40A",
+                hashit.next_chunk())
+        assert_equals("BA22B7DC95F6CC8765757BE4BCCF37CD92ECE6D4987DC26A31E274C9BE236921",
+                hashit.next_chunk())
+        assert_equals("372AFEFA6BCD01BE7504CFE132D4CDB5151ED08DE35825772BDECAB4C4EB6FBC",
+                hashit.next_chunk())
+        assert_equals("2ED1BAD92452DF6752AC09877A37FC86EC876010FAA7D80765BD5131FB8E0226",
+                hashit.next_chunk())
+        assert_equals("FBD8C6B1CD3C16E5A21471CD88E33224C138BDCD856586F752C28BEDADC181FD",
+                hashit.next_chunk())
 
     @raises(NotImplementedError)
     def test_hash_it_sha384_not_implemented(self):

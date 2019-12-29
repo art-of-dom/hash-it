@@ -7,7 +7,7 @@ import hashlib
 import os
 from PyCRC.CRC16 import CRC16
 from PyCRC.CRC32 import CRC32
-from hashit.hash_type import HashType
+from hashit.core.hash_type import HashType
 
 HASHLIB_MAPPING = {
     HashType.MD5: hashlib.md5,

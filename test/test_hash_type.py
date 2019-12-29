@@ -5,7 +5,7 @@ Tests for the HashType Enum
 from __future__ import absolute_import
 import unittest
 from nose.tools import assert_equals, assert_true
-from hashit.hash_type import HashType
+from hashit.core.hash_type import HashType
 
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name

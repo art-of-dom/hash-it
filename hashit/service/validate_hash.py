@@ -3,8 +3,8 @@ validate_hash.py
 The heavy hitter of hashing.
 '''
 from __future__ import absolute_import
-from hashit.hash_type import HashType
-from hashit.hash_it import HashIt
+from hashit.core.hash_type import HashType
+from hashit.core.hash_it import HashIt
 
 class ValidateHash(object):
     '''

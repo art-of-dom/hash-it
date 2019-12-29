@@ -1,10 +1,11 @@
 '''
+Runs the CLI for hash-it
 '''
 
-from __future__ import absolute_import
-from hashit.hash_it import HashIt
-from hashit.hash_type import HashType
-from hashit.validate_hash import ValidateHash
+from __future__ import absolute_import, print_function
+from hashit.core.hash_it import HashIt
+from hashit.core.hash_type import HashType
+from hashit.service.validate_hash import ValidateHash
 
 def extract_args(args):
     hash_type = HashType.CRC16

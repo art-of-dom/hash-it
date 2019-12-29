@@ -5,8 +5,8 @@ Tests for the ValidateHash object
 from __future__ import absolute_import
 import unittest
 from nose.tools import assert_true, assert_false
-from hashit.validate_hash import ValidateHash
-from hashit.hash_type import HashType
+from hashit.service.validate_hash import ValidateHash
+from hashit.core.hash_type import HashType
 
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
