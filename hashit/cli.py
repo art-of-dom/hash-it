@@ -10,41 +10,47 @@ from hashit.service.validate_hash import ValidateHash
 
 def extract_args(args):
     hash_type = HashType.CRC16
+    hash_data = None
     if args['--hash-type']:
         hash_type = HashType[args['--hash-type'].upper()]
-    return hash_type
-
-def verify_data(args, ht):
     if args['-f']:
-        validate = ValidateHash(
-            result=args['--verify'],
-            hash_type=ht,
-            data=HashData(args['<input>'])
-        )
-        if not validate.is_vaild():
-            return 2
+        hash_data = HashData(args['<input>'])
+    elif args['-a']:
+        hash_data = HashData(data=args['<input>'])
+    elif args['-x']:
+        data = str(bytearray.fromhex(args['<input>']).decode())
+        hash_data = HashData(data=data)
+    return hash_type, hash_data
+
+def verify_data(args):
+    validate = ValidateHash(
+        result=args['--verify'],
+        hash_type=args['ht'],
+        data=args['hd']
+    )
+    if not validate.is_vaild():
+        return 2
     return 0
 
-def run_hash(hash_type, args=None):
+def run_hash(args=None):
     if args['--verify']:
-        return verify_data(args, hash_type)
-    else:
-        hash_str = ''
-        if args['-f']:
-            hash_str = HashIt(hash_type=hash_type,
-                hash_data=HashData(args['<input>'])
-            ).hash_it()
-            print('file: %s hash: %s'%(args['<input>'], hash_str))
-
+        return verify_data(args)
+    elif args['<input>']:
+        hash_str = HashIt(hash_type=args['ht'],
+            hash_data=args['hd']
+        ).hash_it()
+        print('input: %s hash: %s'%(args['<input>'], hash_str))
     return 0
 
 def cli_main(args=None):
     try:
-        hash_type = extract_args(args)
+        hash_type, hash_data = extract_args(args)
+        args['ht'] = hash_type
+        args['hd'] = hash_data
     except KeyError:
         print("Unknown hash type %s"%args['--hash-type'])
         return 1
     except TypeError:
         return 1
 
-    return run_hash(hash_type, args)
+    return run_hash(args)

@@ -13,7 +13,15 @@ support test file like so will yield:
 
 ```shell
 python -m hashit -f test/support/example.bin --hash-type=CRC32
-# file: test/support/example.bin hash: 29058C73
+# input: test/support/example.bin hash: 29058C73
+```
+
+Can also be given an ASCII character string. Running against the input
+'123456789' will yield the following.
+
+```shell
+python -m hashit -s 123456789 --hash-type=CRC32
+# input: 123456789 hash: CBF43926
 ```
 
 If you already have a hash, you can also verify the hash of the file. A
@@ -36,6 +44,7 @@ echo $? # return value is 2
 
 - [x] Displaying File hashes
 - [x] Verification return value
+- [x] ASCII and Hex inputs
 - [ ] Reverse input
 - [ ] Pipe data or raw data instead of using a file
 - [ ] Data generation based on hash

@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 """
 Usage:
-    hash-it [-f] <input> [--hash-type=HASH] [--verify=RESULT]
+    hash-it [-fax] <input> [--hash-type=HASH] [--verify=RESULT]
 
 Options:
     -f                 input is a file
+    -a                 input is ascii text
+    -x                 input is hex string
     --hash-type=HASH   hash
     --verify=RESULT    verify given result
 """

@@ -20,6 +20,8 @@ class TestCLI(unittest.TestCase):
             '--hash-type': None,
             '--verify': None,
             '-f': False,
+            '-a': False,
+            '-x': False,
             '<input>': None
         }
 
@@ -55,18 +57,58 @@ class TestCLI(unittest.TestCase):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'
         assert_equals(0, cli_main(self.args))
-        self.assertEqual("file: test/support/example.bin hash: BAD3",
+        self.assertEqual("input: test/support/example.bin hash: BAD3",
             sys.stdout.getvalue().strip()
         )
 
-    def test_cil_verify_good_result_returns_zero(self):
+    def test_cil_uses_default_hash_on_ascii(self):
+        self.args['-a'] = True
+        self.args['<input>'] = '123456789'
+        assert_equals(0, cli_main(self.args))
+        self.assertEqual("input: 123456789 hash: BB3D",
+            sys.stdout.getvalue().strip()
+        )
+
+    def test_cil_uses_default_hash_on_hex(self):
+        self.args['-x'] = True
+        self.args['<input>'] = '010203040506070809'
+        assert_equals(0, cli_main(self.args))
+        self.assertEqual("input: 010203040506070809 hash: 4204",
+            sys.stdout.getvalue().strip()
+        )
+
+    def test_cil_verify_good_result_returns_zero_file(self):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'
         self.args['--verify'] = 'BAD3'
         assert_equals(0, cli_main(self.args))
 
-    def test_cil_verify_bad_result_returns_error(self):
+    def test_cil_verify_bad_result_returns_error_file(self):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'
+        self.args['--verify'] = 'F00D'
+        assert_equals(2, cli_main(self.args))
+
+    def test_cil_verify_good_result_returns_zero_ascii(self):
+        self.args['-a'] = True
+        self.args['<input>'] = '123456789'
+        self.args['--verify'] = 'BB3D'
+        assert_equals(0, cli_main(self.args))
+
+    def test_cil_verify_bad_result_returns_error_ascii(self):
+        self.args['-a'] = True
+        self.args['<input>'] = '123456789'
+        self.args['--verify'] = 'F00D'
+        assert_equals(2, cli_main(self.args))
+
+    def test_cil_verify_good_result_returns_zero_hex(self):
+        self.args['-x'] = True
+        self.args['<input>'] = '010203040506070809'
+        self.args['--verify'] = '4204'
+        assert_equals(0, cli_main(self.args))
+
+    def test_cil_verify_bad_result_returns_error_hex(self):
+        self.args['-x'] = True
+        self.args['<input>'] = '010203040506070809'
         self.args['--verify'] = 'F00D'
         assert_equals(2, cli_main(self.args))
