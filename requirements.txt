@@ -15,7 +15,7 @@ packaging==19.0
 PyCRC==1.21
 Pygments==2.3.1
 pyparsing==2.3.1
-pytz==2018.9
+pytz==2019.3
 requests==2.21.0
 six==1.13.0
 snowballstemmer==1.2.1
