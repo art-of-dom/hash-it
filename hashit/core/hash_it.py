@@ -53,13 +53,15 @@ class HashIt(object):
     def _hash(self, data):
         hash_str = ""
         if self.hash_type in HASHLIB_MAPPING:
+
             try:
                 data = data.encode('utf-8')
-            except:
+            except (UnicodeDecodeError, AttributeError):
                 pass
+
             try:
                 hasher = HASHLIB_MAPPING[self.hash_type]()
-            except TypeError:
+            except (TypeError, AttributeError):
                 hasher = HASHLIB_MAPPING[self.hash_type].new()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()

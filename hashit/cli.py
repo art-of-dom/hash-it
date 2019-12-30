@@ -9,6 +9,9 @@ from hashit.core.hash_type import HashType
 from hashit.service.validate_hash import ValidateHash
 
 def extract_args(args):
+    '''
+    extracts args for the CLI
+    '''
     hash_type = HashType.CRC16
     hash_data = None
     if args['--hash-type']:
@@ -33,9 +36,12 @@ def verify_data(args):
     return 0
 
 def run_hash(args=None):
+    '''
+    Does the hashing actions for the CLI
+    '''
     if args['--verify']:
         return verify_data(args)
-    elif args['<input>']:
+    if args['<input>']:
         hash_str = HashIt(hash_type=args['ht'],
             hash_data=args['hd']
         ).hash_it()
@@ -43,6 +49,9 @@ def run_hash(args=None):
     return 0
 
 def cli_main(args=None):
+    '''
+    CLI main point of entry
+    '''
     try:
         hash_type, hash_data = extract_args(args)
         args['ht'] = hash_type
