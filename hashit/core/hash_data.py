@@ -16,24 +16,29 @@ class HashData(object):
         self.chunk_size = chunk_size
         self.pos = 0
         self.data = data
+        self.size = 0
 
-        if filename != None:
+        if filename is not None:
             self.size = os.path.getsize(filename)
-        elif data != None:
+        elif data is not None:
             self.size = len(data)
-        else:
-            self.size = 0
 
         if self.chunk_size == 0:
             self.chunk_size = self.size
 
     def percent_processed(self):
+        '''
+        Give the data yet to be processed as a pecentage
+        '''
         try:
             return (self.pos / self.size) * 100.0
         except ZeroDivisionError:
             return 100.0
 
     def next_chunk(self):
+        '''
+        Give the next chunk of pure data
+        '''
         data = None
         if self.pos == self.size:
             return None

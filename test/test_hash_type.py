@@ -10,7 +10,7 @@ from hashit.core.hash_type import HashType
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
 # pylint: disable=no-self-use
-
+# pylint: disable=too-many-public-methods
 
 class TestHashType(unittest.TestCase):
     def setUp(self):
@@ -18,6 +18,12 @@ class TestHashType(unittest.TestCase):
 
     def tearDown(self):
         pass
+
+    def test_hash_type_crc8_in_hash_type(self):
+        assert_true('CRC8' in HashType.__members__)
+
+    def test_hash_type_crc8_lookup(self):
+        assert_equals(HashType.CRC8, HashType['CRC8'])
 
     def test_hash_type_crc16_in_hash_type(self):
         assert_true('CRC16' in HashType.__members__)
@@ -30,6 +36,12 @@ class TestHashType(unittest.TestCase):
 
     def test_hash_type_crc32_lookup(self):
         assert_equals(HashType.CRC32, HashType['CRC32'])
+
+    def test_hash_type_crc64_in_hash_type(self):
+        assert_true('CRC64' in HashType.__members__)
+
+    def test_hash_type_crc64_lookup(self):
+        assert_equals(HashType.CRC64, HashType['CRC64'])
 
     def test_hash_type_md2_in_hash_type(self):
         assert_true('MD2' in HashType.__members__)

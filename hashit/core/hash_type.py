@@ -5,14 +5,21 @@ Enumerates the hash types to easily allow choosing a hash.
 """
 
 from enum import Enum
+
+
 class HashType(Enum):
-    CRC16 = 0
-    CRC32 = 1
-    MD2 = 2
-    MD4 = 3
-    MD5 = 4
-    SHA1 = 5
-    SHA224 = 6
-    SHA256 = 7
-    SHA384 = 8
-    SHA512 = 9
+    '''
+    An Enumerated representation of a hash used for parsing
+    '''
+    CRC8 = 0
+    CRC16 = 1
+    CRC32 = 2
+    CRC64 = 3
+    MD2 = 4
+    MD4 = 5
+    MD5 = 6
+    SHA1 = 7
+    SHA224 = 8
+    SHA256 = 9
+    SHA384 = 10
+    SHA512 = 11

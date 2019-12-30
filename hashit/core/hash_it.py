@@ -3,16 +3,23 @@ hash_type.py
 The heavy hitter of hashing.
 '''
 from __future__ import absolute_import
+
 import hashlib
-from PyCRC.CRC16 import CRC16
-from PyCRC.CRC32 import CRC32
+import crcmod
+
 from hashit.core.hash_type import HashType
 
 HASHLIB_MAPPING = {
+    HashType.CRC8: crcmod.predefined.Crc('crc-8'),
+    HashType.CRC16: crcmod.predefined.Crc('crc-16'),
+    HashType.CRC32: crcmod.predefined.Crc('crc-32'),
+    HashType.CRC64: crcmod.predefined.Crc('crc-64'),
     HashType.MD5: hashlib.md5,
     HashType.SHA1: hashlib.sha1,
     HashType.SHA224: hashlib.sha224,
-    HashType.SHA256: hashlib.sha256
+    HashType.SHA256: hashlib.sha256,
+    HashType.SHA384: hashlib.sha384,
+    HashType.SHA512: hashlib.sha512
 }
 
 
@@ -34,10 +41,10 @@ class HashIt(object):
         '''
         Hash all of the data
         '''
-        if hash_type != None:
+        if hash_type is not None:
             self.hash_type = hash_type
 
-        if hash_data != None:
+        if hash_data is not None:
             self.data = hash_data
 
         return self._hash(self.data.next_chunk())
@@ -45,16 +52,15 @@ class HashIt(object):
 
     def _hash(self, data):
         hash_str = ""
-        if self.hash_type == HashType.CRC16:
-            hash_str = "%04X"%(CRC16().calculate(data) & 0xFFFF)
-        elif self.hash_type == HashType.CRC32:
-            hash_str = "%08X"%(CRC32().calculate(data) & 0xFFFFFFFF)
-        elif self.hash_type in HASHLIB_MAPPING:
+        if self.hash_type in HASHLIB_MAPPING:
             try:
                 data = data.encode('utf-8')
             except:
                 pass
-            hasher = HASHLIB_MAPPING[self.hash_type]()
+            try:
+                hasher = HASHLIB_MAPPING[self.hash_type]()
+            except TypeError:
+                hasher = HASHLIB_MAPPING[self.hash_type].new()
             hasher.update(data)
             hash_str = hasher.hexdigest().upper()
         else:

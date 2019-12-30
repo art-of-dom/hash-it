@@ -5,6 +5,7 @@ python:
   - "3.5"
   - "3.6"
   - "3.7"
+  - "3.8"
 install:
   pip install -r requirements.txt;
 script:
@@ -12,6 +13,10 @@ script:
   - python -m hashit -f test/support/example.bin
   - python -m hashit -a 123456789
   - python -m hashit -x 010203040506070809
+  - python -m hashit -f test/support/example.bin --hash-type CRC8
+  - python -m hashit -f test/support/example.bin --hash-type CRC8 --verify 14
+  - python -m hashit -a 123456789 --hash-type CR8
+  - python -m hashit -x 010203040506070809  --hash-type CRC8
   - python -m hashit -f test/support/example.bin --hash-type CRC16
   - python -m hashit -f test/support/example.bin --hash-type CRC16 --verify BAD3
   - python -m hashit -a 123456789 --hash-type CRC16
@@ -20,6 +25,10 @@ script:
   - python -m hashit -f test/support/example.bin --hash-type CRC32 --verify 29058C73
   - python -m hashit -a 123456789 --hash-type CRC32
   - python -m hashit -x 010203040506070809  --hash-type CRC32
+  - python -m hashit -f test/support/example.bin --hash-type CRC64
+  - python -m hashit -f test/support/example.bin --hash-type CRC64 --verify 6C27EAA78BA3F822
+  - python -m hashit -a 123456789 --hash-type CRC64
+  - python -m hashit -x 010203040506070809  --hash-type CRC64
   - python -m hashit -f test/support/example.bin --hash-type MD5
   - python -m hashit -f test/support/example.bin --hash-type MD5 --verify E2C865DB4162BED963BFAA9EF6AC18F0
   - python -m hashit -a 123456789 --hash-type MD5

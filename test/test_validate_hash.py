@@ -3,11 +3,13 @@ Tests for the ValidateHash object
 '''
 
 from __future__ import absolute_import
+
 import unittest
 from nose.tools import assert_true, assert_false
-from hashit.service.validate_hash import ValidateHash
+
 from hashit.core.hash_data import HashData
 from hashit.core.hash_type import HashType
+from hashit.service.validate_hash import ValidateHash
 
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
@@ -20,6 +22,20 @@ class TestHashIt(unittest.TestCase):
 
     def tearDown(self):
         pass
+
+    def test_verify_hash_crc8_expected_result(self):
+        assert_true(ValidateHash(
+            result="14",
+            hash_type=HashType.CRC8,
+            data=self.data
+        ).is_vaild())
+
+    def test_verify_hash_crc8_bad_result(self):
+        assert_false(ValidateHash(
+            result="FE",
+            hash_type=HashType.CRC8,
+            data=self.data
+        ).is_vaild())
 
     def test_verify_hash_crc16_expected_result(self):
         assert_true(ValidateHash(
@@ -46,6 +62,20 @@ class TestHashIt(unittest.TestCase):
         assert_false(ValidateHash(
             result="ACEF2345",
             hash_type=HashType.CRC32,
+            data=self.data
+        ).is_vaild())
+
+    def test_verify_hash_crc64_expected_result(self):
+        assert_true(ValidateHash(
+            result="6C27EAA78BA3F822",
+            hash_type=HashType.CRC64,
+            data=self.data
+        ).is_vaild())
+
+    def test_verify_hash_crc64_bad_result(self):
+        assert_false(ValidateHash(
+            result="DEADBEEFF00DB00F",
+            hash_type=HashType.CRC64,
             data=self.data
         ).is_vaild())
 

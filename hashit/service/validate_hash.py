@@ -14,9 +14,14 @@ class ValidateHash(object):
         self.data = data
         self.expected_result = result
         self.hash_type = hash_type
+        self.resulting_hash = None
 
     def is_vaild(self):
-        return self.expected_result.upper() == HashIt().hash_it(
+        '''
+        checks if the given result is valid
+        '''
+        self.resulting_hash = HashIt().hash_it(
             self.hash_type,
             self.data
         )
+        return self.expected_result.upper() == self.resulting_hash

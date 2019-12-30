@@ -13,6 +13,7 @@ from hashit.core.hash_type import HashType
 # pylint: disable=invalid-name
 # pylint: disable=no-self-use
 # pylint: disable=bad-continuation
+# pylint: disable=too-many-public-methods
 
 
 class TestHashIt(unittest.TestCase):
@@ -22,6 +23,20 @@ class TestHashIt(unittest.TestCase):
 
     def tearDown(self):
         pass
+
+    def test_hash_it_crc8(self):
+        assert_equals("14", HashIt().hash_it(HashType.CRC8, self.example))
+
+    def test_hash_it_crc8_chunked(self):
+        hashit = HashIt(HashType.CRC8, self.example_chunk)
+        assert_equals("41", hashit.next_chunk())
+        assert_equals("84", hashit.next_chunk())
+        assert_equals("CC", hashit.next_chunk())
+        assert_equals("09", hashit.next_chunk())
+        assert_equals("5C", hashit.next_chunk())
+        assert_equals("99", hashit.next_chunk())
+        assert_equals("D1", hashit.next_chunk())
+        assert_equals("14", hashit.next_chunk())
 
     def test_hash_it_crc16(self):
         assert_equals("BAD3", HashIt().hash_it(HashType.CRC16, self.example))
@@ -50,6 +65,20 @@ class TestHashIt(unittest.TestCase):
         assert_equals("1D0382DB", hashit.next_chunk())
         assert_equals("53B8A2EA", hashit.next_chunk())
         assert_equals("69D1BD05", hashit.next_chunk())
+
+    def test_hash_it_crc64(self):
+        assert_equals("6C27EAA78BA3F822", HashIt().hash_it(HashType.CRC64, self.example))
+
+    def test_hash_it_crc64_chunked(self):
+        hashit = HashIt(HashType.CRC64, self.example_chunk)
+        assert_equals("D744B0AF58936778", hashit.next_chunk())
+        assert_equals("AF1BEFF007CC3827", hashit.next_chunk())
+        assert_equals("27FA0E11E62DD9C6", hashit.next_chunk())
+        assert_equals("5FA5514EB9728699", hashit.next_chunk())
+        assert_equals("8639CDD225EE1A05", hashit.next_chunk())
+        assert_equals("FE66928D7AB1455A", hashit.next_chunk())
+        assert_equals("7687736C9B50A4BB", hashit.next_chunk())
+        assert_equals("0ED82C33C40FFBE4", hashit.next_chunk())
 
     @raises(NotImplementedError)
     def test_hash_it_md2_not_implemented(self):
@@ -138,10 +167,11 @@ class TestHashIt(unittest.TestCase):
         assert_equals("FBD8C6B1CD3C16E5A21471CD88E33224C138BDCD856586F752C28BEDADC181FD",
                 hashit.next_chunk())
 
-    @raises(NotImplementedError)
-    def test_hash_it_sha384_not_implemented(self):
-        HashIt().hash_it(HashType.SHA384, self.example)
+    def test_hash_it_sha384(self):
+        assert_equals("FFDAEBFF65ED05CF400F0221C4CCFB4B2104FB6A51F87E40BE6C4309386BFDEC2"
+                "892E9179B34632331A59592737DB5C5", HashIt().hash_it(HashType.SHA384, self.example))
 
-    @raises(NotImplementedError)
-    def test_hash_it_sha512_not_implemented(self):
-        HashIt().hash_it(HashType.SHA512, self.example)
+    def test_hash_it_sha512(self):
+        assert_equals("1E7B80BC8EDC552C8FEEB2780E111477E5BC70465FAC1A77B29B35980C3F0CE4A"
+                "036A6C9462036824BD56801E62AF7E9FEBA5C22ED8A5AF877BF7DE117DCAC6D",
+                HashIt().hash_it(HashType.SHA512, self.example))
