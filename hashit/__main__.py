@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 """
 Usage:
-    hash-it [-fax] <input> [--hash-type=HASH] [--verify=RESULT]
+    hash-it [-bfax] <input> [--hash-type=HASH] [--verify=RESULT]
 
 Options:
+    -b                 brute force the verify
     -f                 input is a file
     -a                 input is ascii text
     -x                 input is hex string

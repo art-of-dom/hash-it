@@ -22,6 +22,7 @@ class TestCLI(unittest.TestCase):
             '-f': False,
             '-a': False,
             '-x': False,
+            '-b': False,
             '<input>': None
         }
 
@@ -109,6 +110,48 @@ class TestCLI(unittest.TestCase):
 
     def test_cil_verify_bad_result_returns_error_hex(self):
         self.args['-x'] = True
+        self.args['<input>'] = '010203040506070809'
+        self.args['--verify'] = 'F00D'
+        assert_equals(2, cli_main(self.args))
+
+    def test_cil_verify_brute_force_good_result_returns_zero_file(self):
+        self.args['-f'] = True
+        self.args['-b'] = True
+        self.args['<input>'] = 'test/support/example.bin'
+        self.args['--verify'] = 'BAD3'
+        assert_equals(0, cli_main(self.args))
+
+    def test_cil_verify_brute_force_bad_result_returns_error_file(self):
+        self.args['-f'] = True
+        self.args['-b'] = True
+        self.args['<input>'] = 'test/support/example.bin'
+        self.args['--verify'] = '000D'
+        assert_equals(2, cli_main(self.args))
+
+    def test_cil_verify_brute_force_good_result_returns_zero_ascii(self):
+        self.args['-a'] = True
+        self.args['-b'] = True
+        self.args['<input>'] = '123456789'
+        self.args['--verify'] = 'BB3D'
+        assert_equals(0, cli_main(self.args))
+
+    def test_cil_verify_brute_force_bad_result_returns_error_ascii(self):
+        self.args['-a'] = True
+        self.args['-b'] = True
+        self.args['<input>'] = '123456789'
+        self.args['--verify'] = 'F00D'
+        assert_equals(2, cli_main(self.args))
+
+    def test_cil_verify_brute_force_good_result_returns_zero_hex(self):
+        self.args['-x'] = True
+        self.args['-b'] = True
+        self.args['<input>'] = '010203040506070809'
+        self.args['--verify'] = '4204'
+        assert_equals(0, cli_main(self.args))
+
+    def test_cil_verify_brute_force_bad_result_returns_error_hex(self):
+        self.args['-x'] = True
+        self.args['-b'] = True
         self.args['<input>'] = '010203040506070809'
         self.args['--verify'] = 'F00D'
         assert_equals(2, cli_main(self.args))

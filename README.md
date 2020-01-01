@@ -46,11 +46,11 @@ echo $? # return value is 2
 - [x] Displaying File hashes
 - [x] Verification return value
 - [x] ASCII and Hex inputs
+- [x] Brute force verification
 - [ ] Reverse input
-- [ ] Pipe data or raw data instead of using a file
+- [ ] Pipe data to hash-it
 - [ ] Data generation based on hash
 - [ ] Data generation depth
-- [ ] Brute force verification
 
 ## State of the repo
 

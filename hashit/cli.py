@@ -3,10 +3,14 @@ Runs the CLI for hash-it
 '''
 
 from __future__ import absolute_import, print_function
+
 from hashit.core.hash_data import HashData
 from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
+
+from hashit.service.brute_force import BruteForce
 from hashit.service.validate_hash import ValidateHash
+
 
 def extract_args(args):
     '''
@@ -26,14 +30,26 @@ def extract_args(args):
     return hash_type, hash_data
 
 def verify_data(args):
-    validate = ValidateHash(
-        result=args['--verify'],
-        hash_type=args['ht'],
-        data=args['hd']
-    )
-    if not validate.is_vaild():
+    '''
+    verify data for CLI
+    '''
+    if args['-b']:
+        brute_force = BruteForce(data=args['hd'])
+        if brute_force.run(result=args['--verify'], hash_type=args['ht']):
+            print('found hash %s after brute forcing\n'
+                    'data = %s'%(args['<input>'],
+                    brute_force.solved_data))
+            return 0
         return 2
-    return 0
+    else:
+        validate = ValidateHash(
+            result=args['--verify'],
+            hash_type=args['ht'],
+            data=args['hd']
+        )
+        if validate.is_vaild():
+            return 0
+    return 2
 
 def run_hash(args=None):
     '''
