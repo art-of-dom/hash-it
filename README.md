@@ -47,7 +47,7 @@ echo $? # return value is 2
 - [x] Verification return value
 - [x] ASCII and Hex inputs
 - [x] Brute force verification
-- [ ] Reverse input
+- [x] Reverse input
 - [ ] Pipe data to hash-it
 - [ ] Data generation based on hash
 - [ ] Data generation depth

@@ -1,15 +1,15 @@
-'''
+"""
 hash_data.py
 Keeps track of data for hashing.
-'''
+"""
 
 from __future__ import absolute_import, division
 import os
 
 class HashData(object):
-    '''
+    """
     The object to keep track of data being hashed
-    '''
+    """
 
     def __init__(self, filename=None, data=None, chunk_size=0):
         self.filename = filename
@@ -25,6 +25,19 @@ class HashData(object):
 
         if self.chunk_size == 0:
             self.chunk_size = self.size
+
+    def reverse(self):
+        """
+        Reverse the stored hash data
+        """
+        if self.data:
+            self.data.reverse()
+        elif self.filename:
+            with open(self.filename, 'rb') as fin:
+                fin.seek(self.pos)
+                self.data = bytearray(fin.read(self.chunk_size))
+            self.data.reverse()
+
 
     def percent_processed(self):
         '''
@@ -46,12 +59,12 @@ class HashData(object):
         if end_pos > self.size:
             end_pos = self.size
 
-        if self.filename:
+        if self.data:
+            data = self.data[self.pos:end_pos]
+        elif self.filename:
             with open(self.filename, 'rb') as fin:
                 fin.seek(self.pos)
                 data = fin.read(self.chunk_size)
-        elif self.data:
-            data = self.data[self.pos:end_pos]
 
         self.pos = end_pos
         return data

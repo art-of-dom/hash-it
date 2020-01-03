@@ -41,14 +41,13 @@ def verify_data(args):
                     brute_force.solved_data))
             return 0
         return 2
-    else:
-        validate = ValidateHash(
-            result=args['--verify'],
-            hash_type=args['ht'],
-            data=args['hd']
-        )
-        if validate.is_vaild():
-            return 0
+    validate = ValidateHash(
+        result=args['--verify'],
+        hash_type=args['ht'],
+        data=args['hd']
+    )
+    if validate.is_vaild():
+        return 0
     return 2
 
 def run_hash(args=None):

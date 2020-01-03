@@ -8,9 +8,9 @@ from enum import Enum
 
 
 class HashType(Enum):
-    '''
+    """
     An Enumerated representation of a hash used for parsing
-    '''
+    """
     CRC8 = 0
     CRC16 = 1
     CRC32 = 2
