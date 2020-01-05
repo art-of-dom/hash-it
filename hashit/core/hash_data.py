@@ -5,7 +5,7 @@ Keeps track of data for hashing.
 
 from __future__ import absolute_import, division
 import os
-
+from six import string_types
 
 class HashData(object):
     """
@@ -30,14 +30,14 @@ class HashData(object):
     def reverse(self):
         """Reverse the stored hash data"""
         if self.data:
-            self.data = bytearray(self.data)
+            if isinstance(self.data, string_types):
+                self.data = bytearray(self.data.encode())
             self.data.reverse()
         elif self.filename:
             with open(self.filename, 'rb') as fin:
-                fin.seek(self.pos)
-                self.data = bytearray(fin.read(self.chunk_size))
+                fin.seek(0)
+                self.data = bytearray(fin.read(self.size))
             self.data.reverse()
-        self.data = str(self.data)
 
     def percent_processed(self):
         """Give the data yet to be processed as a pecentage"""

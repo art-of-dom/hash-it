@@ -13,7 +13,7 @@ from hashit.core.hash_data import HashData
 # pylint: disable=bad-continuation
 
 
-class TestHashIt(unittest.TestCase):
+class TestHashData(unittest.TestCase):
     def setUp(self):
         self.bin_data = bytearray(list(range(0, 256)))
 
@@ -62,7 +62,7 @@ class TestHashIt(unittest.TestCase):
         reverse_data.reverse()
         hd = HashData(filename="test/support/example.bin")
         hd.reverse()
-        assert_equals(reverse_data, bytearray(hd.next_chunk()))
+        assert_equals(reverse_data, hd.next_chunk())
 
     def test_hash_data_arg_data_handles_percent_processed(self):
         hd = HashData(data=self.bin_data)
@@ -94,4 +94,4 @@ class TestHashIt(unittest.TestCase):
         reverse_data.reverse()
         hd = HashData(data=self.bin_data)
         hd.reverse()
-        assert_equals(reverse_data, bytearray(hd.next_chunk()))
+        assert_equals(reverse_data, hd.next_chunk())

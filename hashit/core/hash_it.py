@@ -7,6 +7,7 @@ from __future__ import absolute_import
 import hashlib
 
 import crcmod
+import six
 
 from hashit.core.hash_type import HashType
 
@@ -26,9 +27,7 @@ HASHLIB_MAPPING = {
 
 
 class HashIt(object):
-    """
-    The object to preform hashing
-    """
+    """The object to preform hashing"""
     def __init__(self, hash_type=None, hash_data=None):
         self.hash_type = hash_type
         self.data = hash_data
@@ -60,10 +59,13 @@ class HashIt(object):
         """
         Internal hashing mapping specifically for hashlib like interfaces
         """
-        try:
-            data = data.encode('utf-8')
-        except (UnicodeDecodeError, AttributeError):
-            pass
+        if six.PY3:
+            try:
+                data = data.encode('utf-8')
+            except (UnicodeDecodeError, AttributeError):
+                pass
+        else:
+            data = str(data)
 
         hasher = HASHLIB_MAPPING[self.hash_type]()
         hasher.update(data)

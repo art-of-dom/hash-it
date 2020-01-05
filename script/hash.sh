@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-#set -x
+set -x
 
 FILE_INPUT="test/support/example.bin"
 ASCII_INPUT="123456789"
@@ -42,11 +42,11 @@ do
     $CMD_BASE -rx "$HEX_INPUT" --hash-type "$hash"
 
     if [[ -v "FILE_VERIFY[$hash]" ]] ; then
-        python -m hashit -f "$FILE_INPUT" --hash-type "$hash" --verify "${FILE_VERIFY[$hash]}"
+        $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash" --verify "${FILE_VERIFY[$hash]}"
     fi
 
     if [[ -v "ASCII_VERIFY[$hash]" ]] ; then
-        python -m hashit -a "$ASCII_INPUT" --hash-type "$hash" --verify "${ASCII_VERIFY[$hash]}"
+        $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash" --verify "${ASCII_VERIFY[$hash]}"
     fi
 done
 
