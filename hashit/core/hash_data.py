@@ -28,9 +28,7 @@ class HashData(object):
             self.chunk_size = self.size
 
     def reverse(self):
-        """
-        Reverse the stored hash data
-        """
+        """Reverse the stored hash data"""
         if self.data:
             self.data = bytearray(self.data)
             self.data.reverse()
@@ -41,20 +39,15 @@ class HashData(object):
             self.data.reverse()
         self.data = str(self.data)
 
-
     def percent_processed(self):
-        '''
-        Give the data yet to be processed as a pecentage
-        '''
+        """Give the data yet to be processed as a pecentage"""
         try:
             return (self.pos / self.size) * 100.0
         except ZeroDivisionError:
             return 100.0
 
     def next_chunk(self):
-        '''
-        Give the next chunk of pure data
-        '''
+        """Give the next chunk of pure data"""
         data = None
         if self.pos == self.size:
             return None

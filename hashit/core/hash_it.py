@@ -47,7 +47,6 @@ class HashIt(object):
 
         return self._hash(self.data.next_chunk())
 
-
     def _hash(self, data):
         """Internal hashing mapping"""
         hash_str = ""
@@ -56,7 +55,6 @@ class HashIt(object):
         else:
             raise NotImplementedError
         return hash_str
-
 
     def _hashlib_hash(self, data):
         """

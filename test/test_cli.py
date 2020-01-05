@@ -19,6 +19,7 @@ class TestCLI(unittest.TestCase):
         self.args = {
             '--hash-type': None,
             '--verify': None,
+            '-r': False,
             '-f': False,
             '-a': False,
             '-x': False,
@@ -29,12 +30,14 @@ class TestCLI(unittest.TestCase):
     def tearDown(self):
         pass
 
+    # arg checks
     def test_cil_retruns_error_if_no_args(self):
         assert_equals(1, cli_main(None))
 
     def test_cil_retruns_success_no_vaild_args(self):
         assert_equals(0, cli_main(self.args))
 
+    # arg checks hash-type check
     def test_cil_retruns_success_known_hash_uppercase(self):
         self.args['--hash-type'] = 'CRC32'
         assert_equals(0, cli_main(self.args))
@@ -54,6 +57,7 @@ class TestCLI(unittest.TestCase):
             sys.stdout.getvalue().strip()
         )
 
+    # base hash / base hash-type
     def test_cil_uses_default_hash_on_file(self):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'
@@ -78,6 +82,7 @@ class TestCLI(unittest.TestCase):
             sys.stdout.getvalue().strip()
         )
 
+    # verify hash
     def test_cil_verify_good_result_returns_zero_file(self):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'
@@ -114,6 +119,7 @@ class TestCLI(unittest.TestCase):
         self.args['--verify'] = 'F00D'
         assert_equals(2, cli_main(self.args))
 
+    # verify hash brute force
     def test_cil_verify_brute_force_good_result_returns_zero_file(self):
         self.args['-f'] = True
         self.args['-b'] = True

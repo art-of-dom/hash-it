@@ -29,6 +29,7 @@ def extract_args(args):
 
     return hash_type, hash_data
 
+
 def verify_data(args):
     """verify data for CLI"""
     if args['-b']:
@@ -48,6 +49,7 @@ def verify_data(args):
         return 0
     return 2
 
+
 def run_task(args=None):
     """Does the hashing related task for the CLI"""
     if args['--verify']:
@@ -58,6 +60,7 @@ def run_task(args=None):
         ).hash_it()
         print('input: %s hash: %s' % (args['<input>'], hash_str))
     return 0
+
 
 def cli_main(args=None):
     """CLI main point of entry"""
