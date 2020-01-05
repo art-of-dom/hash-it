@@ -1,6 +1,4 @@
-'''
-Tests for the BruteForce object
-'''
+"""Tests for the BruteForce object"""
 
 from __future__ import absolute_import
 
@@ -9,7 +7,6 @@ from nose.tools import assert_true, assert_equals, assert_false, assert_is_none
 import six
 
 from hashit.core.hash_data import HashData
-from hashit.core.hash_type import HashType
 from hashit.service.brute_force import BruteForce
 
 # pylint: disable=missing-docstring

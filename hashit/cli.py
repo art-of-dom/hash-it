@@ -1,6 +1,4 @@
-'''
-Runs the CLI for hash-it
-'''
+"""Runs the CLI for hash-it"""
 
 from __future__ import absolute_import, print_function
 
@@ -13,9 +11,7 @@ from hashit.service.validate_hash import ValidateHash
 
 
 def extract_args(args):
-    '''
-    extracts args for the CLI
-    '''
+    """extracts args for the CLI"""
     hash_type = HashType.CRC16
     hash_data = None
     if args['--hash-type']:
@@ -27,17 +23,19 @@ def extract_args(args):
     elif args['-x']:
         data = str(bytearray.fromhex(args['<input>']).decode())
         hash_data = HashData(data=data)
+
+    if args['-r']:
+        hash_data.reverse()
+
     return hash_type, hash_data
 
 def verify_data(args):
-    '''
-    verify data for CLI
-    '''
+    """verify data for CLI"""
     if args['-b']:
         brute_force = BruteForce(data=args['hd'])
         if brute_force.run(result=args['--verify'], hash_type=args['ht']):
             print('found hash %s after brute forcing\n'
-                    'data = %s'%(args['<input>'],
+                    'data = %s' % (args['<input>'],
                     brute_force.solved_data))
             return 0
         return 2
@@ -50,31 +48,27 @@ def verify_data(args):
         return 0
     return 2
 
-def run_hash(args=None):
-    '''
-    Does the hashing actions for the CLI
-    '''
+def run_task(args=None):
+    """Does the hashing related task for the CLI"""
     if args['--verify']:
         return verify_data(args)
     if args['<input>']:
         hash_str = HashIt(hash_type=args['ht'],
             hash_data=args['hd']
         ).hash_it()
-        print('input: %s hash: %s'%(args['<input>'], hash_str))
+        print('input: %s hash: %s' % (args['<input>'], hash_str))
     return 0
 
 def cli_main(args=None):
-    '''
-    CLI main point of entry
-    '''
+    """CLI main point of entry"""
     try:
         hash_type, hash_data = extract_args(args)
         args['ht'] = hash_type
         args['hd'] = hash_data
     except KeyError:
-        print("Unknown hash type %s"%args['--hash-type'])
+        print("Unknown hash type %s" % args['--hash-type'])
         return 1
     except TypeError:
         return 1
 
-    return run_hash(args)
+    return run_task(args)

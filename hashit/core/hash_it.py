@@ -10,6 +10,7 @@ import crcmod
 
 from hashit.core.hash_type import HashType
 
+
 HASHLIB_MAPPING = {
     HashType.CRC8: crcmod.predefined.Crc('crc-8').new,
     HashType.CRC16: crcmod.predefined.Crc('crc-16').new,

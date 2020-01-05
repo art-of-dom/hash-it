@@ -1,8 +1,11 @@
 import os
 from setuptools import setup
 
+
 def read(fname):
+    """utility read markdown files"""
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 setup(
     name="hash-it",

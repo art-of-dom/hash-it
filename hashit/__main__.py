@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 """
 Usage:
-    hash-it [-bfax] <input> [--hash-type=HASH] [--verify=RESULT]
+    hash-it [-brfax] <input> [--hash-type=HASH] [--verify=RESULT]
 
 Options:
     -b                 brute force the verify
+    -r                 reverse input
     -f                 input is a file
     -a                 input is ascii text
     -x                 input is hex string
@@ -14,6 +15,7 @@ Options:
 from __future__ import absolute_import
 import sys
 from docopt import docopt
+
 
 def main():
     try:
