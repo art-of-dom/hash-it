@@ -56,9 +56,7 @@ class HashIt(object):
         return hash_str
 
     def _hashlib_hash(self, data):
-        """
-        Internal hashing mapping specifically for hashlib like interfaces
-        """
+        """Internal hashing mapping specifically for hashlib like interfaces"""
         if six.PY3:
             try:
                 data = data.encode('utf-8')

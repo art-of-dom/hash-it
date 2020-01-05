@@ -7,10 +7,9 @@ from __future__ import absolute_import, division
 import os
 from six import string_types
 
+
 class HashData(object):
-    """
-    The object to keep track of data being hashed
-    """
+    """The object to keep track of data being hashed"""
 
     def __init__(self, filename=None, data=None, chunk_size=0):
         self.filename = filename

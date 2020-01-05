@@ -82,6 +82,33 @@ class TestCLI(unittest.TestCase):
             sys.stdout.getvalue().strip()
         )
 
+    def test_cil_uses_default_hash_on_file_reverse(self):
+        self.args['-f'] = True
+        self.args['-r'] = True
+        self.args['<input>'] = 'test/support/example.bin'
+        assert_equals(0, cli_main(self.args))
+        self.assertEqual("input: test/support/example.bin hash: EE93",
+            sys.stdout.getvalue().strip()
+        )
+
+    def test_cil_uses_default_hash_on_ascii_reverse(self):
+        self.args['-a'] = True
+        self.args['-r'] = True
+        self.args['<input>'] = '123456789'
+        assert_equals(0, cli_main(self.args))
+        self.assertEqual("input: 123456789 hash: 39D9",
+            sys.stdout.getvalue().strip()
+        )
+
+    def test_cil_uses_default_hash_on_hex_reverse(self):
+        self.args['-x'] = True
+        self.args['-r'] = True
+        self.args['<input>'] = '010203040506070809'
+        assert_equals(0, cli_main(self.args))
+        self.assertEqual("input: 010203040506070809 hash: C0E0",
+            sys.stdout.getvalue().strip()
+        )
+
     # verify hash
     def test_cil_verify_good_result_returns_zero_file(self):
         self.args['-f'] = True
