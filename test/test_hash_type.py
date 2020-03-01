@@ -25,6 +25,48 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_lookup(self):
         assert_equals(HashType.CRC8, HashType['CRC8'])
 
+    def test_hash_type_crc8_darc_in_hash_type(self):
+        assert_true('CRC8_DARC' in HashType.__members__)
+
+    def test_hash_type_crc8_darc_lookup(self):
+        assert_equals(HashType.CRC8_DARC, HashType['CRC8_DARC'])
+
+    def test_hash_type_crc8_darc_in_hash_type(self):
+        assert_true('CRC8_DARC' in HashType.__members__)
+
+    def test_hash_type_crc8_darc_lookup(self):
+        assert_equals(HashType.CRC8_DARC, HashType['CRC8_DARC'])
+
+    def test_hash_type_crc8_i_code_in_hash_type(self):
+        assert_true('CRC8_I_CODE' in HashType.__members__)
+
+    def test_hash_type_crc8_i_code_lookup(self):
+        assert_equals(HashType.CRC8_I_CODE, HashType['CRC8_I_CODE'])
+
+    def test_hash_type_crc8_itu_in_hash_type(self):
+        assert_true('CRC8_ITU' in HashType.__members__)
+
+    def test_hash_type_crc8_itu_lookup(self):
+        assert_equals(HashType.CRC8_ITU, HashType['CRC8_ITU'])
+
+    def test_hash_type_crc8_maxim_in_hash_type(self):
+        assert_true('CRC8_MAXIM' in HashType.__members__)
+
+    def test_hash_type_crc8_maxim_lookup(self):
+        assert_equals(HashType.CRC8_MAXIM, HashType['CRC8_MAXIM'])
+
+    def test_hash_type_crc8_rohc_in_hash_type(self):
+        assert_true('CRC8_ROHC' in HashType.__members__)
+
+    def test_hash_type_crc8_rohc_lookup(self):
+        assert_equals(HashType.CRC8_ROHC, HashType['CRC8_ROHC'])
+
+    def test_hash_type_crc8_wcdma_in_hash_type(self):
+        assert_true('CRC8_WCDMA' in HashType.__members__)
+
+    def test_hash_type_crc8_wcdma_lookup(self):
+        assert_equals(HashType.CRC8_WCDMA, HashType['CRC8_WCDMA'])
+
     def test_hash_type_crc16_in_hash_type(self):
         assert_true('CRC16' in HashType.__members__)
 

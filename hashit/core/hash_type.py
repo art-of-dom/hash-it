@@ -12,14 +12,20 @@ class HashType(Enum):
     An Enumerated representation of a hash used for parsing
     """
     CRC8 = 0
-    CRC16 = 1
-    CRC32 = 2
-    CRC64 = 3
-    MD2 = 4
-    MD4 = 5
-    MD5 = 6
-    SHA1 = 7
-    SHA224 = 8
-    SHA256 = 9
-    SHA384 = 10
-    SHA512 = 11
+    CRC8_DARC = 1
+    CRC8_I_CODE = 2
+    CRC8_ITU = 3
+    CRC8_MAXIM = 4
+    CRC8_ROHC = 5
+    CRC8_WCDMA = 6
+    CRC16 = 7
+    CRC32 = 8
+    CRC64 = 9
+    MD2 = 10
+    MD4 = 11
+    MD5 = 12
+    SHA1 = 13
+    SHA224 = 14
+    SHA256 = 15
+    SHA384 = 16
+    SHA512 = 17
