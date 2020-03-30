@@ -19,17 +19,12 @@ class TestHashType(unittest.TestCase):
     def tearDown(self):
         pass
 
+    # CRC 8
     def test_hash_type_crc8_in_hash_type(self):
         assert_true('CRC8' in HashType.__members__)
 
     def test_hash_type_crc8_lookup(self):
         assert_equals(HashType.CRC8, HashType['CRC8'])
-
-    def test_hash_type_crc8_darc_in_hash_type(self):
-        assert_true('CRC8_DARC' in HashType.__members__)
-
-    def test_hash_type_crc8_darc_lookup(self):
-        assert_equals(HashType.CRC8_DARC, HashType['CRC8_DARC'])
 
     def test_hash_type_crc8_darc_in_hash_type(self):
         assert_true('CRC8_DARC' in HashType.__members__)
@@ -67,6 +62,7 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_wcdma_lookup(self):
         assert_equals(HashType.CRC8_WCDMA, HashType['CRC8_WCDMA'])
 
+    # Others
     def test_hash_type_crc16_in_hash_type(self):
         assert_true('CRC16' in HashType.__members__)
 
