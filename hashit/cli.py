@@ -30,12 +30,11 @@ def extract_args(args):
             infile = sys.stdin.buffer
             data = infile.read()
             hash_data = HashData(data=data)
-        except AttributeError as e:
+        except AttributeError:
             data = ''
             for line in sys.stdin:
                 data += line
             hash_data = HashData(data=data)
-
 
     if args['-r']:
         hash_data.reverse()
@@ -67,9 +66,9 @@ def run_task(args=None):
     """Does the hashing related task for the CLI"""
     if args['--verify']:
         return verify_data(args)
-    hash_str = HashIt(hash_type=args['ht'],
-        hash_data=args['hd']
-    ).hash_it()
+
+    hash_str = HashIt(hash_type=args['ht'], hash_data=args['hd']).hash_it()
+
     if args['<input>']:
         print('input: %s | hash: %s' % (args['<input>'], hash_str))
     else:
