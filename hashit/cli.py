@@ -2,6 +2,8 @@
 
 from __future__ import absolute_import, print_function
 
+import sys
+
 from hashit.core.hash_data import HashData
 from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
@@ -23,6 +25,17 @@ def extract_args(args):
     elif args['-x']:
         data = str(bytearray.fromhex(args['<input>']).decode())
         hash_data = HashData(data=data)
+    else:
+        try:
+            infile = sys.stdin.buffer
+            data = infile.read()
+            hash_data = HashData(data=data)
+        except AttributeError as e:
+            data = ''
+            for line in sys.stdin:
+                data += line
+            hash_data = HashData(data=data)
+
 
     if args['-r']:
         hash_data.reverse()
@@ -54,11 +67,13 @@ def run_task(args=None):
     """Does the hashing related task for the CLI"""
     if args['--verify']:
         return verify_data(args)
+    hash_str = HashIt(hash_type=args['ht'],
+        hash_data=args['hd']
+    ).hash_it()
     if args['<input>']:
-        hash_str = HashIt(hash_type=args['ht'],
-            hash_data=args['hd']
-        ).hash_it()
-        print('input: %s hash: %s' % (args['<input>'], hash_str))
+        print('input: %s | hash: %s' % (args['<input>'], hash_str))
+    else:
+        print('input: stdin | hash: %s' % (hash_str))
     return 0
 
 

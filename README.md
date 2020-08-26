@@ -48,11 +48,11 @@ echo $? # return value is 2
 - [x] ASCII and Hex inputs
 - [x] Brute force verification
 - [x] Reverse input
-- [ ] Pipe data to hash-it
+- [x] Pipe data to hash-it
 - [ ] Data generation based on hash
 - [ ] Data generation depth
 
 ## State of the repo
 
 This project started as just a quick how to hash for data integrity in python.
-It is a long way from being usable
+It is a long way from being usable, but feel free to hack around.

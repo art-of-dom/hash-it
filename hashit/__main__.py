@@ -2,6 +2,7 @@
 """
 Usage:
     hash-it [-brfax] <input> [--hash-type=HASH] [--verify=RESULT]
+    hash-it [-br] [--hash-type=HASH] [--verify=RESULT]
 
 Options:
     -b                 brute force the verify
