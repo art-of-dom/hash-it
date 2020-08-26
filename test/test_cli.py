@@ -62,7 +62,7 @@ class TestCLI(unittest.TestCase):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'
         assert_equals(0, cli_main(self.args))
-        self.assertEqual("input: test/support/example.bin hash: BAD3",
+        self.assertEqual("input: test/support/example.bin | hash: BAD3",
             sys.stdout.getvalue().strip()
         )
 
@@ -70,7 +70,7 @@ class TestCLI(unittest.TestCase):
         self.args['-a'] = True
         self.args['<input>'] = '123456789'
         assert_equals(0, cli_main(self.args))
-        self.assertEqual("input: 123456789 hash: BB3D",
+        self.assertEqual("input: 123456789 | hash: BB3D",
             sys.stdout.getvalue().strip()
         )
 
@@ -78,7 +78,7 @@ class TestCLI(unittest.TestCase):
         self.args['-x'] = True
         self.args['<input>'] = '010203040506070809'
         assert_equals(0, cli_main(self.args))
-        self.assertEqual("input: 010203040506070809 hash: 4204",
+        self.assertEqual("input: 010203040506070809 | hash: 4204",
             sys.stdout.getvalue().strip()
         )
 
@@ -87,7 +87,7 @@ class TestCLI(unittest.TestCase):
         self.args['-r'] = True
         self.args['<input>'] = 'test/support/example.bin'
         assert_equals(0, cli_main(self.args))
-        self.assertEqual("input: test/support/example.bin hash: EE93",
+        self.assertEqual("input: test/support/example.bin | hash: EE93",
             sys.stdout.getvalue().strip()
         )
 
@@ -96,7 +96,7 @@ class TestCLI(unittest.TestCase):
         self.args['-r'] = True
         self.args['<input>'] = '123456789'
         assert_equals(0, cli_main(self.args))
-        self.assertEqual("input: 123456789 hash: 39D9",
+        self.assertEqual("input: 123456789 | hash: 39D9",
             sys.stdout.getvalue().strip()
         )
 
@@ -105,7 +105,7 @@ class TestCLI(unittest.TestCase):
         self.args['-r'] = True
         self.args['<input>'] = '010203040506070809'
         assert_equals(0, cli_main(self.args))
-        self.assertEqual("input: 010203040506070809 hash: C0E0",
+        self.assertEqual("input: 010203040506070809 | hash: C0E0",
             sys.stdout.getvalue().strip()
         )
 

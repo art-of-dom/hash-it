@@ -26,15 +26,16 @@ def extract_args(args):
         data = str(bytearray.fromhex(args['<input>']).decode())
         hash_data = HashData(data=data)
     else:
-        try:
-            infile = sys.stdin.buffer
-            data = infile.read()
-            hash_data = HashData(data=data)
-        except AttributeError:
-            data = ''
-            for line in sys.stdin:
-                data += line
-            hash_data = HashData(data=data)
+        if not sys.stdin.isatty():
+            try:
+                infile = sys.stdin.buffer
+                data = infile.read()
+                hash_data = HashData(data=data)
+            except AttributeError:
+                data = ''
+                for line in sys.stdin:
+                    data += line
+                hash_data = HashData(data=data)
 
     if args['-r']:
         hash_data.reverse()
@@ -87,5 +88,8 @@ def cli_main(args=None):
         return 1
     except TypeError:
         return 1
+
+    if args['hd'] is None:
+        return 0
 
     return run_task(args)

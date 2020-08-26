@@ -10,7 +10,9 @@ from hashit.core.hash_data import HashData
 from hashit.core.hash_type import HashType
 from hashit.service.validate_hash import ValidateHash
 
-MAX_DATA = 5
+MAX_FOUND_DATA = 5
+MAX_DATA_LEN = 3
+
 
 class DataGeneration(object):
     """
@@ -23,10 +25,10 @@ class DataGeneration(object):
         """
         runs the data generation
         """
+        found_data = []
         if result:
-            found_data = []
             tmp_data = bytearray()
-            while len(found_data) < MAX_DATA and len(tmp_data) < 3:
+            while len(found_data) < MAX_FOUND_DATA and len(tmp_data) < MAX_DATA_LEN:
                 tmp_data = self._get_next_data(tmp_data)
                 hash_data = HashData(data=tmp_data)
                 validate = ValidateHash(
@@ -42,11 +44,12 @@ class DataGeneration(object):
                         data = tmp_data.hex()
 
                     found_data.append(data)
-            return found_data
-        else:
-            raise ArgumentError
+        return found_data
 
     def _get_next_data(self, data):
+        """
+        gives the next vaild byte array data
+        """
         if len(data) is 0:
             data.append(0)
             return data
