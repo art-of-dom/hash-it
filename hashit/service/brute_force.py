@@ -35,7 +35,7 @@ class BruteForce(object):
                     hash_type=hash_type,
                     data=hash_data
                 )
-                #print(tmpdata)
+
                 if validate.is_vaild():
                     self.solved_data = tmpdata
                     return True

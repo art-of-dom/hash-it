@@ -1,6 +1,4 @@
-'''
-Tests for the HashData object
-'''
+'''Tests for the HashData object'''
 
 from __future__ import absolute_import
 import unittest

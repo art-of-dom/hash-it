@@ -1,6 +1,4 @@
-'''
-Tests for the HashType Enum
-'''
+'''Tests for the HashType Enum'''
 
 from __future__ import absolute_import
 import unittest

@@ -3,11 +3,10 @@
 from __future__ import absolute_import
 
 import unittest
-from nose.tools import assert_true, assert_equals, assert_false, assert_is_none
-import six
+from nose.tools import assert_true, assert_false
 
-from hashit.core.hash_data import HashData
 from hashit.service.data_generation import DataGeneration
+from hashit.core.hash_type import HashType
 
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
@@ -32,3 +31,9 @@ class TestDataGeneration(unittest.TestCase):
         dg = DataGeneration()
         found = dg.run(result="1C01")
         assert_false(found)
+
+    def test_data_generation_rejects_crc32(self):
+        dg = DataGeneration()
+        found = dg.run(result="83DCEFB7", hash_type=HashType.CRC32)
+        assert_true(found)
+

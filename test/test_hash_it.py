@@ -1,6 +1,4 @@
-'''
-Tests for the HashIt object
-'''
+'''Tests for the HashIt object'''
 
 from __future__ import absolute_import
 import unittest

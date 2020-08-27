@@ -1,6 +1,4 @@
-'''
-Tests for the cli interface
-'''
+'''Tests for the cli interface'''
 
 from __future__ import absolute_import
 import unittest

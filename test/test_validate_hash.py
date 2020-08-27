@@ -1,6 +1,4 @@
-'''
-Tests for the ValidateHash object
-'''
+'''Tests for the ValidateHash object'''
 
 from __future__ import absolute_import
 
