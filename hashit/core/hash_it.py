@@ -28,6 +28,7 @@ HASHLIB_MAPPING = {
 
 class HashIt(object):
     """The object to preform hashing"""
+
     def __init__(self, hash_type=None, hash_data=None):
         self.hash_type = hash_type
         self.data = hash_data

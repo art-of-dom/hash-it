@@ -56,8 +56,8 @@ def verify_data(args):
         brute_force = BruteForce(data=args['hd'])
         if brute_force.run(result=args['--verify'], hash_type=args['ht']):
             print('found hash %s after brute forcing\n'
-                'data = %s' % (args['<input>'], brute_force.solved_data)
-            )
+                  'data = %s' % (args['<input>'], brute_force.solved_data)
+                  )
             return 0
         return 2
 

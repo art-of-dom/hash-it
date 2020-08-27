@@ -36,4 +36,3 @@ class TestDataGeneration(unittest.TestCase):
         dg = DataGeneration()
         found = dg.run(result="83DCEFB7", hash_type=HashType.CRC32)
         assert_false(found)
-
