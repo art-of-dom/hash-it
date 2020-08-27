@@ -41,18 +41,23 @@ class TestHashData(unittest.TestCase):
 
     def test_hash_data_file_handles_next_chunk_even_chunks(self):
         hd = HashData(filename="test/support/example.bin", chunk_size=128)
-        assert_equals(bytearray(self.bin_data[:128]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[:128]), bytearray(hd.next_chunk()))
         assert_equals(50.0, hd.percent_processed())
-        assert_equals(bytearray(self.bin_data[128:]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[128:]), bytearray(hd.next_chunk()))
         assert_equals(100.0, hd.percent_processed())
 
     def test_hash_data_file_handles_next_chunk_uneven_chunks(self):
         hd = HashData(filename="test/support/example.bin", chunk_size=100)
-        assert_equals(bytearray(self.bin_data[:100]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[:100]), bytearray(hd.next_chunk()))
         assert_equals(39.0625, hd.percent_processed())
-        assert_equals(bytearray(self.bin_data[100:200]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[100:200]), bytearray(hd.next_chunk()))
         assert_equals(78.125, hd.percent_processed())
-        assert_equals(bytearray(self.bin_data[200:]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[200:]), bytearray(hd.next_chunk()))
         assert_equals(100.0, hd.percent_processed())
 
     def test_hash_data_file_can_be_reversed(self):
@@ -73,18 +78,23 @@ class TestHashData(unittest.TestCase):
 
     def test_hash_data_arg_data_handles_next_chunk_even_chunks(self):
         hd = HashData(data=self.bin_data, chunk_size=128)
-        assert_equals(bytearray(self.bin_data[:128]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[:128]), bytearray(hd.next_chunk()))
         assert_equals(50.0, hd.percent_processed())
-        assert_equals(bytearray(self.bin_data[128:]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[128:]), bytearray(hd.next_chunk()))
         assert_equals(100.0, hd.percent_processed())
 
     def test_hash_data_arg_data_handles_next_chunk_uneven_chunks(self):
         hd = HashData(data=self.bin_data, chunk_size=100)
-        assert_equals(bytearray(self.bin_data[:100]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[:100]), bytearray(hd.next_chunk()))
         assert_equals(39.0625, hd.percent_processed())
-        assert_equals(bytearray(self.bin_data[100:200]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[100:200]), bytearray(hd.next_chunk()))
         assert_equals(78.125, hd.percent_processed())
-        assert_equals(bytearray(self.bin_data[200:]), bytearray(hd.next_chunk()))
+        assert_equals(
+            bytearray(self.bin_data[200:]), bytearray(hd.next_chunk()))
         assert_equals(100.0, hd.percent_processed())
 
     def test_hash_data_arg_data_can_be_reversed(self):

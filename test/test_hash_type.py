@@ -10,6 +10,7 @@ from hashit.core.hash_type import HashType
 # pylint: disable=no-self-use
 # pylint: disable=too-many-public-methods
 
+
 class TestHashType(unittest.TestCase):
     def setUp(self):
         pass
@@ -234,5 +235,3 @@ class TestHashType(unittest.TestCase):
 
     def test_hash_type_sha256_has_hash_str_length_128(self):
         assert_equals(128, HashType.SHA512.hash_str_length())
-
-

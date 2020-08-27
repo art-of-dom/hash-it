@@ -13,6 +13,7 @@ class BruteForce(object):
     """
     The object to facilitating reverse engineering of hashes based on data
     """
+
     def __init__(self, data=None):
         self.org_data = data.next_chunk()
         self.solved_data = None

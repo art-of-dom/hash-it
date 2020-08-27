@@ -25,6 +25,7 @@ ALLOWED_HASH_TYPES_WITH_RESULTS = [
 
 class DataGeneration(object):
     """The object to generate data and hashing it"""
+
     def __init__(self, depth=None):
         self.depth = depth
 

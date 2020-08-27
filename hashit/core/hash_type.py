@@ -30,7 +30,6 @@ class HashType(Enum):
     SHA384 = 16
     SHA512 = 17
 
-
     def hash_byte_length(self):
         """Gives the length in bytes of the hash"""
         if self in CRC8_LIST:
@@ -58,6 +57,7 @@ class HashType(Enum):
     def hash_str_length(self):
         """Gives the length in characters of the hash"""
         return self.hash_byte_length() * 2
+
 
 CRC8_LIST = [
     HashType.CRC8,
