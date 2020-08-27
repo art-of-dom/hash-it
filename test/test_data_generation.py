@@ -35,5 +35,5 @@ class TestDataGeneration(unittest.TestCase):
     def test_data_generation_rejects_crc32(self):
         dg = DataGeneration()
         found = dg.run(result="83DCEFB7", hash_type=HashType.CRC32)
-        assert_true(found)
+        assert_false(found)
 
