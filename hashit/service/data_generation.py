@@ -22,6 +22,7 @@ ALLOWED_HASH_TYPES_WITH_RESULTS = [
     HashType.CRC16
 ]
 
+
 class DataGeneration(object):
     """The object to generate data and hashing it"""
     def __init__(self, depth=None):

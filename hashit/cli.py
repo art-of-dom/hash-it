@@ -45,14 +45,22 @@ def extract_args(args):
 
 def verify_data(args):
     """verify data for CLI"""
+    if len(args['--verify']) != args['ht'].hash_str_length():
+        print(
+            'verify hash invalid. Expected size %d was %d\n' %
+            (args['ht'].hash_str_length(), len(args['--verify']))
+        )
+        return 1
+
     if args['-b']:
         brute_force = BruteForce(data=args['hd'])
         if brute_force.run(result=args['--verify'], hash_type=args['ht']):
             print('found hash %s after brute forcing\n'
-                    'data = %s' % (args['<input>'],
-                    brute_force.solved_data))
+                'data = %s' % (args['<input>'], brute_force.solved_data)
+            )
             return 0
         return 2
+
     validate = ValidateHash(
         result=args['--verify'],
         hash_type=args['ht'],

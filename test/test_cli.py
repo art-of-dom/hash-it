@@ -108,6 +108,12 @@ class TestCLI(unittest.TestCase):
         )
 
     # verify hash
+    def test_cil_verify_bad_hash_size(self):
+        self.args['-f'] = True
+        self.args['<input>'] = 'test/support/example.bin'
+        self.args['--verify'] = '0BAD3'
+        assert_equals(1, cli_main(self.args))
+
     def test_cil_verify_good_result_returns_zero_file(self):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'

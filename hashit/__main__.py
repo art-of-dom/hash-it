@@ -17,7 +17,9 @@ from __future__ import absolute_import
 import sys
 from docopt import docopt
 
+
 def main():
+    """hash-it main entry point"""
     try:
         from hashit.cli import cli_main
         sys.exit(cli_main(docopt(__doc__)))
