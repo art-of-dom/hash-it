@@ -49,7 +49,7 @@ echo $? # return value is 2
 - [x] Brute force verification
 - [x] Reverse input
 - [x] Pipe data to hash-it
-- [ ] Data generation based on hash
+- [x] Data generation based on hash
 - [ ] Data generation depth
 
 ## State of the repo

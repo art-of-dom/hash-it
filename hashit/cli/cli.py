@@ -4,11 +4,14 @@ from __future__ import absolute_import, print_function
 
 import sys
 
+from hashit.cli.cli_status import CliStatus
+
 from hashit.core.hash_data import HashData
 from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
 
 from hashit.service.brute_force import BruteForce
+from hashit.service.data_generation import DataGeneration
 from hashit.service.validate_hash import ValidateHash
 
 
@@ -50,7 +53,7 @@ def verify_data(args):
             'verify hash invalid. Expected size %d was %d\n' %
             (args['ht'].hash_str_length(), len(args['--verify']))
         )
-        return 1
+        return CliStatus.ARG_INVALID.value
 
     if args['-b']:
         brute_force = BruteForce(data=args['hd'])
@@ -58,8 +61,8 @@ def verify_data(args):
             print('found hash %s after brute forcing\n'
                   'data = %s' % (args['<input>'], brute_force.solved_data)
                   )
-            return 0
-        return 2
+            return CliStatus.SUCCESS.value
+        return CliStatus.VALIDATION_ERROR.value
 
     validate = ValidateHash(
         result=args['--verify'],
@@ -67,14 +70,36 @@ def verify_data(args):
         data=args['hd']
     )
     if validate.is_vaild():
-        return 0
-    return 2
+        return CliStatus.SUCCESS.value
+    return CliStatus.VALIDATION_ERROR.value
+
+
+def generate_data(args):
+    """generate data for CLI"""
+    if len(args['--generate']) != args['ht'].hash_str_length():
+        print(
+            'generate hash invalid. Expected size %d was %d\n' %
+            (args['ht'].hash_str_length(), len(args['--generate']))
+        )
+        return CliStatus.ARG_INVALID.value
+
+    dg = DataGeneration()
+    found = dg.run(result=args['--generate'], hash_type=args['ht'])
+    if found:
+        for hash in found:
+            print('data %s matches hash %s' % (hash.upper(), args['--generate']))
+        return CliStatus.SUCCESS.value
+    return CliStatus.GENERATION_ERROR.value
 
 
 def run_task(args=None):
     """Does the hashing related task for the CLI"""
-    if args['--verify']:
+    if '--verify' in args and args['--verify']:
         return verify_data(args)
+    elif '--generate' in args and args['--generate']:
+        return generate_data(args)
+    elif args['hd'] is None:
+        return CliStatus.SUCCESS.value
 
     hash_str = HashIt(hash_type=args['ht'], hash_data=args['hd']).hash_it()
 
@@ -82,7 +107,7 @@ def run_task(args=None):
         print('input: %s | hash: %s' % (args['<input>'], hash_str))
     else:
         print('input: stdin | hash: %s' % (hash_str))
-    return 0
+    return CliStatus.SUCCESS.value
 
 
 def cli_main(args=None):
@@ -96,8 +121,5 @@ def cli_main(args=None):
         return 1
     except TypeError:
         return 1
-
-    if args['hd'] is None:
-        return 0
 
     return run_task(args)
