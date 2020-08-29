@@ -3,7 +3,8 @@
 Usage:
     hash-it [-brfax] <input> [--hash-type=HASH] [--verify=RESULT]
     hash-it [-br] [--hash-type=HASH] [--verify=RESULT]
-    hash-it [-d] [--hash-type=HASH] [--generate=RESULT]
+    hash-it [--hash-type=HASH] [--generate=RESULT]
+    hash-it [--hash-type=HASH] [--depth=DEPTH]
 
 Options:
     -b                 brute force the verify
@@ -13,7 +14,8 @@ Options:
     -x                 input is hex string
     --hash-type=HASH   hash
     --verify=RESULT    verify given result
-    --generate=RESULT    generate given result
+    --generate=RESULT  generate given result
+    --depth=DEPTH      generate given depth
 """
 from __future__ import absolute_import
 import sys

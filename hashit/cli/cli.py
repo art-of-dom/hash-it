@@ -76,19 +76,31 @@ def verify_data(args):
 
 def generate_data(args):
     """generate data for CLI"""
-    if len(args['--generate']) != args['ht'].hash_str_length():
+    if '--generate' in args and args['--generate'] and len(args['--generate']) != args['ht'].hash_str_length():
         print(
             'generate hash invalid. Expected size %d was %d\n' %
             (args['ht'].hash_str_length(), len(args['--generate']))
         )
         return CliStatus.ARG_INVALID.value
 
-    dg = DataGeneration()
-    found = dg.run(result=args['--generate'], hash_type=args['ht'])
-    if found:
-        for hash in found:
-            print('data %s matches hash %s' % (hash.upper(), args['--generate']))
-        return CliStatus.SUCCESS.value
+    if '--generate' in args and args['--generate']:
+        dg = DataGeneration()
+        found = dg.run(result=args['--generate'], hash_type=args['ht'])
+        if found:
+            for hash in found:
+                print('data %s matches hash %s' % (hash.upper(), args['--generate']))
+            return CliStatus.SUCCESS.value
+    elif '--depth' in args:
+        dg = DataGeneration(int(args['--depth']))
+        found = dg.run(hash_type=args['ht'])
+        if found:
+            print('Generated %s byte(s) of data with hash %s : %r' % (
+                args['--depth'],
+                dg.hash_result,
+                found[0]
+            ))
+            return CliStatus.SUCCESS.value
+
     return CliStatus.GENERATION_ERROR.value
 
 
@@ -96,7 +108,7 @@ def run_task(args=None):
     """Does the hashing related task for the CLI"""
     if '--verify' in args and args['--verify']:
         return verify_data(args)
-    elif '--generate' in args and args['--generate']:
+    elif ('--generate' in args and args['--generate']) or '--depth' in args:
         return generate_data(args)
     elif args['hd'] is None:
         return CliStatus.SUCCESS.value

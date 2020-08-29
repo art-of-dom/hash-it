@@ -205,7 +205,7 @@ class TestCLI(unittest.TestCase):
         self.args['--generate'] = 'BAD3'
         assert_equals(CliStatus.SUCCESS.value, cli_main(self.args))
 
-    def test_cil_generate_good_hash_returns_success(self):
+    def test_cil_generate_unhandled_hash_generation_error(self):
         self.args['--hash-type'] = 'CRC32'
         self.args['--generate'] = 'BAD3BAD3'
         assert_equals(CliStatus.GENERATION_ERROR.value, cli_main(self.args))

@@ -5,8 +5,11 @@ Make it or break it.
 from __future__ import absolute_import
 
 from hashit.core.hash_data import HashData
+from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
 from hashit.service.validate_hash import ValidateHash
+
+import os
 
 MAX_FOUND_DATA = 5
 MAX_DATA_LEN = 3
@@ -28,6 +31,7 @@ class DataGeneration(object):
 
     def __init__(self, depth=None):
         self.depth = depth
+        self.hash_result = ''
 
     def run(self, result='', hash_type=HashType.CRC8):
         """runs the data generation"""
@@ -50,6 +54,10 @@ class DataGeneration(object):
                         data = tmp_data.hex()
 
                     found_data.append(data)
+        elif self.depth:
+            hash_data = HashData(data=bytearray(os.urandom(self.depth)))
+            self.hash_result = HashIt().hash_it(hash_type, hash_data)
+            found_data.append(hash_data.data)
         return found_data
 
     def _get_next_data(self, data):
