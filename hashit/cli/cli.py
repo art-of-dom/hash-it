@@ -88,7 +88,8 @@ def generate_data(args):
         found = dg.run(result=args['--generate'], hash_type=args['ht'])
         if found:
             for hash in found:
-                print('data %s matches hash %s' % (hash.upper(), args['--generate']))
+                print('data %s matches hash %s' %
+                      (hash.upper(), args['--generate']))
             return CliStatus.SUCCESS.value
     elif '--depth' in args:
         dg = DataGeneration(int(args['--depth']))
