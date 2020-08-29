@@ -15,11 +15,14 @@ from hashit.service.data_generation import DataGeneration
 from hashit.service.validate_hash import ValidateHash
 
 
+def arg_exists(args, key):
+    return key in args and args[key]
+
 def extract_args(args):
     """extracts args for the CLI"""
     hash_type = HashType.CRC16
     hash_data = None
-    if args['--hash-type']:
+    if arg_exists(args, '--hash-type'):
         hash_type = HashType[args['--hash-type'].upper()]
     if args['-f']:
         hash_data = HashData(args['<input>'])
@@ -76,21 +79,22 @@ def verify_data(args):
 
 def generate_data(args):
     """generate data for CLI"""
-    if '--generate' in args and args['--generate'] and len(args['--generate']) != args['ht'].hash_str_length():
+    if arg_exists(args, '--generate') and \
+            len(args['--generate']) != args['ht'].hash_str_length():
         print(
             'generate hash invalid. Expected size %d was %d\n' %
             (args['ht'].hash_str_length(), len(args['--generate']))
         )
         return CliStatus.ARG_INVALID.value
 
-    if '--generate' in args and args['--generate']:
+    if arg_exists(args, '--generate'):
         dg = DataGeneration()
         found = dg.run(result=args['--generate'], hash_type=args['ht'])
         if found:
-            for hash in found:
-                print('data %s matches hash %s' % (hash.upper(), args['--generate']))
+            for f_hash in found:
+                print('data %s matches hash %s' % (f_hash.upper(), args['--generate']))
             return CliStatus.SUCCESS.value
-    elif '--depth' in args:
+    elif arg_exists(args, '--depth'):
         dg = DataGeneration(int(args['--depth']))
         found = dg.run(hash_type=args['ht'])
         if found:

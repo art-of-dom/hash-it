@@ -50,7 +50,7 @@ echo $? # return value is 2
 - [x] Reverse input
 - [x] Pipe data to hash-it
 - [x] Data generation based on hash
-- [ ] Data generation depth
+- [x] Data generation depth
 
 ## State of the repo
 
