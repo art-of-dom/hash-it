@@ -112,7 +112,7 @@ def run_task(args=None):
     """Does the hashing related task for the CLI"""
     if '--verify' in args and args['--verify']:
         return verify_data(args)
-    elif ('--generate' in args and args['--generate']) or '--depth' in args:
+    elif arg_exists(args, '--generate') or arg_exists(args, '--depth'):
         return generate_data(args)
     elif args['hd'] is None:
         return CliStatus.SUCCESS.value
