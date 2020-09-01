@@ -8,27 +8,28 @@ from enum import Enum
 
 
 class HashType(Enum):
-    """
-    An Enumerated representation of a hash used for parsing
-    """
+    """An Enumerated representation of a hash used for parsing"""
     CRC8 = 0
-    CRC8_DARC = 1
-    CRC8_I_CODE = 2
-    CRC8_ITU = 3
-    CRC8_MAXIM = 4
-    CRC8_ROHC = 5
-    CRC8_WCDMA = 6
-    CRC16 = 7
-    CRC32 = 8
-    CRC64 = 9
-    MD2 = 10
-    MD4 = 11
-    MD5 = 12
-    SHA1 = 13
-    SHA224 = 14
-    SHA256 = 15
-    SHA384 = 16
-    SHA512 = 17
+    CRC8_CDMA2000 = 1
+    CRC8_DARC = 2
+    CRC8_DVB_S2 = 3
+    CRC8_EBU = 4
+    CRC8_I_CODE = 5
+    CRC8_ITU = 6
+    CRC8_MAXIM = 7
+    CRC8_ROHC = 8
+    CRC8_WCDMA = 9
+    CRC16 = 10
+    CRC32 = 11
+    CRC64 = 12
+    MD2 = 13
+    MD4 = 14
+    MD5 = 15
+    SHA1 = 16
+    SHA224 = 17
+    SHA256 = 18
+    SHA384 = 19
+    SHA512 = 20
 
     def hash_byte_length(self):
         """Gives the length in bytes of the hash"""
@@ -61,7 +62,10 @@ class HashType(Enum):
 
 CRC8_LIST = [
     HashType.CRC8,
+    HashType.CRC8_CDMA2000,
     HashType.CRC8_DARC,
+    HashType.CRC8_DVB_S2,
+    HashType.CRC8_EBU,
     HashType.CRC8_I_CODE,
     HashType.CRC8_ITU,
     HashType.CRC8_MAXIM,

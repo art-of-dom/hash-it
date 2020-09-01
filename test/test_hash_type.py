@@ -31,6 +31,18 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8.hash_str_length())
 
+    def test_hash_type_crc8_cdma2000_in_hash_type(self):
+        assert_true('CRC8_CDMA2000' in HashType.__members__)
+
+    def test_hash_type_crc8_cdma2000_lookup(self):
+        assert_equals(HashType.CRC8_CDMA2000, HashType['CRC8_CDMA2000'])
+
+    def test_hash_type_crc8_cdma2000_has_hash_byte_length_1(self):
+        assert_equals(1, HashType.CRC8_CDMA2000.hash_byte_length())
+
+    def test_hash_type_crc8_cdma2000_has_hash_str_length_2(self):
+        assert_equals(2, HashType.CRC8_CDMA2000.hash_str_length())
+
     def test_hash_type_crc8_darc_in_hash_type(self):
         assert_true('CRC8_DARC' in HashType.__members__)
 
@@ -42,6 +54,30 @@ class TestHashType(unittest.TestCase):
 
     def test_hash_type_crc8_darc_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_DARC.hash_str_length())
+
+    def test_hash_type_crc8_dvb_s2_in_hash_type(self):
+        assert_true('CRC8_DVB_S2' in HashType.__members__)
+
+    def test_hash_type_crc8_dvb_s2_lookup(self):
+        assert_equals(HashType.CRC8_DVB_S2, HashType['CRC8_DVB_S2'])
+
+    def test_hash_type_crc8_dvb_s2_has_hash_byte_length_1(self):
+        assert_equals(1, HashType.CRC8_DVB_S2.hash_byte_length())
+
+    def test_hash_type_crc8_dvb_s2_has_hash_str_length_2(self):
+        assert_equals(2, HashType.CRC8_DVB_S2.hash_str_length())
+
+    def test_hash_type_crc8_ebu_in_hash_type(self):
+        assert_true('CRC8_EBU' in HashType.__members__)
+
+    def test_hash_type_crc8_ebu_lookup(self):
+        assert_equals(HashType.CRC8_EBU, HashType['CRC8_EBU'])
+
+    def test_hash_type_crc8_ebu_has_hash_byte_length_1(self):
+        assert_equals(1, HashType.CRC8_EBU.hash_byte_length())
+
+    def test_hash_type_crc8_ebu_has_hash_str_length_2(self):
+        assert_equals(2, HashType.CRC8_EBU.hash_str_length())
 
     def test_hash_type_crc8_i_code_in_hash_type(self):
         assert_true('CRC8_I_CODE' in HashType.__members__)
