@@ -34,7 +34,8 @@ HASHLIB_MAPPING = {
 CRCMOD_CUSTOM_MAPPING = {
     HashType.CRC8_CDMA2000: crcmod.mkCrcFun(0x19B, initCrc=0xFF, rev=False, xorOut=0x00),
     HashType.CRC8_DVB_S2: crcmod.mkCrcFun(0x1D5, initCrc=0x00, rev=False, xorOut=0x00),
-    HashType.CRC8_EBU: crcmod.mkCrcFun(0x11D, initCrc=0xFF, rev=True, xorOut=0x00)
+    HashType.CRC8_EBU: crcmod.mkCrcFun(
+        0x11D, initCrc=0xFF, rev=True, xorOut=0x00)
 }
 
 
@@ -65,7 +66,8 @@ class HashIt(object):
         if self.hash_type in HASHLIB_MAPPING:
             hash_str = self._hashlib_hash(data)
         elif self.hash_type in CRCMOD_CUSTOM_MAPPING:
-            hash_str = hex(CRCMOD_CUSTOM_MAPPING[self.hash_type](data))[2:].upper()
+            hash_str = hex(CRCMOD_CUSTOM_MAPPING[self.hash_type](data))[
+                2:].upper()
         else:
             raise NotImplementedError
         return hash_str
