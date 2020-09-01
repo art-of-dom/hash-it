@@ -18,9 +18,7 @@ class ValidateHash(object):
         self.resulting_hash = None
 
     def is_vaild(self):
-        """
-        checks if the given result is valid
-        """
+        """checks if the given result is valid"""
         self.resulting_hash = HashIt().hash_it(
             self.hash_type,
             self.data

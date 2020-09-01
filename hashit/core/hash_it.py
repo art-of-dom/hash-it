@@ -62,6 +62,8 @@ class HashIt(object):
     def _hash(self, data):
         """Internal hashing mapping"""
         hash_str = ""
+        data = self._sanatize_data(data)
+
         if self.hash_type in HASHLIB_MAPPING:
             hash_str = self._hashlib_hash(data)
         elif self.hash_type in CRCMOD_CUSTOM_MAPPING:
@@ -70,8 +72,9 @@ class HashIt(object):
             raise NotImplementedError
         return hash_str
 
-    def _hashlib_hash(self, data):
-        """Internal hashing mapping specifically for hashlib like interfaces"""
+
+    def _sanatize_data(self, data):
+        """Temporary py2/py3 data helper"""
         if six.PY3:
             try:
                 data = data.encode('utf-8')
@@ -79,7 +82,11 @@ class HashIt(object):
                 pass
         else:
             data = str(data)
+        return data
 
+
+    def _hashlib_hash(self, data):
+        """Internal hashing mapping specifically for hashlib like interfaces"""
         hasher = HASHLIB_MAPPING[self.hash_type]()
         hasher.update(data)
         return hasher.hexdigest().upper()
