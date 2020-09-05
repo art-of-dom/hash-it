@@ -31,16 +31,19 @@ class HashType(Enum):
     SHA384 = 19
     SHA512 = 20
 
+    def is_crc(self):
+        return self.name.startswith('CRC')
+
+    def is_md(self):
+        return self.name.startswith('MD')
+
+    def is_sha(self):
+        return self.name.startswith('SHA')
+
     def hash_byte_length(self):
         """Gives the length in bytes of the hash"""
-        if self in CRC8_LIST:
-            return 1
-        if self is HashType.CRC16:
-            return 2
-        if self is HashType.CRC32:
-            return 4
-        if self is HashType.CRC64:
-            return 8
+        if self.is_crc():
+            return self._crc_byte_len()
         if self in MD_LIST:
             return 16
         if self is HashType.SHA1:
@@ -59,6 +62,16 @@ class HashType(Enum):
         """Gives the length in characters of the hash"""
         return self.hash_byte_length() * 2
 
+    def _crc_byte_len(self):
+        if self in CRC8_LIST:
+            return 1
+        if self is HashType.CRC16:
+            return 2
+        if self is HashType.CRC32:
+            return 4
+        if self is HashType.CRC64:
+            return 8
+        return 0
 
 CRC8_LIST = [
     HashType.CRC8,

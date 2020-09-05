@@ -34,11 +34,11 @@ class TestDataGeneration(unittest.TestCase):
 
     def test_data_generation_rejects_crc32(self):
         dg = DataGeneration()
-        found = dg.run(result="83DCEFB7", hash_type=HashType.CRC32)
+        found = dg.run(result="83DCEFB7", ht=HashType.CRC32)
         assert_false(found)
 
     def test_data_generation_with_depth(self):
         dg = DataGeneration(depth=5)
-        found = dg.run(hash_type=HashType.CRC32)
+        found = dg.run(ht=HashType.CRC32)
         assert_true(found)
         assert_equal(5, len(found[0]))

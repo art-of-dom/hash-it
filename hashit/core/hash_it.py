@@ -6,7 +6,6 @@ from __future__ import absolute_import
 
 import six
 
-from hashit.core.hash_type import HashType
 from hashit.core.mappings.hashlib_mapping import HASHLIB_MAPPING
 from hashit.core.mappings.custom_crc_mapping import CRCMOD_CUSTOM_MAPPING
 
