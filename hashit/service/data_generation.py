@@ -62,7 +62,7 @@ class DataGeneration(object):
                 bytearray(os.urandom(self.depth))
             ))
             self.hash_result = HashIt().hash_it(hash_type, hash_data)
-            found_data.append(hash_data.data)
+            found_data.append(hash_data.data_encap.data)
         return found_data
 
     def _get_next_data(self, data):

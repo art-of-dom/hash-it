@@ -31,6 +31,7 @@ class DataEncap(object):
         elif data_type == DataType.HEX:
             self.data = str(bytearray.fromhex(data).decode())
             self.size = len(data)
+            self.data_type = DataType.ASCII
         elif data_type == DataType.STDIN:
             self._get_stdin()
 

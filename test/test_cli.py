@@ -41,14 +41,20 @@ class TestCLI(unittest.TestCase):
     # arg checks hash-type check
     def test_cil_retruns_success_known_hash_uppercase(self):
         self.args['--hash-type'] = 'CRC32'
+        self.args['-x'] = True
+        self.args['<input>'] = '010203040506070809'
         assert_equals(CliStatus.SUCCESS.value, cli_main(self.args))
 
     def test_cil_retruns_success_known_hash_lowercase(self):
         self.args['--hash-type'] = 'crc32'
+        self.args['-x'] = True
+        self.args['<input>'] = '010203040506070809'
         assert_equals(CliStatus.SUCCESS.value, cli_main(self.args))
 
     def test_cil_retruns_success_known_hash_mixedcase(self):
         self.args['--hash-type'] = 'cRc32'
+        self.args['-x'] = True
+        self.args['<input>'] = '010203040506070809'
         assert_equals(CliStatus.SUCCESS.value, cli_main(self.args))
 
     def test_cil_retruns_error_unknown_hash(self):

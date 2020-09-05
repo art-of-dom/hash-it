@@ -41,6 +41,9 @@ def extract_args(args):
 
     hash_data = HashData(DataEncap(data_type, args['<input>']))
 
+    if hash_data.data_encap.size == 0:
+        hash_data = None
+
     if args['-r']:
         hash_data.reverse()
 
