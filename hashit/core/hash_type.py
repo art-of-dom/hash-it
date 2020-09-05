@@ -73,6 +73,7 @@ class HashType(Enum):
             return 8
         return 0
 
+
 CRC8_LIST = [
     HashType.CRC8,
     HashType.CRC8_CDMA2000,
