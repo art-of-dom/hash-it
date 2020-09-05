@@ -35,7 +35,6 @@ class DataEncap(object):
         elif data_type == DataType.STDIN:
             self._get_stdin()
 
-
     def _get_stdin(self):
         self.data = ''
         if not sys.stdin.isatty():

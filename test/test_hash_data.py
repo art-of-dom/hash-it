@@ -41,7 +41,8 @@ class TestHashData(unittest.TestCase):
 
     def test_hash_data_file_handles_next_chunk_all(self):
         hd = HashData(self.file_encap)
-        assert_equals(bytearray(self.bin_encap.data), bytearray(hd.next_chunk()))
+        assert_equals(bytearray(self.bin_encap.data),
+                      bytearray(hd.next_chunk()))
         assert_equals(100.0, hd.percent_processed())
 
     def test_hash_data_file_handles_next_chunk_even_chunks(self):
@@ -78,7 +79,8 @@ class TestHashData(unittest.TestCase):
 
     def test_hash_data_arg_data_handles_next_chunk_all(self):
         hd = HashData(self.bin_encap)
-        assert_equals(bytearray(self.bin_encap.data), bytearray(hd.next_chunk()))
+        assert_equals(bytearray(self.bin_encap.data),
+                      bytearray(hd.next_chunk()))
         assert_equals(100.0, hd.percent_processed())
 
     def test_hash_data_arg_data_handles_next_chunk_even_chunks(self):

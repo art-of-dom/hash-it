@@ -17,7 +17,7 @@ class HashData(object):
         self.pos = 0
 
         if data_encap is None:
-           self.data_encap = DataEncap()
+            self.data_encap = DataEncap()
         if self.chunk_size == 0:
             self.chunk_size = self.data_encap.size
 

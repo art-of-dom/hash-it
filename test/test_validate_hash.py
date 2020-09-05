@@ -18,7 +18,8 @@ from hashit.utils.data_type import DataType
 
 class TestHashIt(unittest.TestCase):
     def setUp(self):
-        self.data = HashData(DataEncap(DataType.FILE, "test/support/example.bin"))
+        self.data = HashData(
+            DataEncap(DataType.FILE, "test/support/example.bin"))
 
     def tearDown(self):
         pass

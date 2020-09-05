@@ -59,8 +59,8 @@ class DataGeneration(object):
                     found_data.append(data)
         elif self.depth:
             hash_data = HashData(DataEncap(DataType.BYTES,
-                bytearray(os.urandom(self.depth))
-            ))
+                                           bytearray(os.urandom(self.depth))
+                                           ))
             self.hash_result = HashIt().hash_it(hash_type, hash_data)
             found_data.append(hash_data.data_encap.data)
         return found_data

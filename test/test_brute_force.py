@@ -21,8 +21,8 @@ EXAMPLE_PAYLOAD = bytearray([0x0F, 0x1E, 0x2D, 0x3C, 0x4B, 0x5A, 0x69, 0x78])
 class TestBruteForce(unittest.TestCase):
     def setUp(self):
         self.data = HashData(DataEncap(DataType.BYTES,
-            EXAMPLE_PAYLOAD
-        ))
+                                       EXAMPLE_PAYLOAD
+                                       ))
 
     def tearDown(self):
         pass

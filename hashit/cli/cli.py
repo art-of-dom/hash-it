@@ -21,6 +21,7 @@ from hashit.utils.data_type import DataType
 def arg_exists(args, key):
     return key in args and args[key]
 
+
 def extract_args(args):
     """extracts args for the CLI"""
     hash_type = HashType.CRC16
@@ -93,7 +94,8 @@ def generate_data(args):
         found = dg.run(result=args['--generate'], hash_type=args['ht'])
         if found:
             for f_hash in found:
-                print('data %s matches hash %s' % (f_hash.upper(), args['--generate']))
+                print('data %s matches hash %s' %
+                      (f_hash.upper(), args['--generate']))
             return CliStatus.SUCCESS.value
     elif arg_exists(args, '--depth'):
         dg = DataGeneration(int(args['--depth']))
