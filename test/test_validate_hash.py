@@ -8,6 +8,8 @@ from nose.tools import assert_true, assert_false
 from hashit.core.hash_data import HashData
 from hashit.core.hash_type import HashType
 from hashit.service.validate_hash import ValidateHash
+from hashit.utils.data_encap import DataEncap
+from hashit.utils.data_type import DataType
 
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
@@ -16,7 +18,7 @@ from hashit.service.validate_hash import ValidateHash
 
 class TestHashIt(unittest.TestCase):
     def setUp(self):
-        self.data = HashData("test/support/example.bin")
+        self.data = HashData(DataEncap(DataType.FILE, "test/support/example.bin"))
 
     def tearDown(self):
         pass

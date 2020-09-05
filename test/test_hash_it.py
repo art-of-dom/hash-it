@@ -7,6 +7,9 @@ from hashit.core.hash_data import HashData
 from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
 
+from hashit.utils.data_encap import DataEncap
+from hashit.utils.data_type import DataType
+
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
 # pylint: disable=no-self-use
@@ -15,12 +18,14 @@ from hashit.core.hash_type import HashType
 
 CHECK_STRING = '123456789'
 
+
 class TestHashIt(unittest.TestCase):
     def setUp(self):
-        self.check_str = HashData(data=CHECK_STRING)
-        self.example = HashData(filename="test/support/example.bin")
-        self.example_chunk = HashData(
-            filename="test/support/example.bin", chunk_size=16)
+        self.check_str = HashData(DataEncap(DataType.ASCII, CHECK_STRING))
+        self.example = HashData(DataEncap(DataType.FILE, "test/support/example.bin"))
+        self.example_chunk = HashData(DataEncap(DataType.FILE,
+            "test/support/example.bin"
+        ), chunk_size=16)
 
     def tearDown(self):
         pass

@@ -9,6 +9,9 @@ from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
 from hashit.service.validate_hash import ValidateHash
 
+from hashit.utils.data_encap import DataEncap
+from hashit.utils.data_type import DataType
+
 import os
 
 MAX_FOUND_DATA = 5
@@ -40,7 +43,7 @@ class DataGeneration(object):
             tmp_data = bytearray()
             while len(found_data) < MAX_FOUND_DATA and len(tmp_data) < MAX_DATA_LEN:
                 tmp_data = self._get_next_data(tmp_data)
-                hash_data = HashData(data=tmp_data)
+                hash_data = HashData(DataEncap(DataType.BYTES, tmp_data))
                 validate = ValidateHash(
                     result=result,
                     hash_type=hash_type,
@@ -55,7 +58,9 @@ class DataGeneration(object):
 
                     found_data.append(data)
         elif self.depth:
-            hash_data = HashData(data=bytearray(os.urandom(self.depth)))
+            hash_data = HashData(DataEncap(DataType.BYTES,
+                bytearray(os.urandom(self.depth))
+            ))
             self.hash_result = HashIt().hash_it(hash_type, hash_data)
             found_data.append(hash_data.data)
         return found_data

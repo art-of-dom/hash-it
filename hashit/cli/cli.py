@@ -14,6 +14,9 @@ from hashit.service.brute_force import BruteForce
 from hashit.service.data_generation import DataGeneration
 from hashit.service.validate_hash import ValidateHash
 
+from hashit.utils.data_encap import DataEncap
+from hashit.utils.data_type import DataType
+
 
 def arg_exists(args, key):
     return key in args and args[key]
@@ -22,26 +25,21 @@ def extract_args(args):
     """extracts args for the CLI"""
     hash_type = HashType.CRC16
     hash_data = None
+    data_type = None
+
     if arg_exists(args, '--hash-type'):
         hash_type = HashType[args['--hash-type'].upper()]
+
     if args['-f']:
-        hash_data = HashData(args['<input>'])
+        data_type = DataType.FILE
     elif args['-a']:
-        hash_data = HashData(data=args['<input>'])
+        data_type = DataType.ASCII
     elif args['-x']:
-        data = str(bytearray.fromhex(args['<input>']).decode())
-        hash_data = HashData(data=data)
+        data_type = DataType.HEX
     else:
-        if not sys.stdin.isatty():
-            try:
-                infile = sys.stdin.buffer
-                data = infile.read()
-                hash_data = HashData(data=data)
-            except AttributeError:
-                data = ''
-                for line in sys.stdin:
-                    data += line
-                hash_data = HashData(data=data)
+        data_type = DataType.STDIN
+
+    hash_data = HashData(DataEncap(data_type, args['<input>']))
 
     if args['-r']:
         hash_data.reverse()
