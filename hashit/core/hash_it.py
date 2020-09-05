@@ -4,40 +4,11 @@ The heavy hitter of hashing.
 """
 from __future__ import absolute_import
 
-import hashlib
-
-import crcmod
 import six
 
 from hashit.core.hash_type import HashType
-
-
-HASHLIB_MAPPING = {
-    HashType.CRC8: crcmod.predefined.Crc('crc-8').new,
-    HashType.CRC8_DARC: crcmod.predefined.Crc('crc-8-darc').new,
-    HashType.CRC8_I_CODE: crcmod.predefined.Crc('crc-8-i-code').new,
-    HashType.CRC8_ITU: crcmod.predefined.Crc('crc-8-itu').new,
-    HashType.CRC8_MAXIM: crcmod.predefined.Crc('crc-8-maxim').new,
-    HashType.CRC8_ROHC: crcmod.predefined.Crc('crc-8-rohc').new,
-    HashType.CRC8_WCDMA: crcmod.predefined.Crc('crc-8-wcdma').new,
-    HashType.CRC16: crcmod.predefined.Crc('crc-16').new,
-    HashType.CRC32: crcmod.predefined.Crc('crc-32').new,
-    HashType.CRC64: crcmod.predefined.Crc('crc-64').new,
-    HashType.MD5: hashlib.md5,
-    HashType.SHA1: hashlib.sha1,
-    HashType.SHA224: hashlib.sha224,
-    HashType.SHA256: hashlib.sha256,
-    HashType.SHA384: hashlib.sha384,
-    HashType.SHA512: hashlib.sha512
-}
-
-CRCMOD_CUSTOM_MAPPING = {
-    HashType.CRC8_CDMA2000: crcmod.mkCrcFun(0x19B, initCrc=0xFF, rev=False, xorOut=0x00),
-    HashType.CRC8_DVB_S2: crcmod.mkCrcFun(0x1D5, initCrc=0x00, rev=False, xorOut=0x00),
-    HashType.CRC8_EBU: crcmod.mkCrcFun(
-        0x11D, initCrc=0xFF, rev=True, xorOut=0x00)
-}
-
+from hashit.core.mappings.hashlib_mapping import HASHLIB_MAPPING
+from hashit.core.mappings.custom_crc_mapping import CRCMOD_CUSTOM_MAPPING
 
 class HashIt(object):
     """The object to preform hashing"""

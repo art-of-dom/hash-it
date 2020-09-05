@@ -25,31 +25,35 @@ declare -A ASCII_VERIFY=(["CRC8"]="F4" ["CRC16"]="BB3D" ["CRC32"]="CBF43926" ["C
     ["SHA384"]="EB455D56D2C1A69DE64E832011F3393D45F3FA31D6842F21AF92D2FE469C499DA5E3179847334A18479C8D1DEDEA1BE3"
     ["SHA512"]="D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85")
 
-$CMD_BASE -f "$FILE_INPUT"
-$CMD_BASE -a "$ASCII_INPUT"
-$CMD_BASE -x "$HEX_INPUT"
+function hash_runner {
 
-for hash in "${HASHES[@]}"
-do
-    echo "Using hash $hash"
+    $CMD_BASE -f "$FILE_INPUT"
+    $CMD_BASE -a "$ASCII_INPUT"
+    $CMD_BASE -x "$HEX_INPUT"
 
-    tail "$FILE_INPUT" | $CMD_BASE --hash-type "$hash"
-    $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash"
-    $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash"
-    $CMD_BASE -x "$HEX_INPUT" --hash-type "$hash"
+    for hash in "${HASHES[@]}"
+    do
+        echo "Using hash $hash"
 
-    # tail "$FILE_INPUT" | $CMD_BASE -r --hash-type "$hash"
-    $CMD_BASE -rf "$FILE_INPUT" --hash-type "$hash"
-    $CMD_BASE -ra "$ASCII_INPUT" --hash-type "$hash"
-    $CMD_BASE -rx "$HEX_INPUT" --hash-type "$hash"
+        tail "$FILE_INPUT" | $CMD_BASE --hash-type "$hash"
+        $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash"
+        $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash"
+        $CMD_BASE -x "$HEX_INPUT" --hash-type "$hash"
 
-    if [[ -v "FILE_VERIFY[$hash]" ]] ; then
-        $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash" --verify "${FILE_VERIFY[$hash]}"
-        tail "$FILE_INPUT" | $CMD_BASE --hash-type "$hash" --verify "${FILE_VERIFY[$hash]}"
-    fi
+        # tail "$FILE_INPUT" | $CMD_BASE -r --hash-type "$hash"
+        $CMD_BASE -rf "$FILE_INPUT" --hash-type "$hash"
+        $CMD_BASE -ra "$ASCII_INPUT" --hash-type "$hash"
+        $CMD_BASE -rx "$HEX_INPUT" --hash-type "$hash"
 
-    if [[ -v "ASCII_VERIFY[$hash]" ]] ; then
-        $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash" --verify "${ASCII_VERIFY[$hash]}"
-    fi
-done
+        if [[ -v "FILE_VERIFY[$hash]" ]] ; then
+            $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash" --verify "${FILE_VERIFY[$hash]}"
+            tail "$FILE_INPUT" | $CMD_BASE --hash-type "$hash" --verify "${FILE_VERIFY[$hash]}"
+        fi
 
+        if [[ -v "ASCII_VERIFY[$hash]" ]] ; then
+            $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash" --verify "${ASCII_VERIFY[$hash]}"
+        fi
+    done
+}
+
+hash_runner
