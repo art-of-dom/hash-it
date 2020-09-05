@@ -2,8 +2,6 @@
 
 from __future__ import absolute_import, print_function
 
-import sys
-
 from hashit.cli.cli_status import CliStatus
 
 from hashit.core.hash_data import HashData
@@ -14,34 +12,36 @@ from hashit.service.brute_force import BruteForce
 from hashit.service.data_generation import DataGeneration
 from hashit.service.validate_hash import ValidateHash
 
+from hashit.utils.data_encap import DataEncap
+from hashit.utils.data_type import DataType
+
 
 def arg_exists(args, key):
     return key in args and args[key]
+
 
 def extract_args(args):
     """extracts args for the CLI"""
     hash_type = HashType.CRC16
     hash_data = None
+    data_type = None
+
     if arg_exists(args, '--hash-type'):
         hash_type = HashType[args['--hash-type'].upper()]
+
     if args['-f']:
-        hash_data = HashData(args['<input>'])
+        data_type = DataType.FILE
     elif args['-a']:
-        hash_data = HashData(data=args['<input>'])
+        data_type = DataType.ASCII
     elif args['-x']:
-        data = str(bytearray.fromhex(args['<input>']).decode())
-        hash_data = HashData(data=data)
+        data_type = DataType.HEX
     else:
-        if not sys.stdin.isatty():
-            try:
-                infile = sys.stdin.buffer
-                data = infile.read()
-                hash_data = HashData(data=data)
-            except AttributeError:
-                data = ''
-                for line in sys.stdin:
-                    data += line
-                hash_data = HashData(data=data)
+        data_type = DataType.STDIN
+
+    hash_data = HashData(DataEncap(data_type, args['<input>']))
+
+    if hash_data.data_encap.size == 0:
+        hash_data = None
 
     if args['-r']:
         hash_data.reverse()
@@ -92,7 +92,8 @@ def generate_data(args):
         found = dg.run(result=args['--generate'], hash_type=args['ht'])
         if found:
             for f_hash in found:
-                print('data %s matches hash %s' % (f_hash.upper(), args['--generate']))
+                print('data %s matches hash %s' %
+                      (f_hash.upper(), args['--generate']))
             return CliStatus.SUCCESS.value
     elif arg_exists(args, '--depth'):
         dg = DataGeneration(int(args['--depth']))

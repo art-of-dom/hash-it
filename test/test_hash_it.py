@@ -7,6 +7,9 @@ from hashit.core.hash_data import HashData
 from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
 
+from hashit.utils.data_encap import DataEncap
+from hashit.utils.data_type import DataType
+
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
 # pylint: disable=no-self-use
@@ -15,12 +18,15 @@ from hashit.core.hash_type import HashType
 
 CHECK_STRING = '123456789'
 
+
 class TestHashIt(unittest.TestCase):
     def setUp(self):
-        self.check_str = HashData(data=CHECK_STRING)
-        self.example = HashData(filename="test/support/example.bin")
-        self.example_chunk = HashData(
-            filename="test/support/example.bin", chunk_size=16)
+        self.check_str = HashData(DataEncap(DataType.ASCII, CHECK_STRING))
+        self.example = HashData(
+            DataEncap(DataType.FILE, "test/support/example.bin"))
+        self.example_chunk = HashData(DataEncap(DataType.FILE,
+                                                "test/support/example.bin"
+                                                ), chunk_size=16)
 
     def tearDown(self):
         pass
@@ -43,31 +49,40 @@ class TestHashIt(unittest.TestCase):
         assert_equals("14", hashit.next_chunk())
 
     def test_hash_it_crc8_cdma2000_check_str(self):
-        assert_equals("DA", HashIt().hash_it(HashType.CRC8_CDMA2000, self.check_str))
+        assert_equals("DA", HashIt().hash_it(
+            HashType.CRC8_CDMA2000, self.check_str))
 
     def test_hash_it_crc8_darc_check_str(self):
-        assert_equals("15", HashIt().hash_it(HashType.CRC8_DARC, self.check_str))
+        assert_equals("15", HashIt().hash_it(
+            HashType.CRC8_DARC, self.check_str))
 
     def test_hash_it_crc8_dvb_s2_check_str(self):
-        assert_equals("BC", HashIt().hash_it(HashType.CRC8_DVB_S2, self.check_str))
+        assert_equals("BC", HashIt().hash_it(
+            HashType.CRC8_DVB_S2, self.check_str))
 
     def test_hash_it_crc8_ebu_check_str(self):
-        assert_equals("97", HashIt().hash_it(HashType.CRC8_EBU, self.check_str))
+        assert_equals("97", HashIt().hash_it(
+            HashType.CRC8_EBU, self.check_str))
 
     def test_hash_it_crc8_i_code_check_str(self):
-        assert_equals("7E", HashIt().hash_it(HashType.CRC8_I_CODE, self.check_str))
+        assert_equals("7E", HashIt().hash_it(
+            HashType.CRC8_I_CODE, self.check_str))
 
     def test_hash_it_crc8_itu_check_str(self):
-        assert_equals("A1", HashIt().hash_it(HashType.CRC8_ITU, self.check_str))
+        assert_equals("A1", HashIt().hash_it(
+            HashType.CRC8_ITU, self.check_str))
 
     def test_hash_it_crc8_maxim_check_str(self):
-        assert_equals("A1", HashIt().hash_it(HashType.CRC8_MAXIM, self.check_str))
+        assert_equals("A1", HashIt().hash_it(
+            HashType.CRC8_MAXIM, self.check_str))
 
     def test_hash_it_crc8_rohc_check_str(self):
-        assert_equals("D0", HashIt().hash_it(HashType.CRC8_ROHC, self.check_str))
+        assert_equals("D0", HashIt().hash_it(
+            HashType.CRC8_ROHC, self.check_str))
 
     def test_hash_it_crc8_wcdma_check_str(self):
-        assert_equals("25", HashIt().hash_it(HashType.CRC8_WCDMA, self.check_str))
+        assert_equals("25", HashIt().hash_it(
+            HashType.CRC8_WCDMA, self.check_str))
 
     def test_hash_it_crc16(self):
         assert_equals("BAD3", HashIt().hash_it(HashType.CRC16, self.example))

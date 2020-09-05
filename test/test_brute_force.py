@@ -4,10 +4,11 @@ from __future__ import absolute_import
 
 import unittest
 from nose.tools import assert_true, assert_equals, assert_false, assert_is_none
-import six
 
 from hashit.core.hash_data import HashData
 from hashit.service.brute_force import BruteForce
+from hashit.utils.data_encap import DataEncap
+from hashit.utils.data_type import DataType
 
 # pylint: disable=missing-docstring
 # pylint: disable=invalid-name
@@ -18,10 +19,9 @@ EXAMPLE_PAYLOAD = bytearray([0x0F, 0x1E, 0x2D, 0x3C, 0x4B, 0x5A, 0x69, 0x78])
 
 class TestBruteForce(unittest.TestCase):
     def setUp(self):
-        if six.PY2:
-            self.data = HashData(data=str(EXAMPLE_PAYLOAD))
-        else:
-            self.data = HashData(data=EXAMPLE_PAYLOAD)
+        self.data = HashData(DataEncap(DataType.BYTES,
+                                       EXAMPLE_PAYLOAD
+                                       ))
 
     def tearDown(self):
         pass
