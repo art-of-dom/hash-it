@@ -68,7 +68,7 @@ class DataGeneration(object):
 
     def _get_next_data(self, data):
         """gives the next vaild byte array data"""
-        if len(data) == 0:
+        if not data:
             data.append(0)
             return data
 

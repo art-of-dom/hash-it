@@ -2,7 +2,7 @@
 
 from __future__ import absolute_import
 import unittest
-from nose.tools import assert_equals, assert_true
+from nose.tools import assert_equals, assert_true, assert_false
 from hashit.core.hash_type import HashType
 
 # pylint: disable=missing-docstring
@@ -31,6 +31,15 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8.hash_str_length())
 
+    def test_hash_type_crc8_is_crc(self):
+        assert_true(HashType.CRC8.is_crc())
+
+    def test_hash_type_crc8_is_not_md(self):
+        assert_false(HashType.CRC8.is_md())
+
+    def test_hash_type_crc8_is_not_sha(self):
+        assert_false(HashType.CRC8.is_sha())
+
     def test_hash_type_crc8_cdma2000_in_hash_type(self):
         assert_true('CRC8_CDMA2000' in HashType.__members__)
 
@@ -42,6 +51,15 @@ class TestHashType(unittest.TestCase):
 
     def test_hash_type_crc8_cdma2000_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_CDMA2000.hash_str_length())
+
+    def test_hash_type_crc8_cdma2000_is_crc(self):
+        assert_true(HashType.CRC8_CDMA2000.is_crc())
+
+    def test_hash_type_crc8_cdma2000_is_not_md(self):
+        assert_false(HashType.CRC8_CDMA2000.is_md())
+
+    def test_hash_type_crc8_cdma2000_is_not_sha(self):
+        assert_false(HashType.CRC8_CDMA2000.is_sha())
 
     def test_hash_type_crc8_darc_in_hash_type(self):
         assert_true('CRC8_DARC' in HashType.__members__)
@@ -55,6 +73,15 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_darc_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_DARC.hash_str_length())
 
+    def test_hash_type_crc8_darc_is_crc(self):
+        assert_true(HashType.CRC8_DARC.is_crc())
+
+    def test_hash_type_crc8_darc_is_not_md(self):
+        assert_false(HashType.CRC8_DARC.is_md())
+
+    def test_hash_type_crc8_darc_is_not_sha(self):
+        assert_false(HashType.CRC8_DARC.is_sha())
+
     def test_hash_type_crc8_dvb_s2_in_hash_type(self):
         assert_true('CRC8_DVB_S2' in HashType.__members__)
 
@@ -66,6 +93,15 @@ class TestHashType(unittest.TestCase):
 
     def test_hash_type_crc8_dvb_s2_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_DVB_S2.hash_str_length())
+
+    def test_hash_type_crc8_dvb_s2_is_crc(self):
+        assert_true(HashType.CRC8_DVB_S2.is_crc())
+
+    def test_hash_type_crc8_dvb_s2_is_not_md(self):
+        assert_false(HashType.CRC8_DVB_S2.is_md())
+
+    def test_hash_type_crc8_dvb_s2_is_not_sha(self):
+        assert_false(HashType.CRC8_DVB_S2.is_sha())
 
     def test_hash_type_crc8_ebu_in_hash_type(self):
         assert_true('CRC8_EBU' in HashType.__members__)
@@ -79,6 +115,15 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_ebu_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_EBU.hash_str_length())
 
+    def test_hash_type_crc8_ebu_is_crc(self):
+        assert_true(HashType.CRC8_EBU.is_crc())
+
+    def test_hash_type_crc8_ebu_is_not_md(self):
+        assert_false(HashType.CRC8_EBU.is_md())
+
+    def test_hash_type_crc8_ebu_is_not_sha(self):
+        assert_false(HashType.CRC8_EBU.is_sha())
+
     def test_hash_type_crc8_i_code_in_hash_type(self):
         assert_true('CRC8_I_CODE' in HashType.__members__)
 
@@ -90,6 +135,15 @@ class TestHashType(unittest.TestCase):
 
     def test_hash_type_crc8_i_code_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_I_CODE.hash_str_length())
+
+    def test_hash_type_crc8_i_code_is_crc(self):
+        assert_true(HashType.CRC8_I_CODE.is_crc())
+
+    def test_hash_type_crc8_i_code_is_not_md(self):
+        assert_false(HashType.CRC8_I_CODE.is_md())
+
+    def test_hash_type_crc8_i_code_is_not_sha(self):
+        assert_false(HashType.CRC8_I_CODE.is_sha())
 
     def test_hash_type_crc8_itu_in_hash_type(self):
         assert_true('CRC8_ITU' in HashType.__members__)
@@ -103,6 +157,15 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_itu_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_ITU.hash_str_length())
 
+    def test_hash_type_crc8_itu_is_crc(self):
+        assert_true(HashType.CRC8_ITU.is_crc())
+
+    def test_hash_type_crc8_itu_is_not_md(self):
+        assert_false(HashType.CRC8_ITU.is_md())
+
+    def test_hash_type_crc8_itu_is_not_sha(self):
+        assert_false(HashType.CRC8_ITU.is_sha())
+
     def test_hash_type_crc8_maxim_in_hash_type(self):
         assert_true('CRC8_MAXIM' in HashType.__members__)
 
@@ -114,6 +177,15 @@ class TestHashType(unittest.TestCase):
 
     def test_hash_type_crc8_maxim_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_MAXIM.hash_str_length())
+
+    def test_hash_type_crc8_maxim_is_crc(self):
+        assert_true(HashType.CRC8_MAXIM.is_crc())
+
+    def test_hash_type_crc8_maxim_is_not_md(self):
+        assert_false(HashType.CRC8_MAXIM.is_md())
+
+    def test_hash_type_crc8_maxim_is_not_sha(self):
+        assert_false(HashType.CRC8_MAXIM.is_sha())
 
     def test_hash_type_crc8_rohc_in_hash_type(self):
         assert_true('CRC8_ROHC' in HashType.__members__)
@@ -127,6 +199,15 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_rohc_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_ROHC.hash_str_length())
 
+    def test_hash_type_crc8_rohc_is_crc(self):
+        assert_true(HashType.CRC8_ROHC.is_crc())
+
+    def test_hash_type_crc8_rohc_is_not_md(self):
+        assert_false(HashType.CRC8_ROHC.is_md())
+
+    def test_hash_type_crc8_rohc_is_not_sha(self):
+        assert_false(HashType.CRC8_ROHC.is_sha())
+
     def test_hash_type_crc8_wcdma_in_hash_type(self):
         assert_true('CRC8_WCDMA' in HashType.__members__)
 
@@ -138,6 +219,15 @@ class TestHashType(unittest.TestCase):
 
     def test_hash_type_crc8_wcdma_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_WCDMA.hash_str_length())
+
+    def test_hash_type_crc8_wcdma_is_crc(self):
+        assert_true(HashType.CRC8_WCDMA.is_crc())
+
+    def test_hash_type_crc8_wcdma_is_not_md(self):
+        assert_false(HashType.CRC8_WCDMA.is_md())
+
+    def test_hash_type_crc8_wcdma_is_not_sha(self):
+        assert_false(HashType.CRC8_WCDMA.is_sha())
 
     # Others
     def test_hash_type_crc16_in_hash_type(self):

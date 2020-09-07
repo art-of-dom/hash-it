@@ -17,11 +17,11 @@ from hashit.utils.data_type import DataType
 
 
 def arg_exists(args, key):
-    '''Checks if arg exists'''
+    """Checks if arg exists"""
     return key in args and args[key]
 
 def hash_len_valid(hash_str, ht):
-    '''Makes sure hash length is valid for given hash type'''
+    """Makes sure hash length is valid for given hash type"""
     if len(hash_str) != ht.hash_str_length():
         print('hash invalid. Expected size %d was %d\n' %
             (ht.hash_str_length(), len(hash_str))
@@ -82,8 +82,6 @@ def verify_data(args):
 
 def generate_data(args):
     """generate data for CLI"""
-
-
     if arg_exists(args, '--generate'):
         dg = DataGeneration()
         found = dg.run(result=args['--generate'], ht=args['ht'])
