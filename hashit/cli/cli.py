@@ -20,14 +20,16 @@ def arg_exists(args, key):
     """Checks if arg exists"""
     return key in args and args[key]
 
+
 def hash_len_valid(hash_str, ht):
     """Makes sure hash length is valid for given hash type"""
     if len(hash_str) != ht.hash_str_length():
         print('hash invalid. Expected size %d was %d\n' %
-            (ht.hash_str_length(), len(hash_str))
-        )
+              (ht.hash_str_length(), len(hash_str))
+              )
         return False
     return True
+
 
 def extract_args(args):
     """extracts args for the CLI"""
@@ -73,8 +75,8 @@ def verify_data(args):
         return CliStatus.VALIDATION_ERROR.value
 
     validate = ValidateHash(result=args['--verify'], hash_type=args['ht'],
-        data=args['hd']
-    )
+                            data=args['hd']
+                            )
     if validate.is_vaild():
         return CliStatus.SUCCESS.value
     return CliStatus.VALIDATION_ERROR.value

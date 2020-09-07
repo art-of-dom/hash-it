@@ -34,10 +34,12 @@ class TestCliStatus(unittest.TestCase):
         assert_true('VALIDATION_ERROR' in CliStatus.__members__)
 
     def test_cli_status_validation_error_lookup(self):
-        assert_equals(CliStatus.VALIDATION_ERROR, CliStatus['VALIDATION_ERROR'])
+        assert_equals(CliStatus.VALIDATION_ERROR,
+                      CliStatus['VALIDATION_ERROR'])
 
     def test_cli_status_generation_error_in_cli_status(self):
         assert_true('GENERATION_ERROR' in CliStatus.__members__)
 
     def test_cli_status_generation_error_lookup(self):
-        assert_equals(CliStatus.GENERATION_ERROR, CliStatus['GENERATION_ERROR'])
+        assert_equals(CliStatus.GENERATION_ERROR,
+                      CliStatus['GENERATION_ERROR'])
