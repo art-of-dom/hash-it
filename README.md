@@ -7,6 +7,20 @@
 
 All file hashing, all the time.
 
+## Dev Set up
+
+Being a python project the assumption is that you have it already installed
+along with some way to set up a development environment. For the rest of this we
+will be using virtualenv.
+
+From the clone all you need to do is the following:
+
+```shell
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
 ## Usage
 
 Can be used to give a quick hash of a file, for example running against our
@@ -21,7 +35,7 @@ Can also be given an ASCII character string. Running against the input
 '123456789' will yield the following.
 
 ```shell
-python -m hashit -s 123456789 --hash-type=CRC32
+python -m hashit -a 123456789 --hash-type=CRC32
 # input: 123456789 hash: CBF43926
 ```
 
