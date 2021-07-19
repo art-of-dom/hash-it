@@ -38,8 +38,7 @@ class HashData(object):
         if self.pos == self.data_encap.size:
             return None
         end_pos = self.pos + self.chunk_size
-        if end_pos > self.data_encap.size:
-            end_pos = self.data_encap.size
+        end_pos = min(end_pos, self.data_encap.size)
 
         data = self.data_encap.get_chunk(self.pos, end_pos)
         self.pos = end_pos

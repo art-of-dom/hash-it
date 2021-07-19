@@ -21,11 +21,11 @@ def arg_exists(args, key):
     return key in args and args[key]
 
 
-def hash_len_valid(hash_str, ht):
+def hash_len_valid(hash_str, hasht):
     """Makes sure hash length is valid for given hash type"""
-    if len(hash_str) != ht.hash_str_length():
+    if len(hash_str) != hasht.hash_str_length():
         print('hash invalid. Expected size %d was %d\n' %
-              (ht.hash_str_length(), len(hash_str))
+              (hasht.hash_str_length(), len(hash_str))
               )
         return False
     return True
@@ -67,7 +67,7 @@ def verify_data(args):
 
     if args['-b']:
         brute_force = BruteForce(data=args['hd'])
-        if brute_force.run(result=args['--verify'], ht=args['ht']):
+        if brute_force.run(result=args['--verify'], hasht=args['ht']):
             print('found hash %s after brute forcing\n'
                   'data = %s' % (args['<input>'], brute_force.solved_data)
                   )
@@ -85,20 +85,20 @@ def verify_data(args):
 def generate_data(args):
     """generate data for CLI"""
     if arg_exists(args, '--generate'):
-        dg = DataGeneration()
-        found = dg.run(result=args['--generate'], ht=args['ht'])
+        datag = DataGeneration()
+        found = datag.run(result=args['--generate'], ht=args['ht'])
         if found:
             for f_hash in found:
                 print('data %s matches hash %s' %
                       (f_hash.upper(), args['--generate']))
             return CliStatus.SUCCESS.value
     elif arg_exists(args, '--depth'):
-        dg = DataGeneration(int(args['--depth']))
-        found = dg.run(ht=args['ht'])
+        datag = DataGeneration(int(args['--depth']))
+        found = datag.run(ht=args['ht'])
         if found:
             print('Generated %s byte(s) of data with hash %s : %r' % (
                 args['--depth'],
-                dg.hash_result,
+                datag.hash_result,
                 found[0]
             ))
             return CliStatus.SUCCESS.value

@@ -15,13 +15,8 @@ from hashit.utils.data_type import DataType
 
 class TestHashData(unittest.TestCase):
     def setUp(self):
-        self.bin_encap = DataEncap(DataType.BYTES, bytearray(list(
-            range(0, 256)
-        )))
+        self.bin_encap = DataEncap(DataType.BYTES, bytearray(list(range(256))))
         self.file_encap = DataEncap(DataType.FILE, "test/support/example.bin")
-
-    def tearDown(self):
-        pass
 
     def test_hash_data_no_args(self):
         hd = HashData()
@@ -67,7 +62,7 @@ class TestHashData(unittest.TestCase):
         assert_equals(100.0, hd.percent_processed())
 
     def test_hash_data_file_can_be_reversed(self):
-        reverse_data = bytearray(list(range(0, 256)))
+        reverse_data = bytearray(list(range(256)))
         reverse_data.reverse()
         hd = HashData(self.file_encap)
         hd.reverse()
@@ -105,7 +100,7 @@ class TestHashData(unittest.TestCase):
         assert_equals(100.0, hd.percent_processed())
 
     def test_hash_data_arg_data_can_be_reversed(self):
-        reverse_data = bytearray(list(range(0, 256)))
+        reverse_data = bytearray(list(range(256)))
         reverse_data.reverse()
         hd = HashData(self.bin_encap)
         hd.reverse()
