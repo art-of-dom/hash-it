@@ -22,19 +22,14 @@ class BruteForce(object):
         if self.data_type == DataType.FILE:
             self.data_type = DataType.BYTES
 
-    def run(self, result='', ht=HashType.CRC16):
-        """runs the brute forcing of a hash"""
-
+    def run(self, result='', hasht=HashType.CRC16):
+        """Runs the brute forcing of a hash"""
         for i in range(len(self.org_data)):
-            for j in range(0, len(self.org_data) - i):
-                if j == 0:
-                    tmpdata = self.org_data[i:]
-                else:
-                    tmpdata = self.org_data[i:-j]
-
+            for j in range(len(self.org_data) - i):
+                tmpdata = self.org_data[i:] if j == 0 else self.org_data[i:-j]
                 hash_data = HashData(DataEncap(self.data_type, tmpdata))
 
-                if ValidateHash(result=result, hash_type=ht, data=hash_data).is_vaild():
+                if ValidateHash(result=result, hash_type=hasht, data=hash_data).is_vaild():
                     self.solved_data = tmpdata
                     return True
         return False
