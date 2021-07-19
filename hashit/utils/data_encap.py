@@ -27,7 +27,7 @@ class DataEncap(object):
             self.filename = data
             self.size = os.path.getsize(self.filename)
             self.data = None
-        elif self.data_type == DataType.ASCII or self.data_type == DataType.BYTES:
+        elif self.data_type in [DataType.ASCII, DataType.BYTES]:
             self.size = len(data)
             self.data = data
         elif self.data_type == DataType.HEX:

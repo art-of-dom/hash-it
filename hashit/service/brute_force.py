@@ -26,12 +26,8 @@ class BruteForce(object):
         """runs the brute forcing of a hash"""
 
         for i in range(len(self.org_data)):
-            for j in range(0, len(self.org_data) - i):
-                if j == 0:
-                    tmpdata = self.org_data[i:]
-                else:
-                    tmpdata = self.org_data[i:-j]
-
+            for j in range(len(self.org_data) - i):
+                tmpdata = self.org_data[i:] if j == 0 else self.org_data[i:-j]
                 hash_data = HashData(DataEncap(self.data_type, tmpdata))
 
                 if ValidateHash(result=result, hash_type=ht, data=hash_data).is_vaild():
