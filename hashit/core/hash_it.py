@@ -43,9 +43,12 @@ class HashIt(object):
                 2:].upper()
         else:
             raise NotImplementedError
+        if len(hash_str) != self.hash_type.hash_str_length():
+            hash_str = hash_str.zfill(self.hash_type.hash_str_length())
         return hash_str
 
-    def _sanatize_data(self, data):
+    @staticmethod
+    def _sanatize_data(data):
         """Temporary py2/py3 data helper"""
         if six.PY3:
             try:
