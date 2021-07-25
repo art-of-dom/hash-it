@@ -39,7 +39,8 @@ class HashIt(object):
         if self.hash_type in HASHLIB_MAPPING:
             hash_str = self._hashlib_hash(data)
         elif self.hash_type in CRCMOD_CUSTOM_MAPPING:
-            hash_str = hex(CRCMOD_CUSTOM_MAPPING[self.hash_type](data))[2:].upper()
+            hash_str = hex(CRCMOD_CUSTOM_MAPPING[self.hash_type](data))[
+                2:].upper()
         else:
             raise NotImplementedError
         if len(hash_str) != self.hash_type.hash_str_length():
