@@ -13,16 +13,7 @@ function hash_runner {
     for hash in "${HASHES[@]}"
     do
         echo "Using hash $hash"
-
-        tail "$FILE_INPUT" | $CMD_BASE --hash-type "$hash"
-        $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash"
-        $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash"
-        $CMD_BASE -x "$HEX_INPUT" --hash-type "$hash"
-
-        # tail "$FILE_INPUT" | $CMD_BASE -r --hash-type "$hash"
-        $CMD_BASE -rf "$FILE_INPUT" --hash-type "$hash"
-        $CMD_BASE -ra "$ASCII_INPUT" --hash-type "$hash"
-        $CMD_BASE -rx "$HEX_INPUT" --hash-type "$hash"
+        core_hash "$hash"
 
         if [[ -v "FILE_VERIFY[$hash]" ]] ; then
             $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash" --verify "${FILE_VERIFY[$hash]}"
@@ -33,6 +24,18 @@ function hash_runner {
             $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash" --verify "${ASCII_VERIFY[$hash]}"
         fi
     done
+}
+
+function core_hash {
+    tail "$FILE_INPUT" | $CMD_BASE --hash-type "$hash"
+    $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash"
+    $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash"
+    $CMD_BASE -x "$HEX_INPUT" --hash-type "$hash"
+
+    # tail "$FILE_INPUT" | $CMD_BASE -r --hash-type "$hash"
+    $CMD_BASE -rf "$FILE_INPUT" --hash-type "$hash"
+    $CMD_BASE -ra "$ASCII_INPUT" --hash-type "$hash"
+    $CMD_BASE -rx "$HEX_INPUT" --hash-type "$hash"
 }
 
 hash_runner
