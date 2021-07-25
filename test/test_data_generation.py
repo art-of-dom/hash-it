@@ -16,12 +16,6 @@ EXAMPLE_PAYLOAD = bytearray([0x0F, 0x1E, 0x2D, 0x3C, 0x4B, 0x5A, 0x69, 0x78])
 
 
 class TestDataGeneration(unittest.TestCase):
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
     def test_data_generation_with_result_crc8(self):
         dg = DataGeneration()
         found = dg.run(result="1C")
@@ -34,11 +28,11 @@ class TestDataGeneration(unittest.TestCase):
 
     def test_data_generation_rejects_crc32(self):
         dg = DataGeneration()
-        found = dg.run(result="83DCEFB7", ht=HashType.CRC32)
+        found = dg.run(result="83DCEFB7", hasht=HashType.CRC32)
         assert_false(found)
 
     def test_data_generation_with_depth(self):
         dg = DataGeneration(depth=5)
-        found = dg.run(ht=HashType.CRC32)
+        found = dg.run(hasht=HashType.CRC32)
         assert_true(found)
         assert_equal(5, len(found[0]))

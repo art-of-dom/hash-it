@@ -32,7 +32,7 @@ def hash_len_valid(hash_str, hasht):
 
 
 def extract_args(args):
-    """extracts args for the CLI"""
+    """Extracts args for the CLI"""
     hash_type = HashType.CRC16
     hash_data = None
     data_type = None
@@ -40,15 +40,7 @@ def extract_args(args):
     if arg_exists(args, '--hash-type'):
         hash_type = HashType[args['--hash-type'].upper()]
 
-    if args['-f']:
-        data_type = DataType.FILE
-    elif args['-a']:
-        data_type = DataType.ASCII
-    elif args['-x']:
-        data_type = DataType.HEX
-    else:
-        data_type = DataType.STDIN
-
+    data_type = extract_data_type_args(args)
     hash_data = HashData(DataEncap(data_type, args['<input>']))
 
     if hash_data.data_encap.size == 0:
@@ -60,8 +52,19 @@ def extract_args(args):
     return hash_type, hash_data
 
 
+def extract_data_type_args(args):
+    """Extracts data type args for the CLI"""
+    if args['-f']:
+        return DataType.FILE
+    if args['-a']:
+        return DataType.ASCII
+    if args['-x']:
+        return DataType.HEX
+    return DataType.STDIN
+
+
 def verify_data(args):
-    """verify data for CLI"""
+    """Verify data for CLI"""
     if hash_len_valid(args['--verify'], args['ht']) is False:
         return CliStatus.ARG_INVALID.value
 
@@ -86,7 +89,7 @@ def generate_data(args):
     """generate data for CLI"""
     if arg_exists(args, '--generate'):
         datag = DataGeneration()
-        found = datag.run(result=args['--generate'], ht=args['ht'])
+        found = datag.run(result=args['--generate'], hasht=args['ht'])
         if found:
             for f_hash in found:
                 print('data %s matches hash %s' %
@@ -94,7 +97,7 @@ def generate_data(args):
             return CliStatus.SUCCESS.value
     elif arg_exists(args, '--depth'):
         datag = DataGeneration(int(args['--depth']))
-        found = datag.run(ht=args['ht'])
+        found = datag.run(hasht=args['ht'])
         if found:
             print('Generated %s byte(s) of data with hash %s : %r' % (
                 args['--depth'],
@@ -106,8 +109,8 @@ def generate_data(args):
     return CliStatus.GENERATION_ERROR.value
 
 
-def run_task(args=None):
-    """Does the hashing related task for the CLI"""
+def base_arg_check(args=None):
+    """Does the intial arg check before giving it to the core hashing function"""
     if arg_exists(args, '--verify'):
         return verify_data(args)
     if arg_exists(args, '--generate') or arg_exists(args, '--depth'):
@@ -117,6 +120,15 @@ def run_task(args=None):
         return generate_data(args)
     if args['hd'] is None:
         return CliStatus.SUCCESS.value
+    return None
+
+
+def run_task(args=None):
+    """Does the hashing related task for the CLI"""
+    ret = base_arg_check(args)
+
+    if args is not None:
+        return ret
 
     hash_str = HashIt(hash_type=args['ht'], hash_data=args['hd']).hash_it()
 
