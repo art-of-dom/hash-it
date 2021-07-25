@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import
 import unittest
+
 from nose.tools import assert_equals, assert_true, assert_false
 from parameterized import parameterized
 
@@ -126,17 +127,11 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8.hash_str_length())
 
-
-
-
     def test_hash_type_crc8_cdma2000_has_hash_byte_length_1(self):
         assert_equals(1, HashType.CRC8_CDMA2000.hash_byte_length())
 
     def test_hash_type_crc8_cdma2000_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_CDMA2000.hash_str_length())
-
-
-
 
     def test_hash_type_crc8_darc_has_hash_byte_length_1(self):
         assert_equals(1, HashType.CRC8_DARC.hash_byte_length())
@@ -144,17 +139,11 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_darc_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_DARC.hash_str_length())
 
-
-
-
     def test_hash_type_crc8_dvb_s2_has_hash_byte_length_1(self):
         assert_equals(1, HashType.CRC8_DVB_S2.hash_byte_length())
 
     def test_hash_type_crc8_dvb_s2_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_DVB_S2.hash_str_length())
-
-
-
 
     def test_hash_type_crc8_ebu_has_hash_byte_length_1(self):
         assert_equals(1, HashType.CRC8_EBU.hash_byte_length())
@@ -162,17 +151,11 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_ebu_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_EBU.hash_str_length())
 
-
-
-
     def test_hash_type_crc8_i_code_has_hash_str_length_1(self):
         assert_equals(1, HashType.CRC8_I_CODE.hash_byte_length())
 
     def test_hash_type_crc8_i_code_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_I_CODE.hash_str_length())
-
-
-
 
     def test_hash_type_crc8_itu_has_hash_str_length_1(self):
         assert_equals(1, HashType.CRC8_ITU.hash_byte_length())
@@ -180,17 +163,11 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_itu_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_ITU.hash_str_length())
 
-
-
-
     def test_hash_type_crc8_maxim_has_hash_byte_length_1(self):
         assert_equals(1, HashType.CRC8_MAXIM.hash_byte_length())
 
     def test_hash_type_crc8_maxim_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_MAXIM.hash_str_length())
-
-
-
 
     def test_hash_type_crc8_rohc_has_hash_byte_length_1(self):
         assert_equals(1, HashType.CRC8_ROHC.hash_byte_length())
@@ -198,17 +175,11 @@ class TestHashType(unittest.TestCase):
     def test_hash_type_crc8_rohc_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_ROHC.hash_str_length())
 
-
-
-
     def test_hash_type_crc8_wcdma_has_hash_byte_length_1(self):
         assert_equals(1, HashType.CRC8_WCDMA.hash_byte_length())
 
     def test_hash_type_crc8_wcdma_has_hash_str_length_2(self):
         assert_equals(2, HashType.CRC8_WCDMA.hash_str_length())
-
-
-
 
     # CRC16
 

@@ -2,7 +2,10 @@
 
 from __future__ import absolute_import
 import unittest
+
 from nose.tools import assert_equals, raises
+from parameterized import parameterized
+
 from hashit.core.hash_data import HashData
 from hashit.core.hash_it import HashIt
 from hashit.core.hash_type import HashType
@@ -28,11 +31,17 @@ class TestHashIt(unittest.TestCase):
                                                 "test/support/example.bin"
                                                 ), chunk_size=16)
 
+    @parameterized.expand([
+        ("CRC8", "F4"), ("CRC8_CDMA2000", "DA"), ("CRC8_DARC", "15"),
+        ("CRC8_DVB_S2", "BC"), ("CRC8_EBU", "97"), ("CRC8_I_CODE", "7E"),
+        ("CRC8_ITU", "A1"), ("CRC8_MAXIM", "A1"), ("CRC8_ROHC", "D0"),
+        ("CRC8_WCDMA", "25"),
+    ])
+    def test_hash_it_crc8_check_str(self, name, result):
+        assert_equals(result, HashIt().hash_it(HashType[name], self.check_str))
+
     def test_hash_it_crc8(self):
         assert_equals("14", HashIt().hash_it(HashType.CRC8, self.example))
-
-    def test_hash_it_crc8_check_str(self):
-        assert_equals("F4", HashIt().hash_it(HashType.CRC8, self.check_str))
 
     def test_hash_it_crc8_chunked(self):
         hashit = HashIt(HashType.CRC8, self.example_chunk)
@@ -45,41 +54,21 @@ class TestHashIt(unittest.TestCase):
         assert_equals("D1", hashit.next_chunk())
         assert_equals("14", hashit.next_chunk())
 
-    def test_hash_it_crc8_cdma2000_check_str(self):
-        assert_equals("DA", HashIt().hash_it(
-            HashType.CRC8_CDMA2000, self.check_str))
-
-    def test_hash_it_crc8_darc_check_str(self):
-        assert_equals("15", HashIt().hash_it(
-            HashType.CRC8_DARC, self.check_str))
-
-    def test_hash_it_crc8_dvb_s2_check_str(self):
-        assert_equals("BC", HashIt().hash_it(
-            HashType.CRC8_DVB_S2, self.check_str))
-
-    def test_hash_it_crc8_ebu_check_str(self):
-        assert_equals("97", HashIt().hash_it(
-            HashType.CRC8_EBU, self.check_str))
-
-    def test_hash_it_crc8_i_code_check_str(self):
-        assert_equals("7E", HashIt().hash_it(
-            HashType.CRC8_I_CODE, self.check_str))
-
-    def test_hash_it_crc8_itu_check_str(self):
-        assert_equals("A1", HashIt().hash_it(
-            HashType.CRC8_ITU, self.check_str))
-
-    def test_hash_it_crc8_maxim_check_str(self):
-        assert_equals("A1", HashIt().hash_it(
-            HashType.CRC8_MAXIM, self.check_str))
-
-    def test_hash_it_crc8_rohc_check_str(self):
-        assert_equals("D0", HashIt().hash_it(
-            HashType.CRC8_ROHC, self.check_str))
-
-    def test_hash_it_crc8_wcdma_check_str(self):
-        assert_equals("25", HashIt().hash_it(
-            HashType.CRC8_WCDMA, self.check_str))
+    @parameterized.expand([
+        ("CRC16", "BB3D"), ("CRC16_A", "BF05"), ("CRC16_AUG_CCITT", "E5CC"),
+        ("CRC16_BUYPASS", "FEE8"), ("CRC16_CMDA2000", "4C06"),
+        ("CRC16_CCITT_FALSE", "29B1"), ("CRC16_DDS_110", "9ECF"),
+        ("CRC16_DECT_R", "007E"), ("CRC16_DECT_X", "007F"),
+        ("CRC16_DNP", "EA82"), ("CRC16_EN_13757", "C2B7"),
+        ("CRC16_GENIUS", "D64E"), ("CRC16_KERMIT", "2189"),
+        ("CRC16_MAXIM", "44C2"), ("CRC16_MCRF4XX", "6F91"),
+        ("CRC16_MODBUS", "4B37"), ("CRC16_RIELLO", "63D0"),
+        ("CRC16_T10_DIF", "D0DB"), ("CRC16_TELEDISK", "0FB3"),
+        ("CRC16_TMS37157", "26B1"), ("CRC16_USB", "B4C8"),
+        ("CRC16_X_25", "906E"), ("CRC16_XMODEM", "31C3")
+    ])
+    def test_hash_it_crc16_check_str(self, name, result):
+        assert_equals(result, HashIt().hash_it(HashType[name], self.check_str))
 
     def test_hash_it_crc16(self):
         assert_equals("BAD3", HashIt().hash_it(HashType.CRC16, self.example))
@@ -94,94 +83,6 @@ class TestHashIt(unittest.TestCase):
         assert_equals("DC7C", hashit.next_chunk())
         assert_equals("5AAF", hashit.next_chunk())
         assert_equals("271E", hashit.next_chunk())
-
-    def test_hash_it_crc16_a_check_str(self):
-        assert_equals("BF05", HashIt().hash_it(
-            HashType.CRC16_A, self.check_str))
-
-    def test_hash_it_crc16_aug_ccitt_check_str(self):
-        assert_equals("E5CC", HashIt().hash_it(
-            HashType.CRC16_AUG_CCITT, self.check_str))
-
-    def test_hash_it_crc16_buypass_check_str(self):
-        assert_equals("FEE8", HashIt().hash_it(
-            HashType.CRC16_BUYPASS, self.check_str))
-
-    def test_hash_it_crc16_cmda2000_check_str(self):
-        assert_equals("4C06", HashIt().hash_it(
-            HashType.CRC16_CMDA2000, self.check_str))
-
-    def test_hash_it_crc16_ccitt_false_check_str(self):
-        assert_equals("29B1", HashIt().hash_it(
-            HashType.CRC16_CCITT_FALSE, self.check_str))
-
-    def test_hash_it_crc16_dds_110_check_str(self):
-        assert_equals("9ECF", HashIt().hash_it(
-            HashType.CRC16_DDS_110, self.check_str))
-
-    def test_hash_it_crc16_dect_r_check_str(self):
-        assert_equals("007E", HashIt().hash_it(
-            HashType.CRC16_DECT_R, self.check_str))
-
-    def test_hash_it_crc16_dect_x_check_str(self):
-        assert_equals("007F", HashIt().hash_it(
-            HashType.CRC16_DECT_X, self.check_str))
-
-    def test_hash_it_crc16_dnp_check_str(self):
-        assert_equals("EA82", HashIt().hash_it(
-            HashType.CRC16_DNP, self.check_str))
-
-    def test_hash_it_crc16_en_13757_check_str(self):
-        assert_equals("C2B7", HashIt().hash_it(
-            HashType.CRC16_EN_13757, self.check_str))
-
-    def test_hash_it_crc16_genius_check_str(self):
-        assert_equals("D64E", HashIt().hash_it(
-            HashType.CRC16_GENIUS, self.check_str))
-
-    def test_hash_it_crc16_kermit_check_str(self):
-        assert_equals("2189", HashIt().hash_it(
-            HashType.CRC16_KERMIT, self.check_str))
-
-    def test_hash_it_crc16_maxim_check_str(self):
-        assert_equals("44C2", HashIt().hash_it(
-            HashType.CRC16_MAXIM, self.check_str))
-
-    def test_hash_it_crc16_mcrf4xx_check_str(self):
-        assert_equals("6F91", HashIt().hash_it(
-            HashType.CRC16_MCRF4XX, self.check_str))
-
-    def test_hash_it_crc16_modbus_check_str(self):
-        assert_equals("4B37", HashIt().hash_it(
-            HashType.CRC16_MODBUS, self.check_str))
-
-    def test_hash_it_crc16_riello_check_str(self):
-        assert_equals("63D0", HashIt().hash_it(
-            HashType.CRC16_RIELLO, self.check_str))
-
-    def test_hash_it_crc16_t10_dif_check_str(self):
-        assert_equals("D0DB", HashIt().hash_it(
-            HashType.CRC16_T10_DIF, self.check_str))
-
-    def test_hash_it_crc16_teledisk_check_str(self):
-        assert_equals("0FB3", HashIt().hash_it(
-            HashType.CRC16_TELEDISK, self.check_str))
-
-    def test_hash_it_crc16_tms37157_check_str(self):
-        assert_equals("26B1", HashIt().hash_it(
-            HashType.CRC16_TMS37157, self.check_str))
-
-    def test_hash_it_crc16_usb_check_str(self):
-        assert_equals("B4C8", HashIt().hash_it(
-            HashType.CRC16_USB, self.check_str))
-
-    def test_hash_it_crc16_x_25_check_str(self):
-        assert_equals("906E", HashIt().hash_it(
-            HashType.CRC16_X_25, self.check_str))
-
-    def test_hash_it_crc16_xmodem_check_str(self):
-        assert_equals("31C3", HashIt().hash_it(
-            HashType.CRC16_XMODEM, self.check_str))
 
     def test_hash_it_crc32(self):
         assert_equals("29058C73", HashIt().hash_it(
