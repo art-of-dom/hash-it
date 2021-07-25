@@ -29,7 +29,8 @@ class BruteForce(object):
                 tmpdata = self.org_data[i:] if j == 0 else self.org_data[i:-j]
                 hash_data = HashData(DataEncap(self.data_type, tmpdata))
 
-                if ValidateHash(result=result, hash_type=hasht, data=hash_data).is_vaild():
+                if ValidateHash(result=result, hash_type=hasht,
+                                data=hash_data).is_vaild():
                     self.solved_data = tmpdata
                     return True
         return False

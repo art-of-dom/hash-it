@@ -55,15 +55,15 @@ class HashType(Enum):
     SHA512 = 42
 
     def is_crc(self):
-        "Checks if hash is a crc"
+        """Checks if hash is a crc"""
         return self.name.startswith('CRC')
 
     def is_md(self):
-        "Checks if hash is an md hash"
+        """Checks if hash is an md hash"""
         return self.name.startswith('MD')
 
     def is_sha(self):
-        "Checks if hash is an sha hash"
+        """Checks if hash is an sha hash"""
         return self.name.startswith('SHA')
 
     def hash_byte_length(self):
@@ -81,6 +81,7 @@ class HashType(Enum):
         return self.hash_byte_length() * 2
 
     def _crc_byte_len(self):
+        """Gives the length in characters of the hash for crcs"""
         if self in CRC8_LIST:
             return 1
         if self in CRC16_LIST:
@@ -92,6 +93,7 @@ class HashType(Enum):
         return 0
 
     def _sha_byte_len(self):
+        """Gives the length in characters of the hash for shas"""
         if self is HashType.SHA1:
             return 20
         if self is HashType.SHA224:
