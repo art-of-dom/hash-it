@@ -10,6 +10,7 @@ $CMD_BASE -a "$ASCII_INPUT"
 $CMD_BASE -x "$HEX_INPUT"
 
 function hash_runner {
+    rm -f tmp
     for hash in "${HASHES[@]}"
     do
         echo "Using hash $hash"
@@ -27,7 +28,8 @@ function hash_runner {
 }
 
 function core_hash {
-    tail "$FILE_INPUT" | $CMD_BASE --hash-type "$hash"
+    tail "$FILE_INPUT" | $CMD_BASE --hash-type "$hash" > tmp
+
     $CMD_BASE -f "$FILE_INPUT" --hash-type "$hash"
     $CMD_BASE -a "$ASCII_INPUT" --hash-type "$hash"
     $CMD_BASE -x "$HEX_INPUT" --hash-type "$hash"
@@ -36,6 +38,21 @@ function core_hash {
     $CMD_BASE -rf "$FILE_INPUT" --hash-type "$hash"
     $CMD_BASE -ra "$ASCII_INPUT" --hash-type "$hash"
     $CMD_BASE -rx "$HEX_INPUT" --hash-type "$hash"
+
+    verify_stdout
+}
+
+function verify_stdout {
+
+    if [ -s tmp ]
+    then
+        touch tmp
+    else
+        exit 1
+    fi
+
+    rm -f tmp
 }
 
 hash_runner
+

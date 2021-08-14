@@ -86,7 +86,7 @@ def verify_data(args):
 
 
 def generate_data(args):
-    """generate data for CLI"""
+    """Generate data for CLI"""
     if arg_exists(args, '--generate'):
         datag = DataGeneration()
         found = datag.run(result=args['--generate'], hasht=args['ht'])
@@ -127,7 +127,7 @@ def run_task(args=None):
     """Does the hashing related task for the CLI"""
     ret = base_arg_check(args)
 
-    if args is not None:
+    if ret is not None:
         return ret
 
     hash_str = HashIt(hash_type=args['ht'], hash_data=args['hd']).hash_it()
