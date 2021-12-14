@@ -24,8 +24,9 @@ class TestHashType(unittest.TestCase):
         "CRC16_DECT_X", "CRC16_DNP", "CRC16_EN_13757", "CRC16_GENIUS",
         "CRC16_KERMIT", "CRC16_MAXIM", "CRC16_MCRF4XX", "CRC16_MODBUS",
         "CRC16_RIELLO", "CRC16_T10_DIF", "CRC16_TELEDISK", "CRC16_TMS37157",
-        "CRC16_USB", "CRC16_X_25", "CRC16_XMODEM", "CRC32", "CRC64",
-        "MD2", "MD4", "MD5", "SHA1", "SHA224", "SHA256", "SHA384", "SHA512"
+        "CRC16_USB", "CRC16_X_25", "CRC16_XMODEM", "CRC24", "CRC24_FLEXRAY_A",
+        "CRC24_FLEXRAY_B", "CRC32", "CRC64", "MD2", "MD4", "MD5",
+        "SHA1", "SHA224", "SHA256", "SHA384", "SHA512"
     ])
     def test_hash_type_in_enum(self, name):
         assert_true(name in HashType.__members__)
@@ -51,7 +52,9 @@ class TestHashType(unittest.TestCase):
         ("CRC16_TELEDISK", HashType.CRC16_TELEDISK),
         ("CRC16_TMS37157", HashType.CRC16_TMS37157),
         ("CRC16_USB", HashType.CRC16_USB), ("CRC16_X_25", HashType.CRC16_X_25),
-        ("CRC16_XMODEM", HashType.CRC16_XMODEM), ("CRC32", HashType.CRC32),
+        ("CRC16_XMODEM", HashType.CRC16_XMODEM), ("CRC24", HashType.CRC24),
+        ("CRC24_FLEXRAY_A", HashType.CRC24_FLEXRAY_A),
+        ("CRC24_FLEXRAY_B", HashType.CRC24_FLEXRAY_B), ("CRC32", HashType.CRC32),
         ("CRC64", HashType.CRC64), ("MD2", HashType.MD2),
         ("MD4", HashType.MD4), ("MD5", HashType.MD5), ("SHA1", HashType.SHA1),
         ("SHA224", HashType.SHA224), ("SHA256", HashType.SHA256),
@@ -68,7 +71,8 @@ class TestHashType(unittest.TestCase):
         "CRC16_DECT_X", "CRC16_DNP", "CRC16_EN_13757", "CRC16_GENIUS",
         "CRC16_KERMIT", "CRC16_MAXIM", "CRC16_MCRF4XX", "CRC16_MODBUS",
         "CRC16_RIELLO", "CRC16_T10_DIF", "CRC16_TELEDISK", "CRC16_TMS37157",
-        "CRC16_USB", "CRC16_X_25", "CRC16_XMODEM", "CRC32", "CRC64"
+        "CRC16_USB", "CRC16_X_25", "CRC16_XMODEM", "CRC24", "CRC24_FLEXRAY_A",
+        "CRC24_FLEXRAY_B", "CRC32", "CRC64"
     ])
     def test_hash_type_is_crc(self, name):
         assert_true(HashType[name].is_crc())
@@ -93,7 +97,8 @@ class TestHashType(unittest.TestCase):
         "CRC16_DECT_X", "CRC16_DNP", "CRC16_EN_13757", "CRC16_GENIUS",
         "CRC16_KERMIT", "CRC16_MAXIM", "CRC16_MCRF4XX", "CRC16_MODBUS",
         "CRC16_RIELLO", "CRC16_T10_DIF", "CRC16_TELEDISK", "CRC16_TMS37157",
-        "CRC16_USB", "CRC16_X_25", "CRC16_XMODEM", "CRC32", "CRC64",
+        "CRC16_USB", "CRC16_X_25", "CRC16_XMODEM", "CRC24", "CRC24_FLEXRAY_A",
+        "CRC24_FLEXRAY_B", "CRC32", "CRC64",
         "SHA1", "SHA224", "SHA256", "SHA384", "SHA512"
     ])
     def test_hash_type_is_not_md(self, name):
@@ -113,8 +118,8 @@ class TestHashType(unittest.TestCase):
         "CRC16_DECT_X", "CRC16_DNP", "CRC16_EN_13757", "CRC16_GENIUS",
         "CRC16_KERMIT", "CRC16_MAXIM", "CRC16_MCRF4XX", "CRC16_MODBUS",
         "CRC16_RIELLO", "CRC16_T10_DIF", "CRC16_TELEDISK", "CRC16_TMS37157",
-        "CRC16_USB", "CRC16_X_25", "CRC16_XMODEM", "CRC32", "CRC64",
-        "MD2", "MD4", "MD5"
+        "CRC16_USB", "CRC16_X_25", "CRC16_XMODEM", "CRC24", "CRC24_FLEXRAY_A",
+        "CRC24_FLEXRAY_B", "CRC32", "CRC64", "MD2", "MD4", "MD5"
     ])
     def test_hash_type_is_not_sha(self, name):
         assert_false(HashType[name].is_sha())

@@ -43,16 +43,19 @@ class HashType(Enum):
     CRC16_USB = 30
     CRC16_X_25 = 31
     CRC16_XMODEM = 32
-    CRC32 = 33
-    CRC64 = 34
-    MD2 = 35
-    MD4 = 36
-    MD5 = 37
-    SHA1 = 38
-    SHA224 = 39
-    SHA256 = 40
-    SHA384 = 41
-    SHA512 = 42
+    CRC24 = 33
+    CRC24_FLEXRAY_A = 34
+    CRC24_FLEXRAY_B = 35
+    CRC32 = 36
+    CRC64 = 37
+    MD2 = 38
+    MD4 = 39
+    MD5 = 40
+    SHA1 = 41
+    SHA224 = 42
+    SHA256 = 43
+    SHA384 = 44
+    SHA512 = 45
 
     def is_crc(self):
         """Checks if hash is a crc"""
@@ -86,6 +89,8 @@ class HashType(Enum):
             return 1
         if self in CRC16_LIST:
             return 2
+        if self in CRC24_LIST:
+            return 3
         if self is HashType.CRC32:
             return 4
         if self is HashType.CRC64:
@@ -120,7 +125,6 @@ CRC8_LIST = [
     HashType.CRC8_WCDMA
 ]
 
-
 CRC16_LIST = [
     HashType.CRC16,
     HashType.CRC16_A,
@@ -145,6 +149,12 @@ CRC16_LIST = [
     HashType.CRC16_USB,
     HashType.CRC16_X_25,
     HashType.CRC16_XMODEM
+]
+
+CRC24_LIST = [
+    HashType.CRC24,
+    HashType.CRC24_FLEXRAY_A,
+    HashType.CRC24_FLEXRAY_B
 ]
 
 MD_LIST = [

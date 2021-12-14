@@ -11,6 +11,7 @@ import crcmod
 from hashit.core.hash_type import HashType
 from hashit.core.mappings.hashlib_mapping_crc8 import HASHLIB_MAPPING_CRC8
 from hashit.core.mappings.hashlib_mapping_crc16 import HASHLIB_MAPPING_CRC16
+from hashit.core.mappings.hashlib_mapping_crc24 import HASHLIB_MAPPING_CRC24
 
 
 HASHLIB_MAPPING = {
@@ -26,3 +27,4 @@ HASHLIB_MAPPING = {
 
 HASHLIB_MAPPING.update(HASHLIB_MAPPING_CRC8)
 HASHLIB_MAPPING.update(HASHLIB_MAPPING_CRC16)
+HASHLIB_MAPPING.update(HASHLIB_MAPPING_CRC24)

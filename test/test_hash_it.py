@@ -88,6 +88,13 @@ class TestHashIt(unittest.TestCase):
         assert_equals("29058C73", HashIt().hash_it(
             HashType.CRC32, self.example))
 
+    @parameterized.expand([
+        ("CRC24", "21CF02"), ("CRC24_FLEXRAY_A", "7979BD"),
+        ("CRC24_FLEXRAY_B", "1F23B8"),
+    ])
+    def test_hash_it_crc24_check_str(self, name, result):
+        assert_equals(result, HashIt().hash_it(HashType[name], self.check_str))
+
     def test_hash_it_crc32_chunked(self):
         hashit = HashIt(HashType.CRC32, self.example_chunk)
         assert_equals("CECEE288", hashit.next_chunk())
