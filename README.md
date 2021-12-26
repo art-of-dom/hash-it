@@ -1,8 +1,8 @@
 # HashIt
 
-[![Build Status](https://travis-ci.org/art-of-dom/hash-it.svg?branch=master)](https://travis-ci.org/art-of-dom/hash-it)
+[![Build Status](https://travis-ci.org/art-of-dom/hash-it.svg?branch=main)](https://travis-ci.org/art-of-dom/hash-it)
 [![CodeFactor](https://www.codefactor.io/repository/github/art-of-dom/hash-it/badge)](https://www.codefactor.io/repository/github/art-of-dom/hash-it)
-[![BCH compliance](https://bettercodehub.com/edge/badge/art-of-dom/hash-it?branch=master)](https://bettercodehub.com/)
+[![BCH compliance](https://bettercodehub.com/edge/badge/art-of-dom/hash-it?branch=main)](https://bettercodehub.com/)
 [![DeepSource](https://static.deepsource.io/deepsource-badge-light.svg)](https://deepsource.io/gh/art-of-dom/hash-it/?ref=repository-badge)
 
 All file hashing, all the time.
