@@ -8,7 +8,7 @@ from __future__ import absolute_import, division
 from hashit.utils.data_encap import DataEncap
 
 
-class HashData(object):
+class HashData:
     """The object to keep track of data being hashed"""
 
     def __init__(self, data_encap=None, chunk_size=0):
