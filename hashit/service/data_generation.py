@@ -21,7 +21,7 @@ MAX_FOUND_DATA = 5
 MAX_DATA_LEN = 3
 
 
-class DataGeneration(object):
+class DataGeneration:
     """The object to generate data and hashing it"""
 
     def __init__(self, depth=None):

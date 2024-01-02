@@ -10,7 +10,7 @@ from hashit.core.mappings.hashlib_mapping import HASHLIB_MAPPING
 from hashit.core.mappings.custom_crc_mapping import CRCMOD_CUSTOM_MAPPING
 
 
-class HashIt(object):
+class HashIt:
     """The object to preform hashing"""
 
     def __init__(self, hash_type=None, hash_data=None):

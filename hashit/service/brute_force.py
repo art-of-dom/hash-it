@@ -11,7 +11,7 @@ from hashit.utils.data_encap import DataEncap
 from hashit.utils.data_type import DataType
 
 
-class BruteForce(object):
+class BruteForce:
     """The object to facilitating reverse engineering of hashes based on data"""
 
     def __init__(self, data=None):

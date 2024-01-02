@@ -11,7 +11,7 @@ import sys
 from hashit.utils.data_type import DataType
 
 
-class DataEncap(object):
+class DataEncap:
     """The object to keep track of raw data"""
 
     def __init__(self, data_type=None, data=None):

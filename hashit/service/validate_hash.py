@@ -8,7 +8,7 @@ from hashit.core.hash_type import HashType
 from hashit.core.hash_it import HashIt
 
 
-class ValidateHash(object):
+class ValidateHash:
     """The object to validate hashing"""
 
     def __init__(self, data=None, result='', hash_type=HashType.CRC16):
