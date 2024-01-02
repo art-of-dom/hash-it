@@ -68,4 +68,5 @@ echo $? # return value is 2
 ## State of the repo
 
 This project started as just a quick how to hash for data integrity in python.
-It is a long way from being usable, but feel free to hack around.
+It is a long way from being usable, but feel free to hack around. It is
+currently being revived and may be unstable for a bit.
