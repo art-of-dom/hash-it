@@ -5,7 +5,6 @@ Keeps track of data for hashing.
 
 from __future__ import absolute_import, division
 import os
-from six import string_types
 import sys
 
 from hashit.utils.data_type import DataType
@@ -52,7 +51,7 @@ class DataEncap:
     def reverse(self):
         """Reverse the stored data"""
         if self.data:
-            if isinstance(self.data, string_types):
+            if isinstance(self.data, str):
                 self.data = bytearray(self.data.encode())
             self.data.reverse()
         elif self.filename:

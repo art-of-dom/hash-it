@@ -1,7 +1,8 @@
 language: python
 
+dist: jammy
+
 python:
-  - "3.7"
   - "3.8"
   - "3.9"
   - "3.10"
@@ -10,7 +11,7 @@ python:
 install:
   pip install -r requirements.txt;
 script:
-  - nosetests -vv
+  - pytest -s
   - script/hash.sh
   - python -m hashit -bf test/support/example.bin --hash-type CRC16 --verify BD68
 notifications:
