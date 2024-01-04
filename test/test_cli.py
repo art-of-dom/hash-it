@@ -1,7 +1,6 @@
 '''Tests for the cli interface'''
 
 import unittest
-import sys
 
 from hashit.cli.cli import cli_main
 from hashit.cli.cli_status import CliStatus
