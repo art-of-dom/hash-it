@@ -4,8 +4,6 @@ The heavy hitter of hashing.
 """
 from __future__ import absolute_import
 
-import six
-
 from hashit.core.mappings.hashlib_mapping import HASHLIB_MAPPING
 from hashit.core.mappings.custom_crc_mapping import CRCMOD_CUSTOM_MAPPING
 
@@ -50,13 +48,10 @@ class HashIt:
     @staticmethod
     def _sanatize_data(data):
         """Temporary py2/py3 data helper"""
-        if six.PY3:
-            try:
-                data = data.encode('utf-8')
-            except (UnicodeDecodeError, AttributeError):
-                pass
-        else:
-            data = str(data)
+        try:
+            data = data.encode('utf-8')
+        except (UnicodeDecodeError, AttributeError):
+            pass
         return data
 
     def _hashlib_hash(self, data):

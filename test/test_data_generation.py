@@ -1,9 +1,6 @@
 """Tests for the DataGeneration object"""
 
-from __future__ import absolute_import
-
 import unittest
-from nose.tools import assert_true, assert_false, assert_equal
 
 from hashit.service.data_generation import DataGeneration
 from hashit.core.hash_type import HashType
@@ -19,20 +16,20 @@ class TestDataGeneration(unittest.TestCase):
     def test_data_generation_with_result_crc8(self):
         dg = DataGeneration()
         found = dg.run(result="1C")
-        assert_true(found)
+        assert found
 
     def test_data_generation_with_failed_result_crc8(self):
         dg = DataGeneration()
         found = dg.run(result="1C01")
-        assert_false(found)
+        assert not found
 
     def test_data_generation_rejects_crc32(self):
         dg = DataGeneration()
         found = dg.run(result="83DCEFB7", hasht=HashType.CRC32)
-        assert_false(found)
+        assert not found
 
     def test_data_generation_with_depth(self):
         dg = DataGeneration(depth=5)
         found = dg.run(hasht=HashType.CRC32)
-        assert_true(found)
-        assert_equal(5, len(found[0]))
+        assert found
+        assert 5 == len(found[0])
