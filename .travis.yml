@@ -12,7 +12,7 @@ python:
 install:
   pip install -r requirements.txt;
 script:
-  - nosetests -vv
+  - pytest
   - script/hash.sh
   - python -m hashit -bf test/support/example.bin --hash-type CRC16 --verify BD68
 notifications:
