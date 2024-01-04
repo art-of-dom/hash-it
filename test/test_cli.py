@@ -57,7 +57,7 @@ class TestCLI(unittest.TestCase):
         assert CliStatus.ARG_INVALID.value == cli_main(self.args)
 
         # out, _err = capfd.readouterr()
-        #assert "Unknown hash type foobar" == out.strip()
+        # assert "Unknown hash type foobar" == out.strip()
 
     # base hash / base hash-type
     def test_cil_uses_default_hash_on_file(self):

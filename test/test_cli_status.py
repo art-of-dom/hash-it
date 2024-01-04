@@ -27,11 +27,11 @@ class TestCliStatus(unittest.TestCase):
 
     def test_cli_status_validation_error_lookup(self):
         assert (CliStatus.VALIDATION_ERROR ==
-                      CliStatus['VALIDATION_ERROR'])
+                CliStatus['VALIDATION_ERROR'])
 
     def test_cli_status_generation_error_in_cli_status(self):
         assert 'GENERATION_ERROR' in CliStatus.__members__
 
     def test_cli_status_generation_error_lookup(self):
         assert (CliStatus.GENERATION_ERROR ==
-                      CliStatus['GENERATION_ERROR'])
+                CliStatus['GENERATION_ERROR'])
