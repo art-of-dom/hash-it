@@ -55,25 +55,22 @@ class TestCLI(unittest.TestCase):
         self.args['--hash-type'] = 'foobar'
         assert CliStatus.ARG_INVALID.value == cli_main(self.args)
 
-
     # base hash / base hash-type
+
     def test_cil_uses_default_hash_on_file(self):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'
         assert CliStatus.SUCCESS.value == cli_main(self.args)
-
 
     def test_cil_uses_default_hash_on_ascii(self):
         self.args['-a'] = True
         self.args['<input>'] = '123456789'
         assert CliStatus.SUCCESS.value == cli_main(self.args)
 
-
     def test_cil_uses_default_hash_on_hex(self):
         self.args['-x'] = True
         self.args['<input>'] = '010203040506070809'
         assert CliStatus.SUCCESS.value == cli_main(self.args)
-
 
     def test_cil_uses_default_hash_on_file_reverse(self):
         self.args['-f'] = True
@@ -81,13 +78,11 @@ class TestCLI(unittest.TestCase):
         self.args['<input>'] = 'test/support/example.bin'
         assert CliStatus.SUCCESS.value == cli_main(self.args)
 
-
     def test_cil_uses_default_hash_on_ascii_reverse(self):
         self.args['-a'] = True
         self.args['-r'] = True
         self.args['<input>'] = '123456789'
         assert CliStatus.SUCCESS.value == cli_main(self.args)
-
 
     def test_cil_uses_default_hash_on_hex_reverse(self):
         self.args['-x'] = True
@@ -95,8 +90,8 @@ class TestCLI(unittest.TestCase):
         self.args['<input>'] = '010203040506070809'
         assert CliStatus.SUCCESS.value == cli_main(self.args)
 
-
     # verify hash
+
     def test_cil_verify_bad_hash_size(self):
         self.args['-f'] = True
         self.args['<input>'] = 'test/support/example.bin'
