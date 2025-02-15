@@ -1,6 +1,5 @@
 # HashIt
 
-[![Build Status](https://travis-ci.org/art-of-dom/hash-it.svg?branch=main)](https://travis-ci.org/art-of-dom/hash-it)
 [![CodeFactor](https://www.codefactor.io/repository/github/art-of-dom/hash-it/badge)](https://www.codefactor.io/repository/github/art-of-dom/hash-it)
 [![DeepSource](https://static.deepsource.io/deepsource-badge-light.svg)](https://deepsource.io/gh/art-of-dom/hash-it/?ref=repository-badge)
 

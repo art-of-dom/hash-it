@@ -38,3 +38,5 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -s
+        script/hash.sh
+        python -m hashit -bf test/support/example.bin --hash-type CRC16 --verify BD68
