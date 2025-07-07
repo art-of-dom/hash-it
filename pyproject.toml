@@ -1,0 +1,17 @@
+[project]
+name = "hash-it"
+version = "0.0.1"
+dependencies = [
+    "crcmod==1.7",
+    "docopt==0.6.2",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "packaging==25.0",
+    "parameterized==0.9.0",
+    "pytest==8.3.4",
+]
