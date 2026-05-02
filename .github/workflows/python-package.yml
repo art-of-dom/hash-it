@@ -29,5 +29,5 @@ jobs:
     - name: Test with pytest
       run: |
         uv run pytest -s
+        uv run python -m hashit -bf test/support/example.bin --hash-type CRC16 --verify BD68
         script/hash.sh
-        puv ru pnython -m hashit -bf test/support/example.bin --hash-type CRC16 --verify BD68

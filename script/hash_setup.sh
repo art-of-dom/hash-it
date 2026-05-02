@@ -3,7 +3,7 @@
 export FILE_INPUT="test/support/example.bin"
 export ASCII_INPUT="123456789"
 export HEX_INPUT="010203040506070809"
-export CMD_BASE="python -m hashit"
+export CMD_BASE="uv run python -m hashit"
 
 # array of supported hashes
 declare -a HASHES=("CRC8" "CRC8_CDMA2000" "CRC8_DARC" "CRC8_DVB_S2" "CRC8_EBU"
