@@ -1,6 +1,7 @@
 [project]
 name = "hash-it"
 version = "0.0.1"
+requires-python = ">=3.10"
 dependencies = [
     "crcmod==1.7",
     "docopt==0.6.2",
